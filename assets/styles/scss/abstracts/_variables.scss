@@ -1,0 +1,39 @@
+$ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+$ease: cubic-bezier(0.2, 0.6, 0.35, 1);
+
+//fonts
+$primary-font: 'Archivo', sans-serif;
+$secondary-font: 'Fugaz One', sans-serif;
+
+//colors
+$white: #fff;
+$grey-map: (
+  100: #757575,
+  200: #b3b3b3,
+  300: #ebebeb
+);
+$black-map: (
+  100: #333,
+  200: #0c251e,
+  300: #4f4f4f
+);
+$white-map: (
+  default: #fff,
+  100: #e0e0e0
+);
+$green-pallet: (
+  100: #a8f0c5,
+  200: #008065
+);
+
+$blue: #3676c8;
+$snow: #f3f3f3;
+$yellow: #ffc700;
+$danger: #e12929;
+
+$border-color: map-get($white-map, 100);
+
+$text-color-weak: map-get($grey-map, 100);
+
+$max-width: 100%;
+$z-indexes: ('action-sheet', 'modal', 'navigation', 'label', 'dropdown');

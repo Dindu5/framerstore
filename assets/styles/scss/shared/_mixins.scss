@@ -1,0 +1,68 @@
+%cover {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+%center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%clamp {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+%clamp-2 {
+  overflow: hidden;
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+%translateY-center {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+%sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+%space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+%overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+%max-width {
+  max-width: $max-width;
+  width: 100%;
+  margin: 0 auto;
+}
+
+%sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  isolation: isolate;
+}
