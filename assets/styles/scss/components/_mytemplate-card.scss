@@ -1,0 +1,50 @@
+.my-template-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 6.4rem 1.6rem;
+  width: 100%;
+  border-bottom: 0.1rem solid map-get($grey-map, 400);
+  &__info {
+    display: flex;
+    gap: 2.6rem;
+    > div {
+      width: 71.2rem;
+    }
+    img {
+      width: 26.1rem;
+      height: 28.4rem;
+    }
+    h3 {
+      color: map-get($grey-map, 100);
+      font-family: $neue-bold;
+      font-size: 3.1rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 3.72rem;
+    }
+    h6 {
+      color: map-get($grey-map, 100);
+      font-family: $secondary-font;
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 2.4rem;
+      margin-top: 2.4rem;
+    }
+    p {
+      color: map-get($grey-map, 300);
+      font-family: Inter;
+      font-size: 2.2rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 3.6rem;
+      margin-top: 3.2rem;
+    }
+  }
+  &__btns {
+    display: flex;
+    gap: 1.6rem;
+  }
+}

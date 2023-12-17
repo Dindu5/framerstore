@@ -1,0 +1,15 @@
+.text-input {
+  width: 100%;
+  padding: 2.4rem 1.6rem;
+  border-radius: 0.8rem;
+  border: 1px solid map-get($grey-map, 300);
+  background-color: transparent;
+  outline: none;
+  color: map-get($grey-map, 100);
+  font-family: $secondary-font;
+  font-size: 2.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.6rem;
+  margin-top: 2.4rem;
+}

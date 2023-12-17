@@ -1,0 +1,241 @@
+.auth-form {
+  border-radius: 1.6rem;
+  background: $white;
+  box-shadow: 0px 4.529px 3.623px 0px rgba(0, 0, 0, 0.02),
+    0px 12.522px 10.017px 0px rgba(0, 0, 0, 0.04),
+    0px 30.147px 24.118px 0px rgba(0, 0, 0, 0.05),
+    0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+  max-width: 69.4rem;
+  width: 100%;
+  margin: auto;
+  padding: 8rem;
+  margin-top: 9rem;
+  position: relative;
+  h1 {
+    color: $black;
+    font-family: $neue-bold;
+    font-size: 3.9rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 4.6rem;
+    text-align: center;
+  }
+  p {
+    color: map-get($grey-map, 100);
+    font-family: $primary-font;
+    font-size: 2.3rem;
+    font-style: normal;
+    text-align: center;
+    font-weight: 400;
+    line-height: 3.5rem;
+    margin-top: 1.6rem;
+    a {
+      color: $accent;
+    }
+  }
+  &__close {
+    position: absolute;
+    background-color: transparent;
+    top: 3.2rem;
+    right: 3.2rem;
+  }
+  h6 {
+    text-align: center;
+    position: relative;
+    color: map-get($grey-map, 200);
+    font-family: $secondary-font;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.8rem; /* 155.556% */
+    letter-spacing: -0.018rem;
+    margin: 2.4rem 0rem;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      bottom: 0;
+      width: 40%;
+      background-color: map-get($grey-map, 300);
+      height: 0.1rem;
+    }
+    &::before {
+      left: 2rem;
+    }
+    &::after {
+      right: 2rem;
+    }
+  }
+  &--google {
+    margin-bottom: 1.5rem;
+    margin-top: 4rem;
+  }
+  input {
+    border-radius: 4.8rem;
+    border: 0.1rem solid map-get($grey-map, 300);
+    padding: 2.4rem 3.2rem;
+    color: map-get($grey-map, 300);
+    font-family: $secondary-font;
+    font-size: 2.2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.6rem;
+    width: 100%;
+    background-color: transparent;
+    margin-bottom: 2.4rem;
+    &:first-child {
+      // margin: 2.4rem 0rem;
+    }
+  }
+  &--cta {
+    margin-top: 1.6rem;
+  }
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+  }
+  &__login-link {
+    color: $accent;
+    font-family: $secondary-font;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.4rem;
+  }
+  &__forgot-password {
+    color: map-get($grey-map, 100);
+    font-family: $secondary-font;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.4rem; /* 150% */
+  }
+}
+
+.submit-template {
+  max-width: 69.4rem;
+  margin: auto;
+  padding-bottom: 35rem;
+  padding-top: 6.4rem;
+  &--indicators {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-bottom: 4rem;
+    > div {
+      &:nth-child(odd) {
+        display: flex;
+        width: 4.8rem;
+        height: 4.8rem;
+        // padding: 2.4rem 3.2rem;
+        justify-content: center;
+        align-items: center;
+        color: map-get($grey-map, 300);
+        font-family: $secondary-font;
+        font-size: 2.2rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        cursor: pointer;
+        border-radius: 8rem;
+        border: 0.1rem solid map-get($grey-map, 400);
+        &.active {
+          color: $black;
+        }
+      }
+      &:nth-child(even) {
+        height: 0.1rem;
+        background-color: map-get($grey-map, 400);
+        flex: 1;
+      }
+    }
+  }
+  &--form-elements {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+  }
+  &--title {
+    h3 {
+      color: $black;
+      font-family: $neue-bold;
+      font-size: 3.9rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 4.6rem; /* 117.949% */
+      margin-bottom: 1.6rem;
+      text-align: center;
+    }
+    p {
+      color: map-get($grey-map, 100);
+      font-family: $primary-font;
+      font-size: 2.3rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 3.5rem; /* 152.174% */
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+  }
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 6.4rem;
+    button {
+      &:last-child {
+        margin-left: 2.4rem;
+      }
+    }
+  }
+  &--upload-elements {
+    > div {
+      &:first-child {
+        margin-bottom: 4rem;
+        p {
+          color: $black;
+          font-family: $primary-font;
+          font-size: 2.3rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 3.5rem; /* 152.174% */
+          margin-bottom: 1.6rem;
+          &:first-child {
+            margin-bottom: 2.4rem;
+          }
+        }
+        > div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 4rem;
+          > div {
+            display: flex;
+            align-items: center;
+          }
+          img {
+            width: 9rem;
+            height: 9rem;
+            border-radius: 9rem;
+            margin-right: 1.6rem;
+          }
+          h5 {
+            color: $black;
+            font-family: $neue-bold;
+            font-size: 3.1rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 3.72rem; /* 120% */
+          }
+        }
+      }
+      &:nth-child(2) {
+        margin-bottom: 4rem;
+      }
+    }
+  }
+}

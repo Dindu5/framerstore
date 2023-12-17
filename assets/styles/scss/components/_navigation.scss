@@ -1,0 +1,112 @@
+.nav {
+  padding: 3.2rem 0rem;
+  background-color: $white;
+  position: sticky;
+  top: 0;
+  border-bottom: 0.15rem solid map-get($grey-map, 500);
+  z-index: 30;
+  transition: all 0.6s;
+
+  &-scroll {
+    box-shadow: 0px 4.529px 3.623px 0px rgba(0, 0, 0, 0.02),
+      0px 12.522px 10.017px 0px rgba(0, 0, 0, 0.04),
+      0px 30.147px 24.118px 0px rgba(0, 0, 0, 0.05),
+      0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+    border-bottom: none;
+  }
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    & > div {
+      display: flex;
+      gap: 1.6rem;
+    }
+  }
+  &-logo {
+    width: 24.4rem;
+    height: auto;
+    margin-right: 1.8rem;
+  }
+  &-search {
+    display: flex;
+    position: relative;
+    span {
+      position: absolute;
+      top: 50%;
+      left: 2.4rem;
+      transform: translateY(-50%);
+    }
+    input {
+      padding: 1.2rem 2.4rem;
+      min-width: 49rem;
+      padding-left: 5.4rem;
+      width: 100%;
+      border-radius: 80px;
+      background: map-get($grey-map, 500);
+      font-family: Inter;
+      font-size: 2.2rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 3.6rem;
+    }
+  }
+  &-search-filter {
+    background-color: $white;
+    height: 65.4rem;
+    position: absolute;
+    padding-top: 3.2rem;
+    padding-bottom: 6.4rem;
+    top: 0;
+    transform: translateY(13.7rem);
+    left: 0;
+    width: 100%;
+    z-index: 29;
+    box-shadow: 0px 4.529px 3.623px 0px rgba(0, 0, 0, 0.02),
+      0px 12.522px 10.017px 0px rgba(0, 0, 0, 0.04),
+      0px 30.147px 24.118px 0px rgba(0, 0, 0, 0.05),
+      0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+
+    border-top: 0.15rem solid map-get($grey-map, 500);
+    display: none;
+    &__active {
+      display: block !important;
+    }
+    &__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4.8rem;
+      h4 {
+        color: $black;
+        font-family: $neue-bold;
+        font-size: 3.1rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 3.72rem;
+        span {
+          color: map-get($grey-map, 300);
+        }
+      }
+      p {
+        color: $black;
+        font-family: $secondary-font;
+        font-size: 1.8rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 2.8rem; /* 155.556% */
+        letter-spacing: -0.018rem;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+    }
+    &__options {
+      > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        justify-content: space-between;
+      }
+    }
+  }
+}

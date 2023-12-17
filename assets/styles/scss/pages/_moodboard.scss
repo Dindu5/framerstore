@@ -1,0 +1,56 @@
+.single-moodboard {
+  padding-top: 4.8rem;
+  padding-bottom: 19.5rem;
+  &__back-button {
+    padding: 1.6rem;
+    padding-left: 0rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: $black;
+    font-family: $secondary-font;
+    font-size: 2.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    cursor: pointer;
+  }
+  &__cta {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    > div:last-child {
+      display: flex;
+      gap: 2.4rem;
+    }
+    margin-bottom: 6.4rem;
+  }
+  &__description {
+    h1 {
+      color: $black;
+      font-family: $neue-bold;
+      font-size: 4.9rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 5.6rem; /* 114.286% */
+      letter-spacing: -0.098rem;
+      margin-bottom: 1.6rem;
+    }
+    h5 {
+      display: flex;
+      align-items: center;
+      gap: 2.4rem;
+      color: map-get($grey-map, 100);
+      font-family: $primary-font;
+      font-size: 2.3rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 3.5rem; /* 152.174% */
+    }
+  }
+  &__templates {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8.1rem;
+  }
+}

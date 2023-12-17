@@ -1,0 +1,10 @@
+.container {
+  @include maxw(1920px);
+  padding: 0px 8rem;
+}
+.auth-layout {
+  background-image: url("/images/auth-bg.jpg");
+  background-size: cover;
+  background-position: top;
+  min-height: 100vh;
+}

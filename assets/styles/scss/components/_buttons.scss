@@ -1,0 +1,53 @@
+.btn {
+  display: flex;
+  padding: 2.4rem 3.2rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 8rem;
+  font-family: "Neue-bold", sans-serif;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.018rem;
+  position: relative;
+  transition: all 0.6s;
+  span {
+    font-size: 2.4rem;
+  }
+  &-primary {
+    border: 0.1rem solid map-get($black-map, 100);
+    background: map-get($black-map, 100);
+    color: $white;
+    &-outline {
+      border: 0.1rem solid map-get($grey-map, 100);
+      color: map-get($black-map, 100);
+      background-color: transparent;
+    }
+  }
+  &-secondary {
+    &-outline {
+      border: 0.1rem solid map-get($grey-map, 400);
+      color: map-get($black-map, 100);
+      background-color: transparent;
+    }
+  }
+  &-icon {
+    height: 7.2rem;
+    width: 7.2rem;
+  }
+  &-full {
+    width: 100%;
+  }
+  &-auth {
+    img {
+      position: absolute;
+      left: 3.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 2.4rem;
+      width: 2.4rem;
+    }
+  }
+}

@@ -1,25 +1,41 @@
 // abstracts
-@import 'abstracts/functions';
-@import 'abstracts/mixins';
-@import 'abstracts/variables';
-@import 'shared/mixins';
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/variables";
+@import "shared/mixins";
 
 // base
-// @import "base/font";
-@import 'base/reset';
-@import 'base/base';
+@import "base/fonts";
+@import "base/reset";
+@import "base/base";
 
 // components
 
-@import 'components/component';
+@import "components/navigation";
+@import "components/buttons";
+@import "components/footer";
+@import "components/hero";
+@import "components/template-card";
+@import "components/chips";
+@import "components/input";
+@import "components/forms";
+@import "components/moodboard-card";
+@import "components/mytemplate-card";
+@import "components/tabs";
+@import "components/form-elements";
+@import "components/file-uploader";
 
 // layout
-@import 'layouts/layout';
+@import "layouts/layout";
 
 // pages
 
-@import 'pages/page';
+@import "pages/page";
+@import "pages/landing";
+@import "pages/search";
+@import "pages/account";
+@import "pages/moodboard";
 
 // shared
-@import 'shared/titles';
-@import 'shared/descriptions';
+@import "shared/titles";
+@import "shared/descriptions";

@@ -1,16 +1,16 @@
 html {
   // responsive font size
-  font-size: calc(100vw / 1440 * 10);
+  font-size: calc(100vw / 2220 * 10);
   @media screen and (max-width: 767px) {
     font-size: calc(100vw / 393 * 10);
   }
 }
 
 body {
-  font-size: 1.4rem;
+  // font-size: 1.4rem;
   font-family: $primary-font;
   color: map-get($black-map, 100);
-  background-color: $snow;
+  background-color: $white;
   -webkit-font-smoothing: antialiased;
 }
 

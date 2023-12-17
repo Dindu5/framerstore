@@ -1,0 +1,36 @@
+.tabs {
+  &-titles {
+    display: flex;
+    gap: 5.2rem;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0.8rem;
+    &--container {
+      display: flex;
+      border-bottom: 0.1rem solid map-get($grey-map, 400);
+    }
+    > div {
+      padding: 1.5rem;
+      color: map-get($grey-map, 300);
+      font-family: $secondary-font;
+      font-size: 2.2rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      cursor: pointer;
+      position: relative;
+      &.active::before {
+        position: absolute;
+        bottom: -0.8rem;
+        transition: all 0.6s;
+        content: "";
+        background-color: $accent;
+        width: 4rem;
+        height: 0.8rem;
+        left: 50%;
+        border-radius: 0.8rem;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}

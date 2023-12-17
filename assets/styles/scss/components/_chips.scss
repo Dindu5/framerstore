@@ -1,0 +1,24 @@
+.chips-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2.8rem;
+  .chip {
+    display: flex;
+    padding: 0.4rem 1rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    color: $black;
+    font-family: $secondary-font;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.4rem;
+    border-radius: 0.8rem;
+    background: map-get($grey-map, 500);
+    span {
+      font-size: 1.4rem;
+    }
+  }
+}
