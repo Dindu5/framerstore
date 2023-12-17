@@ -1,10 +1,33 @@
 .template-card {
-  > img {
-    width: 100%;
+  &__img {
+    position: relative;
     height: 63.8rem;
     margin-bottom: 2.4rem;
-    object-fit: cover;
+    > div {
+      background: rgba(0, 0, 0, 0.4);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 6.3rem 7.3rem;
+      gap: 1.2rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+    }
+    > img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+    &-cta {
+      display: flex !important;
+    }
   }
+
   &__details {
     display: flex;
     align-items: center;
