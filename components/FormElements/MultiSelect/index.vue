@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, defineProps, defineEmits } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 const props = defineProps({
   options: { type: Array as () => string[], required: true },

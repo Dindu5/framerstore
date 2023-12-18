@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { computed, defineEmits } from "vue";
+import { computed } from "vue";
 const props = defineProps({
   modelValue: { type: String, default: "" },
   value: { type: [Boolean, Object] },

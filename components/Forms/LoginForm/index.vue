@@ -30,7 +30,8 @@
 <script setup lang="ts">
 const router = useRouter();
 
-function login() {
+function login(e: any) {
+  e.preventDefault();
   router.push("/app");
 }
 </script>
