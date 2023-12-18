@@ -26,6 +26,7 @@
       <hr class="footer-break" />
       <div class="footer-middle">
         <h4>Top Searches for Framer templates</h4>
+
         <div>
           <a href="#">Portfolio</a>
           <a href="#">Saas</a>
