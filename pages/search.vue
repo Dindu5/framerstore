@@ -1,140 +1,66 @@
 <template>
-  <div class="search-page">
+  <div class="search-result-page">
     <div class="container">
-      <div class="search-page-top">
-        <div>
-          <h1>ChloeLaurent — Luxury Fashion Photography Website</h1>
-          <div>
-            <img src="/images/author-2x.svg" alt="Author" />
-            <p>by Felix Studio</p>
-          </div>
-        </div>
-        <div>
-          <button class="btn btn-primary">
-            <span class="material-symbols-rounded"> local_mall </span> Buy
-            Template
-          </button>
-
-          <div>
-            <button class="btn btn-icon">
-              <span class="material-symbols-rounded"> bookmark </span>
-            </button>
-            <button class="btn btn-icon">
-              <span class="material-symbols-rounded"> upload </span>
-            </button>
-            <button class="btn">Preview</button>
-          </div>
-        </div>
-      </div>
+      <h1 class="search-result-page__text">
+        Showing Result for: <span>{{ searchTerm }}</span>
+      </h1>
     </div>
-    <div class="search-page-images">
-      <img src="/images/search-3.png" alt="Search Image" />
-      <img src="/images/search-2.jpg" alt="Search Image" />
-    </div>
-    <section class="container">
-      <div class="search-page-description">
-        <div>
-          <div>
-            <h3>Description</h3>
-            <p>
-              Unleash your business's potential with Spendly, a dynamic SAAS
-              template meticulously designed to ignite your vision. Spendly is a
-              flexible, all-in-one solution ideal for entrepreneurs seeking to
-              launch a state-of-the-art financial management tool.
-            </p>
-          </div>
-          <div>
-            <h3>Pages (13)</h3>
-            <div class="chips-container">
-              <div class="chip">Home</div>
-              <div class="chip">404</div>
-              <div class="chip">Contact</div>
-              <div class="chip">About</div>
-              <div class="chip">People</div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div>
-            <h3>Features</h3>
-            <div class="chips-container">
-              <div class="chip">
-                Video <span class="material-symbols-rounded"> videocam </span>
-              </div>
-              <div class="chip">
-                3-D <span class="material-symbols-rounded"> view_in_ar </span>
-              </div>
-              <div class="chip">
-                CMS <span class="material-symbols-rounded"> database </span>
-              </div>
-              <div class="chip">
-                CMS <span class="material-symbols-rounded"> database </span>
-              </div>
-              <div class="chip">
-                CMS <span class="material-symbols-rounded"> database </span>
-              </div>
-              <div class="chip">
-                CMS <span class="material-symbols-rounded"> database </span>
-              </div>
-              <div class="chip">
-                CMS <span class="material-symbols-rounded"> database </span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h3>Tags</h3>
-            <div class="chips-container">
-              <div class="chip">Home</div>
-              <div class="chip">404</div>
-              <div class="chip">Contact</div>
-              <div class="chip">About</div>
-              <div class="chip">People</div>
-            </div>
-          </div>
-        </div>
+    <section
+      v-if="apiLoadingStates.templatesSearchResult === API_STATES.LOADING"
+      class="landing"
+    >
+      <div class="container">
+        <TemplateCardSkeleton v-for="i in 6" :key="i" />
       </div>
     </section>
-    <section class="container">
-      <h2 class="search-page-sub_title">Related Templates</h2>
-      <div class="search-page-related">
+    <section v-else class="landing">
+      <div class="container">
         <TemplateCard
-          v-for="(item, i) in cardItems"
+          v-for="(item, i) in templatesSearchResult"
           :key="i"
           :cardData="item"
         />
       </div>
     </section>
+    <div class="container">
+      <Pagination
+        class="landing-pagination"
+        :totalPages="templatesSearchResultMeta.pageCount || 1"
+        :perPage="templatesSearchResultMeta.pageSize || 25"
+        :currentPage="templatesSearchResultMeta.page || 1"
+        @pagechanged="onPageChange"
+      />
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  data() {
-    return {
-      cardItems: [
-        {
-          img: "/images/templates/img-0.jpg",
-          title: "Cuisine",
-          price: "$68",
-          authorImg: "/images/author.png",
-          author: "Adedayo",
-        },
-        {
-          img: "/images/templates/img-1.jpg",
-          title: "Aubrey",
-          price: "$68",
-          authorImg: "/images/author.png",
-          author: "Adedayo",
-        },
-        {
-          img: "/images/templates/img-2.jpg",
-          title: "Bigtech",
-          price: "$40",
-          authorImg: "/images/author.png",
-          author: "Adedayo",
-        },
-      ],
-    };
-  },
+<script lang="ts" setup>
+import { useTemplateStore } from "../stores/useTemplate";
+import { storeToRefs } from "pinia";
+import { API_STATES } from "../services/constants";
+const route = useRoute();
+
+const templateStore = useTemplateStore();
+const currentPage = ref(1);
+const searchTerm = ref("") as any;
+const { getTemplates } = useTemplateStore();
+const {
+  templatesSearchResult,
+  templatesSearchResultMeta,
+  searchFilters,
+  apiLoadingStates,
+} = storeToRefs(templateStore);
+
+searchTerm.value = route?.query?.searchTerm;
+
+if (templatesSearchResult.value.length < 1) {
+  getTemplates({ filters: {} }, searchTerm.value);
+}
+
+const onPageChange = (page: number) => {
+  getTemplates(
+    { pagination: { page }, filters: searchFilters.value },
+    searchTerm.value
+  );
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <label>
-    <input type="checkbox" :value="value" />
+  <label class="form-checkbox">
+    <input type="checkbox" v-model="model" :value="value" />
     {{ label }}
   </label>
 </template>
@@ -12,13 +12,13 @@ const props = defineProps({
   value: { type: [Boolean, Object] },
   label: { type: String },
 });
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:model-value"]);
 const model = computed({
   get() {
     return props.modelValue;
   },
   set(value) {
-    emit("update:modelValue", value);
+    emit("update:model-value", value);
   },
 });
 </script>

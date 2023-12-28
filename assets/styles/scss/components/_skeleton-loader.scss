@@ -1,0 +1,59 @@
+@keyframes load {
+  from {
+    left: -15rem;
+  }
+  to {
+    left: 100%;
+  }
+}
+.skeleton {
+  width: 100%;
+  background: map-get($grey-map, 500);
+  overflow: hidden;
+  border-radius: 0px;
+  position: relative;
+  overflow: hidden;
+
+  &-xs {
+    height: 1.5rem;
+  }
+  &-sm {
+    height: 3rem;
+  }
+  &-md {
+    height: 7.5rem;
+  }
+  &-lg {
+    height: 16rem;
+  }
+  &-circle {
+    &-sm {
+      width: 3rem;
+      border-radius: 50%;
+    }
+    &-md {
+      width: 7.5rem;
+      border-radius: 50%;
+    }
+    &-lg {
+      width: 16rem;
+      border-radius: 50%;
+    }
+  }
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -150px;
+    top: 0;
+    height: 100%;
+    width: 15rem;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      #626d8112 50%,
+      transparent 100%
+    );
+    animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+}

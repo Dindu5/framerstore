@@ -9,201 +9,141 @@
 
           <div class="nav-search">
             <span class="material-symbols-rounded"> search </span>
-            <input type="text" placeholder="Enter keyword to search" />
+            <input
+              type="text"
+              placeholder="Enter keyword to search"
+              v-model="searchTerm"
+              @keypress.enter="triggerSearch"
+            />
           </div>
-          <button
-            @click="filterActive = !filterActive"
-            class="btn btn-secondary-outline"
-          >
-            <span class="material-symbols-rounded"> tune </span>
-            {{ filterActive ? "Hide" : "Show" }} Filters
-          </button>
         </div>
 
         <div>
-          <button class="btn">
-            <span class="material-symbols-rounded"> cloud_upload </span> Submit
-            Template
-          </button>
-          <button class="btn btn-primary" @click="signIn">
-            <span class="material-symbols-rounded"> person </span> Sign In
-          </button>
+          <Button preIcon="cloud_upload"> Submit Template </Button>
+          <Button preIcon="person" color="primary" @click="signIn">
+            Sign In
+          </Button>
         </div>
       </div>
     </div>
-    <div
-      class="nav-search-filter"
-      :class="filterActive ? 'nav-search-filter__active' : ''"
-    >
+    <div v-if="showFilter" class="nav-filter-options">
       <div class="container">
-        <div class="nav-search-filter__top">
-          <h4><span>Searching keyword:</span> Travel</h4>
-          <p>
-            <span class="material-symbols-rounded"> close </span> 3 Filters
-            Reset All
-          </p>
-        </div>
-        <div class="nav-search-filter__options">
-          <div class="hero-filters">
-            <div>
-              <h6>Industry</h6>
-              <div class="hero-filters_options">
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-1" value="mystery" />
-                    Technology
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-2" value="romance" />
-                    Finance and Marketing
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-3" value="adventure" />
-                    Travel
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-4" value="pizza" />
-                    Hospitality
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-1" value="mystery" />
-                    Technology
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-2" value="romance" />
-                    Finance and Marketing
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-3" value="adventure" />
-                    Travel
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-4" value="pizza" />
-                    Hospitality
-                  </label>
-                </div>
-              </div>
+        <Dropdown>
+          <template v-slot:toggler>
+            <div
+              class="nav-filter-options__toggle"
+              :class="
+                hasIndustryActive ? 'nav-filter-options__toggle-active' : ''
+              "
+            >
+              Industry
+              <span class="material-symbols-rounded"> expand_more </span>
             </div>
-            <div>
-              <h6>Type</h6>
-              <div class="hero-filters_options">
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-1" value="mystery" />
-                    Open page
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-2" value="romance" />
-                    Blog
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-3" value="adventure" />
-                    Portfolio
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-4" value="pizza" />
-                    Podcasting
-                  </label>
-                </div>
-              </div>
+          </template>
+          <DropdownContent>
+            <CheckBox
+              v-for="industry in industryFilterItems"
+              :key="industry.name"
+              :label="industry.name"
+              v-model="industry.value"
+              @change="applyFilters"
+            />
+          </DropdownContent>
+        </Dropdown>
+        <Dropdown>
+          <template v-slot:toggler>
+            <div
+              class="nav-filter-options__toggle"
+              :class="hasTypeActive ? 'nav-filter-options__toggle-active' : ''"
+            >
+              Type
+              <span class="material-symbols-rounded"> expand_more </span>
             </div>
-            <div>
-              <h6>Style</h6>
-              <div class="hero-filters_options">
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-1" value="mystery" />
-                    Minimal
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-2" value="romance" />
-                    Modern
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-3" value="adventure" />
-                    Swiss
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-4" value="pizza" />
-                    Typography
-                  </label>
-                </div>
-              </div>
+          </template>
+          <DropdownContent>
+            <CheckBox
+              v-for="industry in typeFilterItems"
+              :key="industry.name"
+              :label="industry.name"
+              v-model="industry.value"
+              @change="applyFilters"
+            />
+          </DropdownContent>
+        </Dropdown>
+        <Dropdown>
+          <template v-slot:toggler>
+            <div
+              class="nav-filter-options__toggle"
+              :class="hasStyleActive ? 'nav-filter-options__toggle-active' : ''"
+            >
+              Style
+              <span class="material-symbols-rounded"> expand_more </span>
             </div>
-            <div>
-              <h6>Collections</h6>
-              <div class="hero-filters_options">
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-1" value="mystery" />
-                    Newest
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-2" value="romance" />
-                    Popular
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-3" value="adventure" />
-                    All Templates
-                  </label>
-                </div>
-              </div>
+          </template>
+          <DropdownContent>
+            <CheckBox
+              v-for="industry in styleFilterItems"
+              :key="industry.name"
+              :label="industry.name"
+              v-model="industry.value"
+              @change="applyFilters"
+            />
+          </DropdownContent>
+        </Dropdown>
+        <Dropdown>
+          <template v-slot:toggler>
+            <div class="nav-filter-options__toggle">
+              Color
+              <span class="material-symbols-rounded"> expand_more </span>
             </div>
-            <div>
-              <h6>Collections</h6>
-              <div class="hero-filters_options">
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-1" value="mystery" />
-                    Newest
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-2" value="romance" />
-                    Popular
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" name="thing-3" value="adventure" />
-                    All Templates
-                  </label>
-                </div>
-              </div>
+          </template>
+          <DropdownContent>
+            <CheckBox
+              v-for="industry in styleFilterItems"
+              :key="industry.name"
+              :label="industry.name"
+              v-model="industry.value"
+            />
+          </DropdownContent>
+        </Dropdown>
+        <Dropdown>
+          <template v-slot:toggler>
+            <div
+              class="nav-filter-options__toggle"
+              :class="hasTagActive ? 'nav-filter-options__toggle-active' : ''"
+            >
+              Tags
+              <span class="material-symbols-rounded"> expand_more </span>
             </div>
-          </div>
-        </div>
+          </template>
+          <DropdownContent>
+            <CheckBox
+              v-for="industry in tagFilterItems"
+              :key="industry.name"
+              :label="industry.name"
+              v-model="industry.value"
+              @change="applyFilters"
+            />
+          </DropdownContent>
+        </Dropdown>
+        <button
+          v-if="
+            hasStyleActive || hasIndustryActive || hasTagActive || hasTypeActive
+          "
+          class="nav-filter-options__reset"
+          @click="
+            setFilters();
+            applyFilters();
+          "
+        >
+          Reset Filters <span class="material-symbols-rounded"> close </span>
+        </button>
+        <CircularLoader
+          v-if="
+            apiLoadingStates.templatesSearchResult === API_STATES.LOADING ||
+            apiLoadingStates.allTemplates === API_STATES.LOADING
+          "
+        />
       </div>
     </div>
   </div>
@@ -211,26 +151,130 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
+import { useTemplateStore } from "../../stores/useTemplate";
+import { API_STATES } from "../../services/constants";
+
+const { getFilters, getTemplates } = useTemplateStore();
+const templateStore = useTemplateStore();
+const {
+  allTags,
+  allIndustries,
+  allDesignStyles,
+  allDesignTypes,
+  apiLoadingStates,
+} = storeToRefs(templateStore);
 
 const scrolled = ref(false);
 const router = useRouter();
-
-const filterActive = ref(false);
+const route = useRoute();
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 0;
 };
 
+const industryFilterItems = ref([]);
+const styleFilterItems = ref([]);
+const typeFilterItems = ref([]);
+const tagFilterItems = ref([]);
+const searchTerm = ref("");
+
+const setFilters = () => {
+  industryFilterItems.value = allIndustries.value.map((tag: any) => {
+    return { name: tag?.attributes?.name, id: tag.id, value: false };
+  });
+  styleFilterItems.value = allDesignStyles.value.map((tag: any) => {
+    return { name: tag?.attributes?.name, id: tag.id, value: false };
+  });
+  tagFilterItems.value = allTags.value.map((tag: any) => {
+    return { name: tag?.attributes?.name, id: tag.id, value: false };
+  });
+  typeFilterItems.value = allDesignTypes.value.map((tag: any) => {
+    return { name: tag?.attributes?.name, id: tag.id, value: false };
+  });
+};
+
+watch(allIndustries, async (newIndustries, oldTags) => {
+  setFilters();
+});
+
+const hasIndustryActive = computed(() => {
+  return industryFilterItems.value.some((item: any) => item.value);
+});
+const hasStyleActive = computed(() => {
+  return styleFilterItems.value.some((item: any) => item.value);
+});
+const hasTagActive = computed(() => {
+  return tagFilterItems.value.some((item: any) => item.value);
+});
+const hasTypeActive = computed(() => {
+  return typeFilterItems.value.some((item: any) => item.value);
+});
+
+const showFilter = computed(() => {
+  return ["/", "/search"].includes(route.path);
+});
+
 function signIn() {
   router.push("/login");
 }
 
+if (allIndustries.value.length < 1) {
+  getFilters();
+}
+
+const applyFilters = () => {
+  const filters = {} as Record<string, any>;
+  if (hasIndustryActive) {
+    filters["industries"] = {
+      id: {
+        $in: industryFilterItems.value
+          .filter((industry: any) => industry.value)
+          .map((ind: any) => ind.id),
+      },
+    };
+  }
+  if (hasStyleActive) {
+    filters["design_styles"] = {
+      id: {
+        $in: styleFilterItems.value
+          .filter((industry: any) => industry.value)
+          .map((ind: any) => ind.id),
+      },
+    };
+  }
+  if (hasTagActive) {
+    filters["tags"] = {
+      id: {
+        $in: tagFilterItems.value
+          .filter((industry: any) => industry.value)
+          .map((ind: any) => ind.id),
+      },
+    };
+  }
+  if (hasTypeActive) {
+    filters["design_types"] = {
+      id: {
+        $in: typeFilterItems.value
+          .filter((industry: any) => industry.value)
+          .map((ind: any) => ind.id),
+      },
+    };
+  }
+
+  getTemplates({ filters }, searchTerm.value);
+};
+
+const triggerSearch = (e: Event) => {
+  applyFilters();
+  // router.push(`/search?searchTerm=${searchTerm.value}`);
+};
+
 onMounted(() => {
+  setFilters();
   if (process.client) {
     window.addEventListener("scroll", handleScroll);
   }
 });
-
 onUnmounted(() => {
   if (process.client) {
     window.removeEventListener("scroll", handleScroll);

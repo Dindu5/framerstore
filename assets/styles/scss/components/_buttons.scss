@@ -1,4 +1,5 @@
 .btn {
+  position: relative;
   display: flex;
   padding: 2.4rem 3.2rem;
   justify-content: center;
@@ -16,10 +17,31 @@
   span {
     font-size: 2.4rem;
   }
+  &-loading {
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2rem;
+      height: 2rem;
+      margin: -1.2rem 0 0 -1.2rem;
+      border: 0.4rem solid $white;
+      border-top: 0.4rem solid map-get($grey-map, 100);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      box-sizing: border-box;
+      transform-origin: 50% 50%;
+    }
+  }
   &-primary {
     border: 0.1rem solid map-get($black-map, 100);
     background: map-get($black-map, 100);
     color: $white;
+    &.btn-loading:after {
+      border: 0.4rem solid map-get($black-map, 100);
+      border-top: 0.4rem solid $white;
+    }
     &-outline {
       border: 0.1rem solid map-get($grey-map, 100);
       color: map-get($black-map, 100);
@@ -49,5 +71,14 @@
       height: 2.4rem;
       width: 2.4rem;
     }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

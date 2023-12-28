@@ -1,5 +1,4 @@
 .nav {
-  padding: 3.2rem 0rem;
   background-color: $white;
   position: sticky;
   top: 0;
@@ -18,6 +17,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 2.4rem 0rem;
     & > div {
       display: flex;
       gap: 1.6rem;
@@ -36,76 +36,78 @@
       top: 50%;
       left: 2.4rem;
       transform: translateY(-50%);
+      font-size: 2.4rem;
+      color: map-get($grey-map, 300);
     }
     input {
       padding: 1.2rem 2.4rem;
-      min-width: 49rem;
+      min-width: 70.7rem;
       padding-left: 5.4rem;
+      min-height: 7.2rem;
       width: 100%;
       border-radius: 80px;
       background: map-get($grey-map, 500);
-      font-family: Inter;
+      font-family: $secondary-font;
       font-size: 2.2rem;
       font-style: normal;
       font-weight: 400;
       line-height: 3.6rem;
     }
   }
-  &-search-filter {
-    background-color: $white;
-    height: 65.4rem;
-    position: absolute;
-    padding-top: 3.2rem;
-    padding-bottom: 6.4rem;
-    top: 0;
-    transform: translateY(13.7rem);
-    left: 0;
-    width: 100%;
-    z-index: 29;
-    box-shadow: 0px 4.529px 3.623px 0px rgba(0, 0, 0, 0.02),
-      0px 12.522px 10.017px 0px rgba(0, 0, 0, 0.04),
-      0px 30.147px 24.118px 0px rgba(0, 0, 0, 0.05),
-      0px 100px 80px 0px rgba(0, 0, 0, 0.07);
-
-    border-top: 0.15rem solid map-get($grey-map, 500);
-    display: none;
-    &__active {
-      display: block !important;
-    }
-    &__top {
+  &-filter-options {
+    border-top: 1px solid map-get($grey-map, 500);
+    padding: 1.6rem 0rem;
+    > div {
       display: flex;
+      gap: 2.4rem;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 4.8rem;
-      h4 {
-        color: $black;
-        font-family: $neue-bold;
-        font-size: 3.1rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 3.72rem;
+    }
+    &__toggle {
+      cursor: pointer;
+      display: flex;
+      padding: 0.8rem 0.8rem 0.8rem 1.6rem;
+      align-items: center;
+      gap: 0.8rem;
+      color: map-get($grey-map, 100);
+      font-family: $primary-font;
+      font-size: 1.8rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      border-radius: 2.4rem;
+      background: $white;
+      span {
+        color: map-get($grey-map, 300);
+      }
+      &:hover {
+        background-color: map-get($grey-map, 500);
+      }
+      &-active {
+        background-color: $accent;
+        color: $white;
         span {
-          color: map-get($grey-map, 300);
+          color: $white;
+        }
+        &:hover {
+          background-color: $accent;
         }
       }
-      p {
-        color: $black;
-        font-family: $secondary-font;
-        font-size: 1.8rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 2.8rem; /* 155.556% */
-        letter-spacing: -0.018rem;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-      }
     }
-    &__options {
-      > div {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        justify-content: space-between;
+    &__reset {
+      display: flex;
+      padding: 0.8rem 0.8rem 0.8rem 1.6rem;
+      align-items: center;
+      gap: 4px;
+      border-radius: 2.4rem;
+      background: map-get($grey-map, 100);
+      color: $white;
+      font-family: $primary-font;
+      font-size: 1.8rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      span {
+        font-size: 1.6rem;
       }
     }
   }

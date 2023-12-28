@@ -1,30 +1,35 @@
 .template-card {
+  &:hover {
+    .template-card__img-cta {
+      transform: translateY(0) !important;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 56.25%, #000 82.29%);
+    }
+  }
   &__img {
     position: relative;
     height: 63.8rem;
     margin-bottom: 2.4rem;
-    > div {
-      background: rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    .template-card__img-cta {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 100%, #000 100%);
       width: 100%;
       height: 100%;
       display: flex;
+      bottom: 0;
       align-items: flex-end;
-      justify-content: space-between;
+      justify-content: center;
       padding: 6.3rem 7.3rem;
       gap: 1.2rem;
       position: absolute;
-      top: 0;
+      cursor: pointer;
       left: 0;
-      display: none;
+      transition: all 0.6s;
+      transform: translateY(50%);
     }
     > img {
       width: 100%;
       height: 100%;
-
       object-fit: cover;
-    }
-    &-cta {
-      display: flex !important;
     }
   }
 

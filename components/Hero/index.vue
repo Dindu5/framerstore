@@ -10,119 +10,28 @@
         </h5>
         <div class="hero-filters">
           <div>
-            <h6>Industry</h6>
-            <div class="hero-filters_options">
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-1" value="mystery" />
-                  Technology
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-2" value="romance" />
-                  Finance and Marketing
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-3" value="adventure" />
-                  Travel
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-4" value="pizza" />
-                  Hospitality
-                </label>
-              </div>
-            </div>
+            <p>All templates</p>
+            <p>AI</p>
+            <p>Blog</p>
           </div>
           <div>
-            <h6>Type</h6>
-            <div class="hero-filters_options">
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-1" value="mystery" />
-                  Open page
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-2" value="romance" />
-                  Blog
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-3" value="adventure" />
-                  Portfolio
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-4" value="pizza" />
-                  Podcasting
-                </label>
-              </div>
-            </div>
+            <p>Portfolio</p>
+            <p>Landing Page</p>
+            <p>Travel</p>
           </div>
           <div>
-            <h6>Style</h6>
-            <div class="hero-filters_options">
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-1" value="mystery" />
-                  Minimal
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-2" value="romance" />
-                  Modern
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-3" value="adventure" />
-                  Swiss
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-4" value="pizza" />
-                  Typography
-                </label>
-              </div>
-            </div>
+            <p>Agency</p>
+            <p>Startup</p>
+            <p>Minimal</p>
           </div>
           <div>
-            <h6>Collections</h6>
-            <div class="hero-filters_options">
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-1" value="mystery" />
-                  Newest
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-2" value="romance" />
-                  Popular
-                </label>
-              </div>
-              <div>
-                <label>
-                  <input type="checkbox" name="thing-3" value="adventure" />
-                  All Templates
-                </label>
-              </div>
-            </div>
+            <p>Business</p>
+            <p>E-commerce</p>
+            <p>Personal</p>
           </div>
         </div>
       </div>
     </div>
-    <!-- <img src="/images/hero-bg-3x.png"  alt="Frame store samplaes" /> -->
   </header>
 </template>
 

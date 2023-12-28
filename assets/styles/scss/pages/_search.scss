@@ -13,6 +13,7 @@
       font-weight: 700;
       line-height: 6.4rem; /* 106.667% */
       letter-spacing: -0.12rem;
+      margin-bottom: 2.4rem;
     }
     > div {
       &:first-child {
@@ -57,20 +58,24 @@
     }
   }
   &-images {
-    display: flex;
-    overflow: visible;
-    gap: 6.4rem;
-    padding: 6.5rem 5rem;
-    img {
-      height: 74.2rem;
-      width: 110.3rem;
-      border-radius: 16px;
-      object-fit: cover;
-      &:first-child {
-        box-shadow: 0px 4.529px 3.623px 0px rgba(0, 0, 0, 0.02),
-          0px 12.522px 10.017px 0px rgba(0, 0, 0, 0.04),
-          0px 30.147px 24.118px 0px rgba(0, 0, 0, 0.05),
-          0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+    // display: flex;
+    // overflow: visible;
+    // gap: 6.4rem;
+    padding: 6.5rem 5rem !important;
+    padding-top: 0rem;
+    // overflow: hidden;
+    .swiper-wrapper {
+      img {
+        height: 74.2rem !important;
+        width: 110.3rem;
+        border-radius: 16px;
+        object-fit: cover;
+      }
+      .swiper-slide:first-child {
+        box-shadow: 0rem 0.4529rem 0.3623rem 0rem rgba(0, 0, 0, 0.01),
+          0rem 1.2522rem 1.0017rem 0rem rgba(0, 0, 0, 0.014),
+          0rem 3.0147rem 2.4118rem 0rem rgba(0, 0, 0, 0.015),
+          0rem 10rem 8rem 0rem rgba(0, 0, 0, 0.017);
       }
     }
   }

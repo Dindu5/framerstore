@@ -1,113 +1,56 @@
 <template>
   <div class="landing-container">
+    <NuxtLoadingIndicator />
     <Hero />
-    <section class="landing">
+    <section
+      v-if="
+        apiLoadingStates.allTemplates === API_STATES.LOADING &&
+        allTemplates.length < 0
+      "
+      class="landing"
+    >
+      <div class="container"></div>
+    </section>
+    <section v-else class="landing">
       <div class="container">
         <TemplateCard
-          v-for="(item, i) in cardItems"
+          v-for="(item, i) in allTemplates"
           :key="i"
           :cardData="item"
         />
       </div>
     </section>
+
     <div class="container">
-      <div class="landing-pagination">
-        <button>
-          <span class="material-symbols-rounded"> chevron_left </span> Previous
-        </button>
-        <button
-          v-for="i in 6"
-          :key="i"
-          class="pagination-btn"
-          :class="i === 1 ? 'active' : ''"
-        >
-          {{ i }}
-        </button>
-        <button>
-          Next <span class="material-symbols-rounded"> chevron_right </span>
-        </button>
-      </div>
+      <Pagination
+        class="landing-pagination"
+        :totalPages="allTemplatesMeta.pageCount || 1"
+        :perPage="allTemplatesMeta.pageSize || 25"
+        :currentPage="allTemplatesMeta.page || 1"
+        @pagechanged="onPageChange"
+      />
     </div>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  data() {
-    return {
-      activeTab: 0,
-      tabs: [
-        { title: "Tab 1", content: "Content for Tab 1" },
-        { title: "Tab 2", content: "Content for Tab 2" },
-        { title: "Tab 3", content: "Content for Tab 3" },
-      ],
-      cardItems: [
-        {
-          img: "/images/templates/img-0.jpg",
-          title: "Cuisine",
-          price: "$68",
-          authorImg: "/images/author.png",
-          author: "Adedayo",
-        },
-        {
-          img: "/images/templates/img-1.jpg",
-          title: "Aubrey",
-          price: "$68",
-          authorImg: "/images/author.png",
-          author: "Adedayo",
-        },
-        {
-          img: "/images/templates/img-2.jpg",
-          title: "Bigtech",
-          price: "$40",
-          authorImg: "/images/author.png",
-          author: "Adedayo",
-        },
+<script lang="ts" setup>
+import { useTemplateStore } from "../stores/useTemplate";
+import { storeToRefs } from "pinia";
+import { API_STATES } from "../services/constants";
 
-        {
-          img: "/images/templates/img-3.jpg",
-          title: "Magica",
-          price: "$68",
-          authorImg: "/images/author.png",
-          author: "Adedayo",
-        },
-        {
-          img: "/images/templates/img-4.jpg",
-          title: "Cuisine",
-          price: "$68",
-          authorImg: "/images/author.png",
-          author: "Adedayo",
-        },
-        {
-          img: "/images/templates/img-5.jpg",
-          title: "Cuisine",
-          price: "$68",
-          authorImg: "/images/author.png",
-          author: "Adedayo",
-        },
-        {
-          img: "/images/templates/img-1.jpg",
-          title: "Cuisine",
-          price: "$68",
-          authorImg: "/images/author.png",
-          author: "Adedayo",
-        },
-        {
-          img: "/images/templates/img-3.jpg",
-          title: "Magica",
-          price: "$68",
-          authorImg: "/images/author.png",
-          author: "Adedayo",
-        },
-        {
-          img: "/images/templates/img-4.jpg",
-          title: "Cuisine",
-          price: "$68",
-          authorImg: "/images/author.png",
-          author: "Adedayo",
-        },
-      ],
-    };
-  },
+const templateStore = useTemplateStore();
+const currentPage = ref(1);
+const { getTemplates } = useTemplateStore();
+const { allTemplates, allTemplatesMeta, searchFilters, apiLoadingStates } =
+  storeToRefs(templateStore);
+
+getTemplates();
+
+const onPageChange = (page: number) => {
+  getTemplates({
+    pagination: { page },
+    filters: searchFilters.value,
+  });
+  // currentPage.value = page;
 };
 </script>

@@ -61,6 +61,9 @@
   </footer>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+// const { $api } = useNuxtApp();
+// console.log($api);
+</script>
 
 <style></style>

@@ -1,0 +1,43 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  button {
+    background-color: transparent;
+    cursor: pointer;
+    height: 4.8rem;
+    width: 4.8rem;
+    padding: 1rem;
+    border-radius: 50%;
+    color: map-get($grey-map, 300);
+    text-align: center;
+    font-family: $secondary-font;
+    font-size: 2.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    &:first-child,
+    &:last-child {
+      color: map-get($grey-map, 100);
+      text-align: center;
+      font-family: $secondary-font;
+      width: auto;
+      font-size: 2.2rem;
+      border-radius: 0.1rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      padding: 1rem;
+      border: none;
+      outline: none;
+      gap: 0.8rem;
+      display: flex;
+      align-items: center;
+    }
+    &.active {
+      color: $black;
+      background: map-get($grey-map, 400);
+    }
+  }
+}
