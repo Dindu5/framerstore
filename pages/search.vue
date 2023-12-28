@@ -1,6 +1,6 @@
 <template>
   <div class="search-result-page">
-    <div class="container">
+    <div v-if="templatesSearchResult.length > 0" class="container">
       <h1 class="search-result-page__text">
         Showing Result for: <span>{{ searchTerm }}</span>
       </h1>
@@ -13,6 +13,14 @@
         <TemplateCardSkeleton v-for="i in 6" :key="i" />
       </div>
     </section>
+    <EmptyState
+      v-else-if="templatesSearchResult.length < 1"
+      image="../images/empty-search.svg"
+      title="No search result found"
+      subText="Popular searches: Business, Portfolio, Minimal  "
+      buttonText="Go Home"
+      @action="goBack"
+    />
     <section v-else class="landing">
       <div class="container">
         <TemplateCard
@@ -22,12 +30,12 @@
         />
       </div>
     </section>
-    <div class="container">
+    <div v-if="templatesSearchResult.length > 0" class="container">
       <Pagination
         class="landing-pagination"
-        :totalPages="templatesSearchResultMeta.pageCount || 1"
-        :perPage="templatesSearchResultMeta.pageSize || 25"
-        :currentPage="templatesSearchResultMeta.page || 1"
+        :totalPages="templatesSearchResultMeta?.pageCount || 1"
+        :perPage="templatesSearchResultMeta?.pageSize || 25"
+        :currentPage="templatesSearchResultMeta?.page || 1"
         @pagechanged="onPageChange"
       />
     </div>
@@ -39,22 +47,24 @@ import { useTemplateStore } from "../stores/useTemplate";
 import { storeToRefs } from "pinia";
 import { API_STATES } from "../services/constants";
 const route = useRoute();
+const router = useRouter();
 
 const templateStore = useTemplateStore();
-const currentPage = ref(1);
-const searchTerm = ref("") as any;
-const { getTemplates } = useTemplateStore();
 const {
   templatesSearchResult,
   templatesSearchResultMeta,
   searchFilters,
   apiLoadingStates,
-} = storeToRefs(templateStore);
+  stateSearchTerm,
+} = storeToRefs(useTemplateStore());
+const currentPage = ref(1);
+const searchTerm = ref("") as any;
+const { getTemplates, setSearchTerm } = useTemplateStore();
 
 searchTerm.value = route?.query?.searchTerm;
 
-if (templatesSearchResult.value.length < 1) {
-  getTemplates({ filters: {} }, searchTerm.value);
+if (stateSearchTerm.value !== searchTerm.value) {
+  getTemplates({ filters: searchFilters.value }, searchTerm.value);
 }
 
 const onPageChange = (page: number) => {
@@ -62,5 +72,10 @@ const onPageChange = (page: number) => {
     { pagination: { page }, filters: searchFilters.value },
     searchTerm.value
   );
+};
+
+const goBack = () => {
+  setSearchTerm("");
+  router.push("/");
 };
 </script>

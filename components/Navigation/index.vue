@@ -138,12 +138,14 @@
         >
           Reset Filters <span class="material-symbols-rounded"> close </span>
         </button>
-        <CircularLoader
-          v-if="
-            apiLoadingStates.templatesSearchResult === API_STATES.LOADING ||
-            apiLoadingStates.allTemplates === API_STATES.LOADING
-          "
-        />
+        <ClientOnly>
+          <CircularLoader
+            v-if="
+              apiLoadingStates.templatesSearchResult === API_STATES.LOADING ||
+              apiLoadingStates.allTemplates === API_STATES.LOADING
+            "
+          />
+        </ClientOnly>
       </div>
     </div>
   </div>
@@ -162,6 +164,7 @@ const {
   allDesignStyles,
   allDesignTypes,
   apiLoadingStates,
+  stateSearchTerm,
 } = storeToRefs(templateStore);
 
 const scrolled = ref(false);
@@ -193,8 +196,12 @@ const setFilters = () => {
   });
 };
 
-watch(allIndustries, async (newIndustries, oldTags) => {
+watch(allIndustries, (newIndustries, oldTags) => {
   setFilters();
+});
+
+watch(stateSearchTerm, () => {
+  searchTerm.value = stateSearchTerm.value;
 });
 
 const hasIndustryActive = computed(() => {
@@ -266,7 +273,7 @@ const applyFilters = () => {
 
 const triggerSearch = (e: Event) => {
   applyFilters();
-  // router.push(`/search?searchTerm=${searchTerm.value}`);
+  router.push(`/search?searchTerm=${searchTerm.value}`);
 };
 
 onMounted(() => {

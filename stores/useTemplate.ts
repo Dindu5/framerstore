@@ -9,12 +9,14 @@ export const useTemplateStore = defineStore("template", () => {
     page: 1,
     pageSize: 25,
     total: 1,
+    pageCount: 1,
   }) as any;
   const templatesSearchResult = ref([]) as Ref<Array<any>>;
   const templatesSearchResultMeta = ref({
     page: 1,
     pageSize: 25,
     total: 1,
+    pageCount: 1,
   }) as any;
   const allTags = ref([]) as any;
   const allIndustries = ref([]) as any;
@@ -29,6 +31,7 @@ export const useTemplateStore = defineStore("template", () => {
   const relatedTemplates = ref([]) as Ref<Array<any>>;
 
   const searchFilters = ref({}) as any;
+  const stateSearchTerm = ref("");
 
   // methods
   const transformTemplate = (template: any) => {
@@ -114,6 +117,7 @@ export const useTemplateStore = defineStore("template", () => {
       },
     };
     if (searchTerm) {
+      stateSearchTerm.value = searchTerm;
       const searchFields = [
         "name",
         "description",
@@ -139,7 +143,7 @@ export const useTemplateStore = defineStore("template", () => {
       });
     }
     if (searchTerm) {
-      router.push(`/search?searchTerm=${searchTerm}`);
+      // router.push(`/search?searchTerm=${searchTerm}`);
       apiLoadingStates.value.templatesSearchResult = API_STATES.LOADING;
     } else {
       apiLoadingStates.value.allTemplates = API_STATES.LOADING;
@@ -159,20 +163,17 @@ export const useTemplateStore = defineStore("template", () => {
         templatesSearchResult.value = data.value?.data.map((template: any) =>
           transformTemplate(template)
         );
+
         templatesSearchResultMeta.value = data.value?.meta?.pagination;
         apiLoadingStates.value.templatesSearchResult = API_STATES.SUCCESS;
       }
-      if (error) {
-        if (searchTerm) {
-          apiLoadingStates.value.templatesSearchResult = API_STATES.ERROR;
-        } else {
-          apiLoadingStates.value.allTemplates = API_STATES.ERROR;
-        }
-      }
-
-      // console.log(data);
     } catch (error) {
       console.error(error);
+      if (searchTerm) {
+        apiLoadingStates.value.templatesSearchResult = API_STATES.ERROR;
+      } else {
+        apiLoadingStates.value.allTemplates = API_STATES.ERROR;
+      }
     }
   }
 
@@ -259,12 +260,16 @@ export const useTemplateStore = defineStore("template", () => {
       );
       apiLoadingStates.value.relatedTemplates = API_STATES.SUCCESS;
       if (error) {
-        apiLoadingStates.value.relatedTemplates = API_STATES.ERROR;
       }
       return transformTemplate(data.value?.data);
     } catch (error) {
       console.log(error, "error na so");
+      apiLoadingStates.value.relatedTemplates = API_STATES.ERROR;
     }
+  };
+
+  const setSearchTerm = (search: string) => {
+    stateSearchTerm.value = search;
   };
 
   return {
@@ -282,5 +287,7 @@ export const useTemplateStore = defineStore("template", () => {
     apiLoadingStates,
     getSingleTemplate,
     relatedTemplates,
+    stateSearchTerm,
+    setSearchTerm,
   };
 });
