@@ -4,7 +4,7 @@ const resource = "/design-types";
 export default () => {
   return {
     getDesignTypes() {
-      return useCustomFetch(`${resource}`, { lazy: true });
+      return useCustomFetch(`${resource}`);
     },
   };
 };

@@ -4,7 +4,7 @@ const resource = "/typographies";
 export default () => {
   return {
     getTypographies() {
-      return useCustomFetch(`${resource}`, { lazy: true });
+      return useCustomFetch(`${resource}`);
     },
   };
 };

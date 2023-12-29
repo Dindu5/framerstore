@@ -20,6 +20,10 @@ export default defineNuxtConfig({
     "~/assets/styles/scss/main.scss",
     //  "@vueform/multiselect/themes/default.css",
   ],
+  routeRules: {
+    "/": { ssr: false },
+    "/search": { ssr: false },
+  },
 
   // components: {
   //   dirs: [

@@ -154,13 +154,13 @@ export const useTemplateStore = defineStore("template", () => {
         lazy: searchTerm ? true : false,
       });
       if (!searchTerm) {
-        allTemplates.value = data.value?.data.map((template: any) =>
+        allTemplates.value = data.value?.data?.map((template: any) =>
           transformTemplate(template)
         );
         allTemplatesMeta.value = data.value?.meta?.pagination;
         apiLoadingStates.value.allTemplates = API_STATES.SUCCESS;
       } else {
-        templatesSearchResult.value = data.value?.data.map((template: any) =>
+        templatesSearchResult.value = data.value?.data?.map((template: any) =>
           transformTemplate(template)
         );
 
@@ -183,6 +183,7 @@ export const useTemplateStore = defineStore("template", () => {
     const industryUrl = $api.industry.getIndustries();
     const designStyleUrl = $api.designStyle.getDesignStyles();
     const designTypeUrl = $api.designType.getDesignTypes();
+    console.log("here");
 
     try {
       const [industries, tags, designTypes, designStyles] = await Promise.all([
@@ -255,7 +256,7 @@ export const useTemplateStore = defineStore("template", () => {
       const { data, error } = await $api.template.getTemplates(query, {
         lazy: true,
       });
-      relatedTemplates.value = data.value?.data.map((template: any) =>
+      relatedTemplates.value = data.value?.data?.map((template: any) =>
         transformTemplate(template)
       );
       apiLoadingStates.value.relatedTemplates = API_STATES.SUCCESS;

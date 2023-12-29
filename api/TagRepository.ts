@@ -4,7 +4,7 @@ const resource = "/tags";
 export default () => {
   return {
     getTags() {
-      return useCustomFetch(`${resource}`, { lazy: true });
+      return useCustomFetch(`${resource}`);
     },
   };
 };

@@ -19,7 +19,7 @@
             <img src="/images/icons/x.svg" alt="Twitter" />
           </a>
           <a href="#">
-            <img src="/images/icons/Instagram.svg" alt="Instagram" />
+            <img src="/images/icons/new-ig.svg" alt="Instagram" />
           </a>
         </div>
       </div>

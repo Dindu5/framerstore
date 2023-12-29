@@ -1,5 +1,6 @@
 <template>
   <div class="search-result-page">
+    <NuxtLoadingIndicator />
     <div v-if="templatesSearchResult.length > 0" class="container">
       <h1 class="search-result-page__text">
         Showing Result for: <span>{{ searchTerm }}</span>

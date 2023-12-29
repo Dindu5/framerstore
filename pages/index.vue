@@ -30,17 +30,14 @@
     </section>
 
     <div
-      v-if="
-        apiLoadingStates.allTemplates === API_STATES.SUCCESS &&
-        allTemplates.length > 0
-      "
+      v-if="apiLoadingStates.allTemplates === API_STATES.SUCCESS"
       class="container"
     >
       <Pagination
         class="landing-pagination"
-        :totalPages="allTemplatesMeta.pageCount || 1"
-        :perPage="allTemplatesMeta.pageSize || 25"
-        :currentPage="allTemplatesMeta.page || 1"
+        :totalPages="allTemplatesMeta?.pageCount || 1"
+        :perPage="allTemplatesMeta?.pageSize || 25"
+        :currentPage="allTemplatesMeta?.page || 1"
         @pagechanged="onPageChange"
       />
     </div>

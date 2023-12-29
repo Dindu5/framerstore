@@ -182,16 +182,16 @@ const tagFilterItems = ref([]);
 const searchTerm = ref("");
 
 const setFilters = () => {
-  industryFilterItems.value = allIndustries.value.map((tag: any) => {
+  industryFilterItems.value = allIndustries.value?.map((tag: any) => {
     return { name: tag?.attributes?.name, id: tag.id, value: false };
   });
-  styleFilterItems.value = allDesignStyles.value.map((tag: any) => {
+  styleFilterItems.value = allDesignStyles.value?.map((tag: any) => {
     return { name: tag?.attributes?.name, id: tag.id, value: false };
   });
-  tagFilterItems.value = allTags.value.map((tag: any) => {
+  tagFilterItems.value = allTags.value?.map((tag: any) => {
     return { name: tag?.attributes?.name, id: tag.id, value: false };
   });
-  typeFilterItems.value = allDesignTypes.value.map((tag: any) => {
+  typeFilterItems.value = allDesignTypes.value?.map((tag: any) => {
     return { name: tag?.attributes?.name, id: tag.id, value: false };
   });
 };
@@ -205,16 +205,16 @@ watch(stateSearchTerm, () => {
 });
 
 const hasIndustryActive = computed(() => {
-  return industryFilterItems.value.some((item: any) => item.value);
+  return industryFilterItems.value?.some((item: any) => item.value);
 });
 const hasStyleActive = computed(() => {
-  return styleFilterItems.value.some((item: any) => item.value);
+  return styleFilterItems.value?.some((item: any) => item.value);
 });
 const hasTagActive = computed(() => {
-  return tagFilterItems.value.some((item: any) => item.value);
+  return tagFilterItems.value?.some((item: any) => item.value);
 });
 const hasTypeActive = computed(() => {
-  return typeFilterItems.value.some((item: any) => item.value);
+  return typeFilterItems.value?.some((item: any) => item.value);
 });
 
 const showFilter = computed(() => {
@@ -225,9 +225,9 @@ function signIn() {
   router.push("/login");
 }
 
-if (allIndustries.value.length < 1) {
-  getFilters();
-}
+// if (allIndustries.value.length < 1) {
+//   getFilters();
+// }
 
 const applyFilters = () => {
   const filters = {} as Record<string, any>;
@@ -235,8 +235,8 @@ const applyFilters = () => {
     filters["industries"] = {
       id: {
         $in: industryFilterItems.value
-          .filter((industry: any) => industry.value)
-          .map((ind: any) => ind.id),
+          ?.filter((industry: any) => industry.value)
+          ?.map((ind: any) => ind.id),
       },
     };
   }
@@ -244,8 +244,8 @@ const applyFilters = () => {
     filters["design_styles"] = {
       id: {
         $in: styleFilterItems.value
-          .filter((industry: any) => industry.value)
-          .map((ind: any) => ind.id),
+          ?.filter((industry: any) => industry.value)
+          ?.map((ind: any) => ind.id),
       },
     };
   }
@@ -253,8 +253,8 @@ const applyFilters = () => {
     filters["tags"] = {
       id: {
         $in: tagFilterItems.value
-          .filter((industry: any) => industry.value)
-          .map((ind: any) => ind.id),
+          ?.filter((industry: any) => industry.value)
+          ?.map((ind: any) => ind.id),
       },
     };
   }
@@ -262,8 +262,8 @@ const applyFilters = () => {
     filters["design_types"] = {
       id: {
         $in: typeFilterItems.value
-          .filter((industry: any) => industry.value)
-          .map((ind: any) => ind.id),
+          ?.filter((industry: any) => industry.value)
+          ?.map((ind: any) => ind.id),
       },
     };
   }
@@ -276,7 +276,8 @@ const triggerSearch = (e: Event) => {
   router.push(`/search?searchTerm=${searchTerm.value}`);
 };
 
-onMounted(() => {
+onMounted(async () => {
+  getFilters();
   setFilters();
   if (process.client) {
     window.addEventListener("scroll", handleScroll);

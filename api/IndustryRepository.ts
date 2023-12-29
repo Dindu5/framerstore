@@ -4,7 +4,7 @@ const resource = "/industries";
 export default () => {
   return {
     getIndustries() {
-      return useCustomFetch(`${resource}`, { lazy: true });
+      return useCustomFetch(`${resource}`);
     },
   };
 };
