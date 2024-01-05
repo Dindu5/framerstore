@@ -5,7 +5,7 @@
       @click="onClickPreviousPage"
       :disabled="isInFirstPage"
     >
-      <span class="material-symbols-rounded"> chevron_left </span> Previous
+      <img src="/images/icons/arrow_back.svg" alt="back" /> Previous
     </button>
 
     <!-- Visible Buttons Start -->
@@ -23,7 +23,7 @@
     <!-- Visible Buttons End -->
 
     <button type="button" @click="onClickNextPage" :disabled="isInLastPage">
-      Next <span class="material-symbols-rounded"> chevron_right </span>
+      Next <img src="/images/icons/arrow_forward.svg" alt="forward" />
     </button>
   </div>
 </template>

@@ -2,9 +2,11 @@ import AuthRepository from "./AuthRepository";
 import DesignStyleRepository from "./DesignStyleRepository";
 import DesignTypeRepository from "./DesignTypeRepository";
 import IndustryRepository from "./IndustryRepository";
+import PendingTemplateRepository from "./PendingTemplateRepository";
 import TagRepository from "./TagRepository";
 import TemplateRepository from "./TemplateRepository";
 import TypographyRepository from "./TypographyRepository";
+import UserRepository from "./UserRepository";
 
 export default {
   auth: AuthRepository(),
@@ -14,4 +16,6 @@ export default {
   designStyle: DesignStyleRepository(),
   designType: DesignTypeRepository(),
   typography: TypographyRepository(),
+  pendingTemplates: PendingTemplateRepository(),
+  users: UserRepository(),
 };

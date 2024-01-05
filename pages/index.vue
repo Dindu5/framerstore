@@ -25,6 +25,7 @@
           v-for="(item, i) in allTemplates"
           :key="i"
           :cardData="item"
+          @preview="previewTemplate"
         />
       </div>
     </section>
@@ -50,7 +51,7 @@ import { storeToRefs } from "pinia";
 import { API_STATES } from "../services/constants";
 
 const currentPage = ref(1);
-const { getTemplates } = useTemplateStore();
+const { getTemplates, setSelectedTemplate } = useTemplateStore();
 const { allTemplates, allTemplatesMeta, searchFilters, apiLoadingStates } =
   storeToRefs(useTemplateStore());
 
@@ -62,5 +63,9 @@ const onPageChange = (page: number) => {
     filters: searchFilters.value,
   });
   // currentPage.value = page;
+};
+
+const previewTemplate = (template: any) => {
+  setSelectedTemplate(template);
 };
 </script>

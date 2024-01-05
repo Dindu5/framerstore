@@ -9,6 +9,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 8rem;
+    @include screenMax("mobile") {
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 2rem;
+    }
   }
   &-pagination {
     padding-bottom: 6.5rem;

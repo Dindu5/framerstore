@@ -28,6 +28,9 @@
 
 <script setup lang="ts">
 const router = useRouter();
+definePageMeta({
+  middleware: ["auth"],
+});
 const cardItems = [
   {
     img: "/images/templates/img-0.jpg",

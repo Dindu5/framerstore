@@ -10,6 +10,10 @@
     height: 63.8rem;
     margin-bottom: 2.4rem;
     overflow: hidden;
+    @include screenMax("mobile") {
+      height: 19.3rem;
+      margin-bottom: 0.8rem;
+    }
     .template-card__img-cta {
       background: linear-gradient(180deg, rgba(0, 0, 0, 0) 100%, #000 100%);
       width: 100%;
@@ -38,27 +42,63 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1.6rem;
+    @include screenMax("mobile") {
+      margin-bottom: 0.4rem;
+    }
     h4 {
       color: $black;
       font-family: $neue-bold;
-      font-size: 3.1rem;
+      font-size: 2.2rem;
       font-style: normal;
       font-weight: 700;
       line-height: 3.72rem; /* 120% */
+      > div {
+        width: 17rem !important;
+        height: 3.2rem !important;
+      }
+
+      @include screenMax("mobile") {
+        font-family: $secondary-font;
+        font-size: 1.4rem;
+        font-weight: 600;
+        line-height: 2.4rem; /* 171.429% */
+        > div {
+          width: 7rem !important;
+          height: 2.2rem !important;
+        }
+      }
     }
     p {
       color: map-get($grey-map, 200);
       font-family: $primary-font;
-      font-size: 3.1rem;
+      font-size: 2.4rem;
       font-style: normal;
       font-weight: 400;
       line-height: 3.72rem; /* 120% */
+      > div {
+        width: 5rem !important;
+        height: 3.2rem !important;
+      }
+      @include screenMax("mobile") {
+        font-family: $secondary-font;
+        font-size: 1.4rem;
+        font-weight: 600;
+        line-height: 2.4rem; /* 171.429% */
+        > div {
+          width: 3rem !important;
+          height: 2.2rem !important;
+        }
+      }
     }
   }
   &__author {
     display: flex;
     align-items: center;
     gap: 1.6rem;
+    > div {
+      height: 3.2rem !important;
+      width: 3.2rem !important;
+    }
     img {
       height: 3.2rem;
       width: 3.2rem;
@@ -71,6 +111,30 @@
       font-style: normal;
       font-weight: 400;
       line-height: 3.6rem;
+      > div {
+        width: 15rem !important;
+        height: 2.8rem !important;
+      }
+    }
+    @include screenMax("mobile") {
+      gap: 0.4rem;
+      img {
+        height: 1.6rem;
+        width: 1.6rem;
+        > div {
+          height: 1.6rem !important;
+          width: 1.6rem !important;
+        }
+      }
+      p {
+        font-size: 1.4rem;
+        line-height: 2.1rem; /* 150% */
+        letter-spacing: -0.014rem;
+        > div {
+          width: 5rem !important;
+          height: 2.8rem !important;
+        }
+      }
     }
   }
 }

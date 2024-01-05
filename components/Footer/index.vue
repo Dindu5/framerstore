@@ -1,24 +1,25 @@
 <template>
   <footer class="footer">
     <div class="container">
-      <h2>Subscribe to our newsletter</h2>
+      <h2>Get the free weekly templates in your inbox</h2>
       <div class="footer-top">
         <div>
           <input
+            name="email subscription"
             type="email"
             placeholder="Enter email here"
             class="footer-subscription"
           />
-          <button class="btn">Submit</button>
+          <button class="btn">Subscribe</button>
         </div>
         <div>
-          <a href="#">
+          <a href="https://www.pinterest.com/framerstorehq" target="_blank">
             <img src="/images/icons/pintrest.svg" alt="Pinterest" />
           </a>
-          <a href="#">
+          <a href="https://twitter.com/framerstoreshop" target="_blank">
             <img src="/images/icons/x.svg" alt="Twitter" />
           </a>
-          <a href="#">
+          <a href="https://www.instagram.com/framerstorehq/" target="_blank">
             <img src="/images/icons/new-ig.svg" alt="Instagram" />
           </a>
         </div>
@@ -26,30 +27,26 @@
       <hr class="footer-break" />
       <div class="footer-middle">
         <h4>Top Searches for Framer templates</h4>
-
+        {{ topSearch }}
         <div>
-          <a href="#">Portfolio</a>
-          <a href="#">Saas</a>
-          <a href="#">Startup</a>
-          <a href="#">Fitness</a>
-          <a href="#">Beauty</a>
-          <a href="#">Photography</a>
-          <a href="#">Pod casting</a>
-          <a href="#">Real Estate</a>
-          <a href="#">Health</a>
-          <a href="#">Agency</a>
-          <a href="#">Marketing</a>
-          <a href="#">Business</a>
-          <a href="#">Technology</a>
+          <p
+            v-for="(search, i) in topSearch"
+            :key="i"
+            @click="triggerSearch(search)"
+          >
+            {{ search }}
+          </p>
         </div>
       </div>
       <hr class="footer-break" />
       <div class="footer-bottom">
         <div>
           <nuxt-link to="/">About us</nuxt-link>
-          <nuxt-link to="/">Blog</nuxt-link>
-          <nuxt-link to="/">Contact us</nuxt-link>
-          <nuxt-link to="/">Submit a template</nuxt-link>
+          <a href="http://framerstore.shop/blog/" target="_blank">Blog</a>
+          <a href=" https://www.framer.com/?via=biyified" target="_blank"
+            >Build with Framer</a
+          >
+          <nuxt-link to="/app/submit">Submit a template</nuxt-link>
           <nuxt-link to="/">Promote a template</nuxt-link>
           <nuxt-link to="/">Customisation</nuxt-link>
         </div>
@@ -62,8 +59,34 @@
 </template>
 
 <script setup lang="ts">
-// const { $api } = useNuxtApp();
-// console.log($api);
+import { storeToRefs } from "pinia";
+import { ref } from "vue";
+import { useTemplateStore } from "../../stores/useTemplate";
+const router = useRouter();
+
+const { searchFilters } = storeToRefs(useTemplateStore());
+const { getTemplates } = useTemplateStore();
+
+const topSearch = ref([
+  "Portfolio",
+  "Saas",
+  "Startup",
+  "Fitness",
+  "Beauty",
+  "Photography",
+  "Pod casting",
+  "Real Estate",
+  "Health",
+  "Agency",
+  "Marketing",
+  "Business",
+  "Technology",
+]);
+
+const triggerSearch = (search: string) => {
+  getTemplates({ filters: searchFilters.value }, search);
+  router.push(`/search?searchTerm=${search}`);
+};
 </script>
 
 <style></style>

@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import qs from "qs";
+import { TemplateSizes } from "~/types/modules/templateModel";
 import { API_STATES } from "../services/constants";
 
 export const useTemplateStore = defineStore("template", () => {
@@ -27,11 +28,14 @@ export const useTemplateStore = defineStore("template", () => {
     templatesSearchResult: API_STATES.IDLE,
     singleTemplate: API_STATES.IDLE,
     relatedTemplates: API_STATES.IDLE,
+    mvpSubmit: API_STATES.IDLE,
   });
   const relatedTemplates = ref([]) as Ref<Array<any>>;
 
   const searchFilters = ref({}) as any;
   const stateSearchTerm = ref("");
+  const selectedTemplate = ref({}) as Ref<any>;
+  const selectedTemplateSize = ref("desktop") as Ref<TemplateSizes>;
 
   // methods
   const transformTemplate = (template: any) => {
@@ -50,6 +54,9 @@ export const useTemplateStore = defineStore("template", () => {
       title,
       screenshots,
       industries,
+      design_styles,
+      typographies,
+      colors,
     } = template?.attributes || {
       name: "",
       price: "",
@@ -62,14 +69,18 @@ export const useTemplateStore = defineStore("template", () => {
       design_types: [],
       screenshots: [],
       industries: [],
+      design_styles: [],
+      typographies: [],
+      colors: [],
     };
     return {
-      id: template.id,
+      id: template?.id,
       name,
       price,
       pages,
       features,
       title,
+      colors,
       thumbnail: {
         image: thumbnail?.data?.attributes?.url,
         placeholder: thumbnail?.data?.attributes?.formats?.thumbnail?.url,
@@ -84,10 +95,12 @@ export const useTemplateStore = defineStore("template", () => {
             publicId: screenshot?.attributes?.provider_metadata?.public_id,
           };
         }) || [],
-      description: description,
+      description,
       tags: tags?.data || [],
       industries: industries?.data || [],
       design_types: design_types?.data || [],
+      design_styles: design_styles?.data || [],
+      typographies: typographies?.data || [],
       author: {
         profilePicture:
           author?.data?.attributes?.profilePicture?.data?.attributes?.url,
@@ -98,11 +111,10 @@ export const useTemplateStore = defineStore("template", () => {
     };
   };
   async function getTemplates(payload?: any, searchTerm: string = "") {
+    const { $api } = useNuxtApp();
     if (payload?.filters) {
       searchFilters.value = payload.filters;
     }
-
-    const { $api } = useNuxtApp();
     const router = useRouter();
     const queryParams = {
       ...payload,
@@ -114,6 +126,7 @@ export const useTemplateStore = defineStore("template", () => {
         design_types: "*",
         industries: "*",
         tags: "*",
+        typographies: "*",
       },
     };
     if (searchTerm) {
@@ -183,7 +196,6 @@ export const useTemplateStore = defineStore("template", () => {
     const industryUrl = $api.industry.getIndustries();
     const designStyleUrl = $api.designStyle.getDesignStyles();
     const designTypeUrl = $api.designType.getDesignTypes();
-    console.log("here");
 
     try {
       const [industries, tags, designTypes, designStyles] = await Promise.all([
@@ -203,25 +215,32 @@ export const useTemplateStore = defineStore("template", () => {
 
   const getSingleTemplate = async (id: string) => {
     const { $api } = useNuxtApp();
-    try {
-      const queryParams = {
-        populate: {
-          author: { populate: "profilePicture" },
-          thumbnail: "*",
-          screenshots: "*",
-          design_styles: "*",
-          design_types: "*",
-          industries: "*",
-          tags: "*",
-        },
-      };
-      const query = qs.stringify(queryParams);
-      const { data, error } = await $api.template.getSingleTemplate(id, query);
+    const queryParams = {
+      populate: {
+        author: { populate: "profilePicture" },
+        thumbnail: "*",
+        screenshots: "*",
+        design_styles: "*",
+        design_types: "*",
+        industries: "*",
+        tags: "*",
+        typographies: "*",
+      },
+    };
+    apiLoadingStates.value.singleTemplate = API_STATES.LOADING;
+
+    const query = qs.stringify(queryParams);
+    const { data, error } = await $api.template.getSingleTemplate(id, query, {
+      lazy: false,
+    });
+    if (error.value) {
+      apiLoadingStates.value.singleTemplate = API_STATES.ERROR;
+      return {};
+    } else if (data.value) {
       const template = transformTemplate(data.value?.data);
       getRelatedTemplates(template);
+      apiLoadingStates.value.singleTemplate = API_STATES.SUCCESS;
       return template;
-    } catch (error) {
-      console.log(error, "error na so");
     }
   };
 
@@ -240,6 +259,24 @@ export const useTemplateStore = defineStore("template", () => {
               $in: template?.tags?.map((ind: any) => ind.id) || [],
             },
           },
+          design_styles: {
+            id: {
+              $in: template?.design_styles?.map((ind: any) => ind.id) || [],
+            },
+          },
+          design_types: {
+            id: {
+              $in: template?.design_types?.map((ind: any) => ind.id) || [],
+            },
+          },
+          typographies: {
+            id: {
+              $in: template?.design_types?.map((ind: any) => ind.id) || [],
+            },
+          },
+          id: {
+            $ne: template.id,
+          },
         },
         populate: {
           author: { populate: "profilePicture" },
@@ -249,6 +286,7 @@ export const useTemplateStore = defineStore("template", () => {
           design_types: "*",
           industries: "*",
           tags: "*",
+          typographies: "*",
         },
       };
       apiLoadingStates.value.relatedTemplates = API_STATES.LOADING;
@@ -273,6 +311,42 @@ export const useTemplateStore = defineStore("template", () => {
     stateSearchTerm.value = search;
   };
 
+  const mvpTemplateSubmit = async (
+    payload: any
+  ): Promise<{ error?: any; data?: any }> => {
+    try {
+      const { $api } = useNuxtApp();
+      apiLoadingStates.value.mvpSubmit = API_STATES.LOADING;
+
+      const { data, error } = await $api.pendingTemplates.createTemplate({
+        data: payload,
+      });
+      console.log({ data, error });
+      if (error.value) {
+        apiLoadingStates.value.mvpSubmit = API_STATES.ERROR;
+        return { error: error.value };
+      } else if (data.value) {
+        apiLoadingStates.value.mvpSubmit = API_STATES.SUCCESS;
+        return { data: data.value };
+      } else {
+        return { error: null };
+      }
+    } catch (error) {
+      console.log(error);
+      return {};
+    }
+  };
+
+  const setSelectedTemplate = (template: any) => {
+    const router = useRouter();
+    selectedTemplate.value = template;
+    router.push("/templates/preview");
+  };
+
+  const updateTemplateSize = (size: TemplateSizes) => {
+    selectedTemplateSize.value = size;
+  };
+
   return {
     allTemplates,
     allTemplatesMeta,
@@ -290,5 +364,10 @@ export const useTemplateStore = defineStore("template", () => {
     relatedTemplates,
     stateSearchTerm,
     setSearchTerm,
+    mvpTemplateSubmit,
+    selectedTemplate,
+    setSelectedTemplate,
+    updateTemplateSize,
+    selectedTemplateSize,
   };
 });

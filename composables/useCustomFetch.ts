@@ -1,5 +1,7 @@
 export const useCustomFetch = (request: any, opts?: any) => {
   const config = useRuntimeConfig();
+  const authToken = useCookie("authToken");
+
   return useFetch(request, {
     baseURL: config.public.baseURL,
     // onRequest({ request, options }) {
@@ -15,6 +17,11 @@ export const useCustomFetch = (request: any, opts?: any) => {
     // onResponseError({ request, response, options }) {
     //     // Handle the response errors
     // },
+
     ...opts,
+    headers: {
+      Authorization: authToken.value ? `Bearer ${authToken.value}` : "",
+      ...opts?.headers,
+    },
   });
 };

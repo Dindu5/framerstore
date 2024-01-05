@@ -6,19 +6,19 @@
     @click="$router.push(`/templates/${cardData.id}`)"
   >
     <div class="template-card__img" :ref="`template-card-${id}`">
-      <!-- <NuxtImg
+      <NuxtImg
         :src="cardData.thumbnail.image"
         alt="Template Image"
         :placeholder="cardData.thumbnail.placeholder"
-      /> -->
-      <CldImage
+      />
+      <!-- <CldImage
         :src="cardData.thumbnail.publicId"
         alt="Image"
         layout="fullWidth"
         :height="`${height}`"
         :width="`${width}`"
       >
-      </CldImage>
+      </CldImage> -->
 
       <div :class="showCta ? 'template-card__img-cta' : ''">
         <button class="btn btn-icon" @click="bookMark">
@@ -27,7 +27,7 @@
         <button class="btn btn-icon" @click="bookMark">
           <span class="material-symbols-rounded"> upload </span>
         </button>
-        <button class="btn" @click="bookMark">Live preview</button>
+        <button class="btn" @click.prevent="preview">Live preview</button>
       </div>
     </div>
 
@@ -69,6 +69,10 @@ export default {
     },
     bookMark(e: Event) {
       e.stopPropagation();
+    },
+    preview(e: Event) {
+      e.stopPropagation();
+      this.$emit("preview", this.cardData);
     },
   },
   mounted() {

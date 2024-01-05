@@ -1,15 +1,28 @@
+import { LoginPayload, SignUpPayload } from "~/types/modules/authModel";
+
 const resource = "/auth";
 
 export default () => {
   return {
-    login(payload: any) {
-      return $fetch(`${resource}/login`, payload);
+    login(payload: LoginPayload) {
+      return useCustomFetch(`${resource}/local`, {
+        body: payload,
+        method: "POST",
+      });
     },
     currentUser() {
-      return $fetch(`${resource}/me`);
+      return useCustomFetch(`${resource}/me`);
     },
-    signup(payload: any) {
-      return $fetch(`${resource}/signup`, payload);
+    signup(payload: SignUpPayload) {
+      return useCustomFetch(`${resource}/local/register`, {
+        method: "POST",
+        body: payload,
+      });
+    },
+    providerAuth(provider: string, payload: any) {
+      return useCustomFetch(`${resource}/${provider}/callback`, {
+        query: payload,
+      });
     },
   };
 };

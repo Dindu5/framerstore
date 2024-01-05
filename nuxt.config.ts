@@ -23,6 +23,11 @@ export default defineNuxtConfig({
   routeRules: {
     "/": { ssr: false },
     "/search": { ssr: false },
+    "/templates/**": { ssr: false },
+    "/login": { ssr: false },
+    "/signup": { ssr: false },
+    "/facebook/callback": { ssr: false },
+    "/google/callback": { ssr: false },
   },
 
   // components: {

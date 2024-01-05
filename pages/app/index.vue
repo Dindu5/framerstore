@@ -72,6 +72,10 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+
+definePageMeta({
+  middleware: ["auth"],
+});
 const route = useRoute();
 
 const myTemplates = [

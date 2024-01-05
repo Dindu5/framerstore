@@ -1,9 +1,10 @@
 <template>
   <main class="auth-layout">
-    <Navigation />
+    <Navigation width="50rem" classes="my-notification" />
     <div class="container">
       <slot />
     </div>
+    <notifications />
   </main>
 </template>
 

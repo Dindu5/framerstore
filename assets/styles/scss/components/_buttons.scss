@@ -14,10 +14,35 @@
   letter-spacing: 0.018rem;
   position: relative;
   transition: all 0.6s;
+  overflow: hidden;
+
+  @include screenMax("mobile") {
+    font-size: 1.4rem;
+    line-height: 1.8rem; /* 128.571% */
+    letter-spacing: 0.014rem;
+    padding: 1.5rem 3.2rem;
+  }
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    img {
+      height: 2.4rem;
+      width: 2.4rem;
+    }
+  }
+
   span {
     font-size: 2.4rem;
   }
   &-loading {
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      height: 100%;
+      width: 100%;
+    }
     &:after {
       content: "";
       position: absolute;
@@ -42,10 +67,16 @@
       border: 0.4rem solid map-get($black-map, 100);
       border-top: 0.4rem solid $white;
     }
+    &.btn-loading::before {
+      background-color: map-get($black-map, 100);
+    }
     &-outline {
       border: 0.1rem solid map-get($grey-map, 100);
       color: map-get($black-map, 100);
       background-color: transparent;
+      &.btn-loading::before {
+        background-color: map-get($white-map, 200);
+      }
     }
   }
   &-secondary {
@@ -58,6 +89,11 @@
   &-icon {
     height: 7.2rem;
     width: 7.2rem;
+    padding: 1.4rem 1.2rem;
+    > img {
+      height: 2.4rem;
+      width: 2.4rem;
+    }
   }
   &-full {
     width: 100%;

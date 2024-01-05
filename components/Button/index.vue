@@ -8,14 +8,14 @@
     }`"
     :disabled="disabled"
   >
-    <span v-show="preIcon && !loading" class="material-symbols-rounded">
+    <span v-show="preIcon" class="material-symbols-rounded">
       {{ preIcon }}
     </span>
-    <div v-show="!loading">
+    <div>
       <slot />
     </div>
 
-    <span v-show="postIcon && !loading" class="material-symbols-rounded">
+    <span v-show="postIcon" class="material-symbols-rounded">
       {{ postIcon }}
     </span>
   </button>

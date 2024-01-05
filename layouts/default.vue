@@ -1,5 +1,6 @@
 <template>
   <main>
+    <Notifications width="50rem" classes="my-notification" />
     <Navigation />
     <slot />
     <Footer />

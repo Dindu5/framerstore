@@ -1,6 +1,6 @@
 .hero {
   background-color: map-get($grey-map, 500);
-  padding: 6rem 0;
+  padding: 8rem 0;
   background-image: url("/images/hero-bg-3x.png");
   background-size: contain;
   background-position: right;
@@ -8,6 +8,9 @@
   &-main_content {
     max-width: 96rem;
     width: 100%;
+  }
+  @include screenMax("mobile") {
+    background-image: none;
   }
   h1 {
     color: $black;
@@ -18,19 +21,33 @@
     line-height: 6.4rem; /* 106.667% */
     letter-spacing: -0.12rem;
     margin-bottom: 2.4rem;
+    @include screenMax("mobile") {
+      font-size: 2.9rem;
+      font-weight: 700;
+      line-height: 3.7rem; /* 127.586% */
+      margin-bottom: 1.6rem;
+    }
   }
   h5 {
     color: map-get($grey-map, 200);
-    font-family: "Neue-thin", sans-serif;
+    font-family: $primary-font;
     font-size: 2.3rem;
     font-style: normal;
     font-weight: 400;
     line-height: 3.5rem;
+    @include screenMax("mobile") {
+      font-family: $secondary-font;
+      font-size: 1.6rem;
+      line-height: 2.5rem; /* 156.25% */
+    }
   }
   &-filters {
     display: flex;
     gap: 12rem;
     margin-top: 4.8rem;
+    @include screenMax("mobile") {
+      display: none;
+    }
     h6 {
       color: map-get($grey-map, 100);
       font-family: $neue-bold;
@@ -57,6 +74,15 @@
       letter-spacing: -0.18px;
       cursor: pointer;
       padding: 0.4rem 0;
+      border-bottom: 0.1rem solid transparent;
+      width: max-content;
+      // width: 100%;
+      // display: block;
+      position: relative;
+
+      &:hover {
+        border-bottom: 0.1rem solid $black;
+      }
     }
   }
 }

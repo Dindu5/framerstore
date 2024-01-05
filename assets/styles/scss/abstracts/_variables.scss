@@ -49,3 +49,17 @@ $text-color-weak: map-get($grey-map, 100);
 
 $max-width: 100%;
 $z-indexes: ("action-sheet", "modal", "navigation", "label", "dropdown");
+
+$breakpoints: (
+  "xxsm-mobile": 350px,
+  "xsm-mobile": 380px,
+  "ssm-mobile": 485px,
+  "sm-mobile": 550px,
+  "mobile": 650px,
+  "sm-tablet": 700px,
+  "md-tablet": 770px,
+  "tablet": 950px,
+  "lg-tablet": 1025px,
+  "sm-desktop": 1200px,
+  "desktop": 1440px,
+) !default;

@@ -1,0 +1,42 @@
+.my-notification {
+  background: $black !important;
+  border-left: 0;
+  padding: 2rem;
+  border-radius: 0.8rem;
+
+  // style for title line
+  .notification-title {
+    color: $white !important;
+    font-size: 2rem;
+    font-family: $secondary-font;
+    font-weight: 600;
+    // margin-bottom: 1rem;
+  }
+
+  // style for content
+  .notification-content {
+    color: $white !important;
+    font-size: 1.6rem;
+    font-family: $secondary-font;
+    font-weight: 400;
+    //  margin-top: 1rem;
+  }
+
+  // additional styling hook when using`type` parameter, i.e. this.$notify({ type: 'success', message: 'Yay!' })
+  &.success {
+  }
+  &.info {
+    /*...*/
+  }
+  &.error {
+    background: $accent !important;
+    color: $white;
+    font-size: 4rem;
+  }
+}
+.vue-notification-group {
+  top: 2rem !important;
+  right: 2rem !important;
+}
+.vue-notification-wrapper {
+}

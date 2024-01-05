@@ -1,6 +1,7 @@
 <template>
   <label class="form-checkbox">
     <input type="checkbox" v-model="model" :value="value" />
+    <span v-if="useColor" :style="`background-color: ${label}`"></span>
     {{ label }}
   </label>
 </template>
@@ -11,6 +12,7 @@ const props = defineProps({
   modelValue: { type: [Array, Boolean] },
   value: { type: [Boolean, Object] },
   label: { type: String },
+  useColor: { type: Boolean },
 });
 const emit = defineEmits(["update:model-value"]);
 const model = computed({
