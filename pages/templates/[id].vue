@@ -75,18 +75,18 @@
             </div>
           </div>
           <div>
-            <button class="btn btn-primary">
+            <Button color="accent">
               <img src="/images/icons/buy.svg" alt="Upload" /> Buy Template -
               ${{ singleTemplate.price }}
-            </button>
+            </Button>
 
             <div>
               <!-- <button class="btn btn-icon">
               <span class="material-symbols-rounded"> bookmark </span>
             </button> -->
-              <Button color="secondary" outlined icon>
+              <!-- <Button color="secondary" outlined icon>
                 <img src="/images/icons/share.svg" alt="Upload" />
-              </Button>
+              </Button> -->
               <Button
                 color="secondary"
                 outlined
@@ -160,9 +160,6 @@
                 class="chip"
               >
                 {{ feature.name }}
-                <span class="material-symbols-rounded">
-                  {{ feature.icon }}
-                </span>
               </div>
             </div>
           </div>
@@ -219,12 +216,11 @@
             </div>
           </div>
           <div class="search-page--cta">
-            <button class="btn btn-primary">
+            <Button color="accent">
               <img src="/images/icons/buy.svg" alt="Buy" /> Buy Template - ${{
                 singleTemplate.price
               }}
-            </button>
-
+            </Button>
             <Button
               color="secondary"
               outlined
@@ -232,9 +228,9 @@
             >
               Preview
             </Button>
-            <Button color="secondary" outlined icon>
+            <!-- <Button color="secondary" outlined icon>
               <img src="/images/icons/share.svg" alt="Upload" />
-            </Button>
+            </Button> -->
           </div>
         </div>
       </section>

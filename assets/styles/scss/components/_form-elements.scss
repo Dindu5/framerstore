@@ -237,11 +237,15 @@
   font-weight: 400;
   line-height: 2.8rem; /* 155.556% */
   letter-spacing: -0.018rem;
+  transition: all 0.6s;
   @include screenMax("mobile") {
     font-size: 1.4rem;
     line-height: 2.1rem; /* 150% */
     letter-spacing: -0.014rem;
     padding: 0.4rem 0rem;
+  }
+  &.active {
+    font-weight: 700;
   }
   span {
     width: 1.6rem;

@@ -4,7 +4,7 @@
   &-top {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 6.5rem;
+    padding-bottom: 0;
     h1 {
       color: $black;
       font-family: $neue-bold;
@@ -24,8 +24,8 @@
           align-items: center;
           gap: 1.6rem;
           img {
-            width: 6rem;
-            height: 6rem;
+            width: 4.8rem;
+            height: 4.8rem;
             border-radius: 50%;
           }
           p {
@@ -62,14 +62,14 @@
     // display: flex;
     // overflow: visible;
     // gap: 6.4rem;
-    padding: 6.5rem 5rem !important;
+    padding: 6.8rem 5rem !important;
     padding-top: 0rem;
     // overflow: hidden;
     .swiper-wrapper {
       img {
         height: 74.2rem !important;
         width: 110.3rem;
-        border-radius: 16px;
+        border-radius: 0rem;
         object-fit: cover;
       }
       .swiper-slide:first-child {
@@ -98,7 +98,7 @@
       font-family: $secondary-font;
       font-size: 2.2rem;
       font-style: normal;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 3.6rem;
       margin-bottom: 0.8rem;
     }

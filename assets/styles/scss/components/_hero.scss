@@ -83,6 +83,7 @@
       position: relative;
 
       &:hover {
+        color: $black;
         border-bottom: 0.1rem solid $black;
       }
     }

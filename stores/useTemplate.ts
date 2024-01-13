@@ -199,19 +199,19 @@ export const useTemplateStore = defineStore("template", () => {
 
   const getFilters = async () => {
     const { $api } = useNuxtApp();
-    const tagUrl = $api.tags.getTags();
+    // const tagUrl = $api.tags.getTags();
     const industryUrl = $api.industry.getIndustries();
     const designStyleUrl = $api.designStyle.getDesignStyles();
     const designTypeUrl = $api.designType.getDesignTypes();
 
     try {
-      const [industries, tags, designTypes, designStyles] = await Promise.all([
+      const [industries, designTypes, designStyles] = await Promise.all([
         industryUrl,
-        tagUrl,
+        // tagUrl,
         designTypeUrl,
         designStyleUrl,
       ]);
-      allTags.value = tags?.data?.value?.data;
+      //  allTags.value = tags?.data?.value?.data;
       allIndustries.value = industries?.data?.value?.data;
       allDesignStyles.value = designStyles?.data?.value?.data;
       allDesignTypes.value = designTypes?.data?.value?.data;
@@ -328,7 +328,6 @@ export const useTemplateStore = defineStore("template", () => {
       const { data, error } = await $api.pendingTemplates.createTemplate({
         data: payload,
       });
-      console.log({ data, error });
       if (error.value) {
         apiLoadingStates.value.mvpSubmit = API_STATES.ERROR;
         return { error: error.value };

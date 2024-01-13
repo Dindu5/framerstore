@@ -21,12 +21,12 @@
       </CldImage> -->
 
       <div :class="showCta ? 'template-card__img-cta' : ''">
-        <button class="btn btn-icon" @click="bookMark">
+        <!-- <button class="btn btn-icon" @click="bookMark">
           <span class="material-symbols-rounded"> bookmark </span>
-        </button>
-        <button class="btn btn-icon" @click="bookMark">
+        </button> -->
+        <!-- <button class="btn btn-icon" @click="bookMark">
           <span class="material-symbols-rounded"> upload </span>
-        </button>
+        </button> -->
         <button class="btn" @click.prevent="preview">Live preview</button>
       </div>
     </div>

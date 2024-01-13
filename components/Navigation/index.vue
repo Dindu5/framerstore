@@ -34,7 +34,7 @@
             outlined
             @click="visitExternalLink('https://www.framer.com/?via=biyified')"
           >
-            Build
+            Get Framer
           </Button>
 
           <Button color="primary" @click="router.push('/app/submit')">
@@ -66,7 +66,12 @@
               "
             >
               Industry
-              <img src="/images/icons/down.svg" alt="expand" />
+              <img
+                v-if="!hasIndustryActive"
+                src="/images/icons/down.svg"
+                alt="expand"
+              />
+              <img v-else src="/images/icons/down-white.svg" alt="expand" />
             </div>
           </template>
           <DropdownContent>
@@ -86,7 +91,12 @@
               :class="hasTypeActive ? 'nav-filter-options__toggle-active' : ''"
             >
               Type
-              <img src="/images/icons/down.svg" alt="expand" />
+              <img
+                v-if="!hasTypeActive"
+                src="/images/icons/down.svg"
+                alt="expand"
+              />
+              <img v-else src="/images/icons/down-white.svg" alt="expand" />
             </div>
           </template>
           <DropdownContent>
@@ -107,7 +117,12 @@
             >
               Style
 
-              <img src="/images/icons/down.svg" alt="expand" />
+              <img
+                v-if="!hasStyleActive"
+                src="/images/icons/down.svg"
+                alt="expand"
+              />
+              <img v-else src="/images/icons/down-white.svg" alt="expand" />
             </div>
           </template>
           <DropdownContent>
@@ -122,9 +137,17 @@
         </Dropdown>
         <Dropdown>
           <template v-slot:toggler>
-            <div class="nav-filter-options__toggle">
+            <div
+              class="nav-filter-options__toggle"
+              :class="hasColorActive ? 'nav-filter-options__toggle-active' : ''"
+            >
               Color
-              <img src="/images/icons/down.svg" alt="expand" />
+              <img
+                v-if="!hasColorActive"
+                src="/images/icons/down.svg"
+                alt="expand"
+              />
+              <img v-else src="/images/icons/down-white.svg" alt="expand" />
             </div>
           </template>
           <DropdownContent>
@@ -138,14 +161,19 @@
             />
           </DropdownContent>
         </Dropdown>
-        <Dropdown>
+        <!-- <Dropdown>
           <template v-slot:toggler>
             <div
               class="nav-filter-options__toggle"
               :class="hasTagActive ? 'nav-filter-options__toggle-active' : ''"
             >
               Tags
-              <img src="/images/icons/down.svg" alt="expand" />
+              <img
+                v-if="!hasTagActive"
+                src="/images/icons/down.svg"
+                alt="expand"
+              />
+              <img v-else src="/images/icons/down-white.svg" alt="expand" />
             </div>
           </template>
           <DropdownContent>
@@ -157,12 +185,11 @@
               @change="applyFilters"
             />
           </DropdownContent>
-        </Dropdown>
+        </Dropdown> -->
         <button
           v-if="
             hasStyleActive ||
             hasIndustryActive ||
-            hasTagActive ||
             hasTypeActive ||
             hasColorActive
           "
@@ -361,7 +388,7 @@
             </div>
           </div>
 
-          <div>
+          <!-- <div>
             <div
               class="nav-mobile-filters__filter-items-title"
               @click="
@@ -392,7 +419,7 @@
                 v-model="industry.value"
               />
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="nav-mobile-filters__buttons">
           <Button
@@ -436,7 +463,7 @@ const menuTrigger = (): void => {
 const { getFilters, getTemplates, setMobileFilters } = useTemplateStore();
 const templateStore = useTemplateStore();
 const {
-  allTags,
+  // allTags,
   allIndustries,
   allDesignStyles,
   allDesignTypes,
@@ -480,7 +507,7 @@ const styleFilterItems = ref([]) as Ref<
   Array<{ name: string; value: boolean }>
 >;
 const typeFilterItems = ref([]) as Ref<Array<{ name: string; value: boolean }>>;
-const tagFilterItems = ref([]) as Ref<Array<{ name: string; value: boolean }>>;
+// const tagFilterItems = ref([]) as Ref<Array<{ name: string; value: boolean }>>;
 const colorFilterValues = ref([]) as Ref<
   Array<{ name: string; value: boolean }>
 >;
@@ -493,9 +520,9 @@ const setFilters = () => {
   styleFilterItems.value = allDesignStyles.value?.map((tag: any) => {
     return { name: tag?.attributes?.name, id: tag.id, value: false };
   });
-  tagFilterItems.value = allTags.value?.map((tag: any) => {
-    return { name: tag?.attributes?.name, id: tag.id, value: false };
-  });
+  // tagFilterItems.value = allTags.value?.map((tag: any) => {
+  //   return { name: tag?.attributes?.name, id: tag.id, value: false };
+  // });
   typeFilterItems.value = allDesignTypes.value?.map((tag: any) => {
     return { name: tag?.attributes?.name, id: tag.id, value: false };
   });
@@ -518,9 +545,9 @@ const hasIndustryActive = computed(() => {
 const hasStyleActive = computed(() => {
   return styleFilterItems.value?.some((item: any) => item.value);
 });
-const hasTagActive = computed(() => {
-  return tagFilterItems.value?.some((item: any) => item.value);
-});
+// const hasTagActive = computed(() => {
+//   return tagFilterItems.value?.some((item: any) => item.value);
+// });
 const hasTypeActive = computed(() => {
   return typeFilterItems.value?.some((item: any) => item.value);
 });
@@ -547,7 +574,7 @@ const applyFilters = () => {
       (industry: any) => industry.value
     ),
     style: styleFilterItems.value?.filter((industry: any) => industry.value),
-    tag: tagFilterItems.value?.filter((industry: any) => industry.value),
+    // tag: tagFilterItems.value?.filter((industry: any) => industry.value),
     type: typeFilterItems.value?.filter((industry: any) => industry.value),
     color: colorFilterValues.value?.filter((color: any) => color.value),
   };
@@ -565,13 +592,13 @@ const applyFilters = () => {
       },
     };
   }
-  if (hasTagActive) {
-    filters["tags"] = {
-      id: {
-        $in: selectedFilters.tag?.map((ind: any) => ind.id),
-      },
-    };
-  }
+  // if (hasTagActive) {
+  //   filters["tags"] = {
+  //     id: {
+  //       $in: selectedFilters.tag?.map((ind: any) => ind.id),
+  //     },
+  //   };
+  // }
   if (hasTypeActive) {
     filters["design_types"] = {
       id: {
@@ -584,10 +611,10 @@ const applyFilters = () => {
       $containsi: selectedFilters.color?.map((ind: any) => ind.id),
     };
   }
-  const { color, style, tag, type, industry } = selectedFilters;
+  const { color, style, type, industry } = selectedFilters;
 
   const totalFilters =
-    color.length + style.length + tag.length + type.length + industry.length;
+    color.length + style.length + type.length + industry.length;
 
   getTemplates({ filters }, searchTerm.value, totalFilters);
 };

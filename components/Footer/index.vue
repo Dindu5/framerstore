@@ -27,7 +27,6 @@
       <hr class="footer-break" />
       <div class="footer-middle">
         <h4>Top Searches for Framer templates</h4>
-        {{ topSearch }}
         <div>
           <p
             v-for="(search, i) in topSearch"
@@ -47,11 +46,11 @@
             >Build with Framer</a
           >
           <nuxt-link to="/app/submit">Submit a template</nuxt-link>
-          <nuxt-link to="/">Promote a template</nuxt-link>
-          <nuxt-link to="/">Customisation</nuxt-link>
+          <!-- <nuxt-link to="/">Promote a template</nuxt-link>
+          <nuxt-link to="/">Customisation</nuxt-link> -->
         </div>
         <div>
-          <p><span>©</span> Copyright 2023 Framerstore</p>
+          <p><span>©</span> Copyright 2024 Framerstore</p>
         </div>
       </div>
     </div>
@@ -74,7 +73,7 @@ const topSearch = ref([
   "Fitness",
   "Beauty",
   "Photography",
-  "Pod casting",
+  "Podcasting",
   "Real Estate",
   "Health",
   "Agency",

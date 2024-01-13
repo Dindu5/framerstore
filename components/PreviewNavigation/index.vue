@@ -3,9 +3,9 @@
     <div class="container">
       <div class="nav-container nav-preview--container">
         <div>
-          <nuxt-link to="/">
-            <img src="/images/logo.svg" class="nav-logo" alt="Framestore"
-          /></nuxt-link>
+          <button class="nav-preview--container__back" @click="router.go(-1)">
+            <img src="/images/icons/forward.svg" alt="Arrow" />Back
+          </button>
           <div class="nav-preview--screens">
             <img
               v-for="(size, i) in templateSizes"
@@ -22,22 +22,20 @@
           </div>
 
           <div class="nav-preview--buttons">
-            <Button
+            <!-- <Button
               color="secondary"
               outlined
               icon
               @click="visitExternalLink('http://framerstore.shop/blog/')"
             >
               <img src="/images/icons/share.svg" alt="Share" />
-            </Button>
-            <Button
-              @click="visitExternalLink('https://www.framer.com/?via=biyified')"
-            >
+            </Button> -->
+            <Button @click="router.push(`/templates/${selectedTemplate.id}`)">
               <img src="/images/icons/info.svg" alt="Info" />
               Template details
             </Button>
 
-            <Button color="primary" @click="router.push('/app/submit')">
+            <Button color="accent" @click="router.push('/app/submit')">
               <img src="/images/icons/buy.svg" alt="Info" />
               Buy for ${{ selectedTemplate.price ? selectedTemplate.price : 0 }}
             </Button>
@@ -58,7 +56,6 @@ const { updateTemplateSize } = templateStore;
 
 const scrolled = ref(false);
 const router = useRouter();
-const route = useRoute();
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 0;

@@ -24,6 +24,10 @@
     & > div {
       display: flex;
       gap: 0.8rem;
+      align-items: center;
+      a {
+        display: flex;
+      }
     }
     &--buttons {
       @include screenMax("mobile") {
@@ -168,6 +172,22 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
+    }
+    &--container__back {
+      display: flex;
+      background-color: transparent;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 2.4rem 0;
+      padding-right: 3.2rem;
+      color: map-get($grey-map, 100);
+      font-family: $neue-bold;
+      font-size: 1.8rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: 0.018rem;
+      margin-right: 10rem;
     }
     &--screens {
       display: flex;

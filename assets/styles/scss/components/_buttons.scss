@@ -15,6 +15,10 @@
   position: relative;
   transition: all 0.6s;
   overflow: hidden;
+  transition: all 0.6s;
+  &:hover {
+    background: map-get($grey-map, 300);
+  }
 
   @include screenMax("mobile") {
     font-size: 1.4rem;
@@ -79,11 +83,44 @@
       }
     }
   }
+  &-accent {
+    border: 0.1rem solid $accent;
+    background: $accent;
+    color: $white;
+    transition: all 0.6s;
+    &.btn-loading:after {
+      border: 0.4rem solid $accent;
+      border-top: 0.4rem solid $white;
+    }
+    &.btn-loading::before {
+      background-color: $accent;
+    }
+    &:hover {
+      background: #c53f4a;
+    }
+    &-outline {
+      border: 0.1rem solid $accent;
+      color: $accent;
+      background-color: transparent;
+      &.btn-loading::before {
+        background-color: $white;
+      }
+      &.btn-loading::after {
+        border: 0.4rem solid $accent;
+        border-top: 0.4rem solid $white;
+      }
+    }
+  }
   &-secondary {
     &-outline {
       border: 0.1rem solid map-get($grey-map, 400);
       color: map-get($black-map, 100);
       background-color: transparent;
+      transition: all 0.6s;
+      &:hover {
+        border: 0.1rem solid map-get($grey-map, 500);
+        background-color: map-get($grey-map, 500);
+      }
     }
   }
   &-icon {
