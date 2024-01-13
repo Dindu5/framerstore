@@ -41,7 +41,7 @@
       <hr class="footer-break" />
       <div class="footer-bottom">
         <div>
-          <nuxt-link to="/">About us</nuxt-link>
+          <nuxt-link to="/about">About us</nuxt-link>
           <a href="http://framerstore.shop/blog/" target="_blank">Blog</a>
           <a href=" https://www.framer.com/?via=biyified" target="_blank"
             >Build with Framer</a

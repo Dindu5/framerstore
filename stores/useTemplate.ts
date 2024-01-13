@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import qs from "qs";
-import { TemplateSizes } from "~/types/modules/templateModel";
+import type { TemplateSizes } from "~/types/modules/templateModel";
 import { API_STATES } from "../services/constants";
 
 export const useTemplateStore = defineStore("template", () => {
@@ -36,6 +36,8 @@ export const useTemplateStore = defineStore("template", () => {
   const stateSearchTerm = ref("");
   const selectedTemplate = ref({}) as Ref<any>;
   const selectedTemplateSize = ref("desktop") as Ref<TemplateSizes>;
+  const isMobileFiltersVisible = ref<boolean>(false);
+  const noOfFiltersApplied = ref<number>(0);
 
   // methods
   const transformTemplate = (template: any) => {
@@ -110,11 +112,16 @@ export const useTemplateStore = defineStore("template", () => {
       preview_link,
     };
   };
-  async function getTemplates(payload?: any, searchTerm: string = "") {
+  async function getTemplates(
+    payload?: any,
+    searchTerm: string = "",
+    totalFilters: number = 0
+  ) {
     const { $api } = useNuxtApp();
     if (payload?.filters) {
       searchFilters.value = payload.filters;
     }
+    noOfFiltersApplied.value = totalFilters;
     const router = useRouter();
     const queryParams = {
       ...payload,
@@ -347,6 +354,10 @@ export const useTemplateStore = defineStore("template", () => {
     selectedTemplateSize.value = size;
   };
 
+  const setMobileFilters = (filterValue: boolean) => {
+    isMobileFiltersVisible.value = filterValue;
+  };
+
   return {
     allTemplates,
     allTemplatesMeta,
@@ -369,5 +380,8 @@ export const useTemplateStore = defineStore("template", () => {
     setSelectedTemplate,
     updateTemplateSize,
     selectedTemplateSize,
+    isMobileFiltersVisible,
+    setMobileFilters,
+    noOfFiltersApplied,
   };
 });

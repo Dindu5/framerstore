@@ -3,6 +3,24 @@
   align-items: center;
   justify-content: center;
   gap: 1.5rem;
+  @include screenMax("mobile") {
+    justify-content: space-between;
+  }
+  h6 {
+    display: none;
+    color: map-get($grey-map, 200);
+    font-family: $secondary-font;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.4rem;
+    span {
+      color: $black;
+    }
+    @include screenMax("mobile") {
+      display: block;
+    }
+  }
   button {
     background-color: transparent;
     cursor: pointer;
@@ -17,6 +35,10 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    @include screenMax("mobile") {
+      font-size: 1.6rem;
+      display: none;
+    }
     &:first-child,
     &:last-child {
       color: map-get($grey-map, 100);
@@ -37,6 +59,11 @@
       img {
         height: 2.4rem;
         width: 2.4rem;
+      }
+      @include screenMax("mobile") {
+        font-size: 1.6rem;
+        padding: 0.4rem 0;
+        display: flex;
       }
     }
     &.active {

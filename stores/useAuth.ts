@@ -1,6 +1,10 @@
 import { defineStore } from "pinia";
 import { API_STATES } from "~/services/constants";
-import { IUser, LoginPayload, SignUpPayload } from "~/types/modules/authModel";
+import type {
+  IUser,
+  LoginPayload,
+  SignUpPayload,
+} from "~/types/modules/authModel";
 import { useNotification } from "@kyvg/vue3-notification";
 
 export const useAuthStore = defineStore("auth", () => {

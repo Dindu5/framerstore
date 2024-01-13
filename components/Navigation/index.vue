@@ -46,10 +46,10 @@
           </Button> -->
         </div>
         <div class="nav-container--mobile">
-          <button>
+          <button @click="isMobileSearchVisible = !isMobileSearchVisible">
             <img src="/images/icons/search-mobile.svg" alt="Menu" />
           </button>
-          <button>
+          <button @click="menuTrigger()">
             <img src="/images/icons/mobile-toggle.svg" alt="Menu" />
           </button>
         </div>
@@ -184,6 +184,234 @@
         </ClientOnly>
       </div>
     </div>
+    <div
+      class="nav-mobile"
+      :class="isMobileNavVisible ? 'nav-mobile-active' : ''"
+    >
+      <div>
+        <nuxt-link to="/app/submit">Submit Template</nuxt-link>
+        <nuxt-link to="/login">Sign In</nuxt-link>
+        <nuxt-link to="/signup">Register - Free</nuxt-link>
+      </div>
+    </div>
+    <div
+      class="nav-mobile-search"
+      :class="isMobileSearchVisible ? 'nav-mobile-search-active' : ''"
+    >
+      <div>
+        <div>
+          <form
+            class="nav-mobile-search__input-container"
+            @submit.prevent="triggerSearch"
+          >
+            <input
+              name="templateSearch"
+              type="text"
+              placeholder="Enter keyword to search"
+              v-model="searchTerm"
+              @keypress.enter="triggerSearch"
+            />
+
+            <img src="/images/icons/seach-mobile.svg" alt="Search" />
+            <button>Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div
+      class="nav-mobile-filters"
+      :class="isMobileFiltersVisible ? 'nav-mobile-filters-active' : ''"
+    >
+      <div>
+        <div class="nav-mobile-filters__top">
+          <h4>Filters</h4>
+          <button @click="setMobileFilters(false)">
+            <img src="/images/icons/close.svg" alt="Close" />
+          </button>
+        </div>
+        <div class="nav-mobile-filters__filter-items">
+          <div>
+            <div
+              class="nav-mobile-filters__filter-items-title"
+              @click="
+                mobileFilterOptionHeadings.industry =
+                  !mobileFilterOptionHeadings.industry
+              "
+            >
+              <h5>Industry</h5>
+              <img src="/images/icons/down.svg" alt="down" />
+            </div>
+            <div
+              class="nav-mobile-filters__filter-items-options"
+              :class="
+                mobileFilterOptionHeadings.industry
+                  ? ' nav-mobile-filters__filter-items-options-active'
+                  : ''
+              "
+              :style="`height: ${
+                mobileFilterOptionHeadings.industry
+                  ? getFilterHeight(industryFilterItems.length || 1)
+                  : '0rem'
+              };`"
+            >
+              <CheckBox
+                v-for="industry in industryFilterItems"
+                :key="industry.name"
+                :label="industry.name"
+                v-model="industry.value"
+              />
+            </div>
+          </div>
+          <div>
+            <div
+              class="nav-mobile-filters__filter-items-title"
+              @click="
+                mobileFilterOptionHeadings.type =
+                  !mobileFilterOptionHeadings.type
+              "
+            >
+              <h5>Type</h5>
+              <img src="/images/icons/down.svg" alt="down" />
+            </div>
+            <div
+              class="nav-mobile-filters__filter-items-options"
+              :class="
+                mobileFilterOptionHeadings.type
+                  ? ' nav-mobile-filters__filter-items-options-active'
+                  : ''
+              "
+              :style="`height: ${
+                mobileFilterOptionHeadings.type
+                  ? getFilterHeight(typeFilterItems.length || 1)
+                  : '0rem'
+              };`"
+            >
+              <CheckBox
+                v-for="industry in typeFilterItems"
+                :key="industry.name"
+                :label="industry.name"
+                v-model="industry.value"
+              />
+            </div>
+          </div>
+          <div>
+            <div
+              class="nav-mobile-filters__filter-items-title"
+              @click="
+                mobileFilterOptionHeadings.style =
+                  !mobileFilterOptionHeadings.style
+              "
+            >
+              <h5>Style</h5>
+              <img src="/images/icons/down.svg" alt="down" />
+            </div>
+            <div
+              class="nav-mobile-filters__filter-items-options"
+              :class="
+                mobileFilterOptionHeadings.style
+                  ? ' nav-mobile-filters__filter-items-options-active'
+                  : ''
+              "
+              :style="`height: ${
+                mobileFilterOptionHeadings.style
+                  ? getFilterHeight(styleFilterItems.length || 1)
+                  : '0rem'
+              };`"
+            >
+              <CheckBox
+                v-for="industry in styleFilterItems"
+                :key="industry.name"
+                :label="industry.name"
+                v-model="industry.value"
+              />
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="nav-mobile-filters__filter-items-title"
+              @click="
+                mobileFilterOptionHeadings.color =
+                  !mobileFilterOptionHeadings.color
+              "
+            >
+              <h5>Color</h5>
+              <img src="/images/icons/down.svg" alt="down" />
+            </div>
+            <div
+              class="nav-mobile-filters__filter-items-options"
+              :class="
+                mobileFilterOptionHeadings.color
+                  ? ' nav-mobile-filters__filter-items-options-active'
+                  : ''
+              "
+              :style="`height: ${
+                mobileFilterOptionHeadings.color
+                  ? getFilterHeight(colorFilterValues.length || 1)
+                  : '0rem'
+              };`"
+            >
+              <CheckBox
+                v-for="industry in colorFilterValues"
+                :key="industry.name"
+                :label="industry.name"
+                useColor
+                v-model="industry.value"
+              />
+            </div>
+          </div>
+
+          <div>
+            <div
+              class="nav-mobile-filters__filter-items-title"
+              @click="
+                mobileFilterOptionHeadings.tags =
+                  !mobileFilterOptionHeadings.tags
+              "
+            >
+              <h5>Tags</h5>
+              <img src="/images/icons/down.svg" alt="down" />
+            </div>
+            <div
+              class="nav-mobile-filters__filter-items-options"
+              :class="
+                mobileFilterOptionHeadings.tags
+                  ? ' nav-mobile-filters__filter-items-options-active'
+                  : ''
+              "
+              :style="`height: ${
+                mobileFilterOptionHeadings.tags
+                  ? getFilterHeight(tagFilterItems.length || 1)
+                  : '0rem'
+              };`"
+            >
+              <CheckBox
+                v-for="industry in tagFilterItems"
+                :key="industry.name"
+                :label="industry.name"
+                v-model="industry.value"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="nav-mobile-filters__buttons">
+          <Button
+            color="primary"
+            outlined
+            fullWidth
+            @click="
+              setFilters();
+              applyFilters();
+            "
+          >
+            Reset
+          </Button>
+          <Button color="primary" fullWidth @click="applyFilters">
+            Apply
+          </Button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -193,7 +421,19 @@ import { useTemplateStore } from "../../stores/useTemplate";
 import { API_STATES } from "../../services/constants";
 import { Colors } from "~/types/modules/templateModel";
 
-const { getFilters, getTemplates } = useTemplateStore();
+const isMobileNavVisible = ref<boolean>(false);
+const isMobileSearchVisible = ref<boolean>(false);
+
+// method when the menu button is click
+const menuTrigger = (): void => {
+  if (isMobileNavVisible.value) {
+    isMobileNavVisible.value = false;
+    return;
+  }
+  isMobileNavVisible.value = true;
+};
+
+const { getFilters, getTemplates, setMobileFilters } = useTemplateStore();
 const templateStore = useTemplateStore();
 const {
   allTags,
@@ -202,9 +442,23 @@ const {
   allDesignTypes,
   apiLoadingStates,
   stateSearchTerm,
+  isMobileFiltersVisible,
 } = storeToRefs(templateStore);
+useHead({
+  bodyAttrs: {
+    class: computed(() => {
+      if (
+        isMobileNavVisible.value ||
+        isMobileSearchVisible.value ||
+        isMobileFiltersVisible.value
+      )
+        return "show-overlay";
+      return "";
+    }),
+  },
+});
 
-const scrolled = ref(false);
+const scrolled = ref<boolean>(false);
 const router = useRouter();
 const route = useRoute();
 
@@ -212,6 +466,13 @@ const handleScroll = () => {
   scrolled.value = window.scrollY > 0;
 };
 
+const mobileFilterOptionHeadings = ref<Record<string, boolean>>({
+  industry: false,
+  color: false,
+  type: false,
+  style: false,
+  tags: false,
+});
 const industryFilterItems = ref([]) as Ref<
   Array<{ name: string; value: boolean }>
 >;
@@ -281,51 +542,54 @@ function signIn() {
 
 const applyFilters = () => {
   const filters = {} as Record<string, any>;
+  const selectedFilters = {
+    industry: industryFilterItems.value?.filter(
+      (industry: any) => industry.value
+    ),
+    style: styleFilterItems.value?.filter((industry: any) => industry.value),
+    tag: tagFilterItems.value?.filter((industry: any) => industry.value),
+    type: typeFilterItems.value?.filter((industry: any) => industry.value),
+    color: colorFilterValues.value?.filter((color: any) => color.value),
+  };
   if (hasIndustryActive) {
     filters["industries"] = {
       id: {
-        $in: industryFilterItems.value
-          ?.filter((industry: any) => industry.value)
-          ?.map((ind: any) => ind.id),
+        $in: selectedFilters.industry?.map((ind: any) => ind.id),
       },
     };
   }
   if (hasStyleActive) {
     filters["design_styles"] = {
       id: {
-        $in: styleFilterItems.value
-          ?.filter((industry: any) => industry.value)
-          ?.map((ind: any) => ind.id),
+        $in: selectedFilters.style?.map((ind: any) => ind.id),
       },
     };
   }
   if (hasTagActive) {
     filters["tags"] = {
       id: {
-        $in: tagFilterItems.value
-          ?.filter((industry: any) => industry.value)
-          ?.map((ind: any) => ind.id),
+        $in: selectedFilters.tag?.map((ind: any) => ind.id),
       },
     };
   }
   if (hasTypeActive) {
     filters["design_types"] = {
       id: {
-        $in: typeFilterItems.value
-          ?.filter((industry: any) => industry.value)
-          ?.map((ind: any) => ind.id),
+        $in: selectedFilters.type?.map((ind: any) => ind.id),
       },
     };
   }
   if (hasColorActive) {
     filters["colors"] = {
-      $containsi: colorFilterValues.value
-        ?.filter((color: any) => color.value)
-        ?.map((ind: any) => ind.id),
+      $containsi: selectedFilters.color?.map((ind: any) => ind.id),
     };
   }
+  const { color, style, tag, type, industry } = selectedFilters;
 
-  getTemplates({ filters }, searchTerm.value);
+  const totalFilters =
+    color.length + style.length + tag.length + type.length + industry.length;
+
+  getTemplates({ filters }, searchTerm.value, totalFilters);
 };
 
 const triggerSearch = (e: Event) => {
@@ -341,6 +605,9 @@ const visitExternalLink = (url: string) => {
       target: "_blank",
     },
   });
+};
+const getFilterHeight = (length: number) => {
+  return `${3.2 + length * 2.9 + (length - 1) * 1.6}rem`;
 };
 
 onMounted(async () => {

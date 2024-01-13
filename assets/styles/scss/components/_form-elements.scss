@@ -7,6 +7,10 @@
     font-style: normal;
     font-weight: 700;
     line-height: 3.72rem;
+    @include screenMax("mobile") {
+      font-size: 2.2rem;
+      line-height: 2.4rem;
+    }
   }
   label {
     color: map-get($grey-map, 100);
@@ -17,6 +21,11 @@
     line-height: 2.4rem;
     margin-bottom: 0.8rem;
     display: block;
+    @include screenMax("mobile") {
+      font-size: 1.2rem;
+      line-height: 2rem;
+      margin-bottom: 0.6rem;
+    }
   }
   input,
   textarea {
@@ -33,9 +42,17 @@
     font-weight: 400;
     transition: all 0.6s;
     line-height: 2.6rem;
+    @include screenMax("mobile") {
+      padding: 1.6rem;
+      font-size: 1.2rem;
+      line-height: 2rem;
+    }
   }
   textarea {
     min-height: 20.7rem;
+    @include screenMax("mobile") {
+      min-height: 15rem;
+    }
   }
   small {
     color: map-get($grey-map, 100);
@@ -46,6 +63,11 @@
     font-weight: 400;
     line-height: 1.9rem; /* 158.333% */
     display: block;
+    @include screenMax("mobile") {
+      font-size: 1rem;
+      line-height: 1.6rem;
+      margin-top: 0.6rem;
+    }
   }
   &-error {
     input {
@@ -69,6 +91,11 @@
     line-height: 2.4rem; /* 150% */
     margin-bottom: 0.8rem;
     display: block;
+    @include screenMax("mobile") {
+      font-size: 1.2rem;
+      line-height: 2rem;
+      margin-bottom: 0.6rem;
+    }
   }
   > small {
     position: relative;
@@ -82,6 +109,11 @@
     font-style: normal;
     font-weight: 400;
     line-height: 1.9rem; /* 158.333% */
+    @include screenMax("mobile") {
+      font-size: 1rem;
+      line-height: 1.6rem;
+      margin-top: 0.6rem;
+    }
   }
   &__selected-items {
     display: flex;
@@ -199,16 +231,26 @@
   gap: 0.8rem;
   position: relative;
   color: map-get($grey-map, 200);
-  font-family: Inter;
+  font-family: $secondary-font;
   font-size: 1.8rem;
   font-style: normal;
   font-weight: 400;
   line-height: 2.8rem; /* 155.556% */
   letter-spacing: -0.018rem;
+  @include screenMax("mobile") {
+    font-size: 1.4rem;
+    line-height: 2.1rem; /* 150% */
+    letter-spacing: -0.014rem;
+    padding: 0.4rem 0rem;
+  }
   span {
     width: 1.6rem;
     height: 1.6rem;
     border-radius: 50%;
+    @include screenMax("mobile") {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
   }
   input[type="checkbox"] {
     -webkit-appearance: none;

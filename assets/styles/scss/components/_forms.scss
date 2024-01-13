@@ -11,6 +11,11 @@
   padding: 8rem;
   margin-top: 9rem;
   position: relative;
+  @include screenMax("mobile") {
+    box-shadow: none;
+    padding: 0rem;
+    margin-top: 8.4rem;
+  }
   h1 {
     color: $black;
     font-family: $neue-bold;
@@ -19,6 +24,10 @@
     font-weight: 700;
     line-height: 4.6rem;
     text-align: center;
+    @include screenMax("mobile") {
+      font-size: 2.1rem;
+      line-height: 2.9rem; /* 138.095% */
+    }
   }
   p {
     color: map-get($grey-map, 100);
@@ -32,12 +41,19 @@
     a {
       color: $accent;
     }
+    @include screenMax("mobile") {
+      font-size: 1.6rem;
+      line-height: 2.7rem; /* 168.75% */
+    }
   }
   &__close {
     position: absolute;
     background-color: transparent;
     top: 3.2rem;
     right: 3.2rem;
+    @include screenMax("mobile") {
+      display: none;
+    }
   }
   h6 {
     text-align: center;
@@ -66,6 +82,15 @@
     &::after {
       right: 2rem;
     }
+    @include screenMax("mobile") {
+      font-size: 1.6rem;
+      &::before {
+        left: 0rem;
+      }
+      &::after {
+        right: 0rem;
+      }
+    }
   }
   &--google {
     margin-bottom: 1.5rem;
@@ -91,6 +116,11 @@
       border: 0.1rem solid $accent;
       color: $accent;
     }
+    @include screenMax("mobile") {
+      padding: 1.6rem 3.2rem;
+      font-size: 1.4rem;
+      line-height: 2.1rem;
+    }
   }
   span {
     font-size: 1.6rem;
@@ -102,6 +132,10 @@
     font-family: $secondary-font;
     font-weight: 500;
     transition: all 0.6s;
+    @include screenMax("mobile") {
+      font-size: 1rem;
+      line-height: 2.1rem;
+    }
   }
   &--cta {
     margin-top: 1.6rem;
@@ -119,6 +153,9 @@
     font-style: normal;
     font-weight: 600;
     line-height: 2.4rem;
+    @include screenMax("mobile") {
+      font-size: 1.4rem;
+    }
   }
   &__forgot-password {
     color: map-get($grey-map, 100);
@@ -127,6 +164,9 @@
     font-style: normal;
     font-weight: 600;
     line-height: 2.4rem; /* 150% */
+    @include screenMax("mobile") {
+      font-size: 1.4rem;
+    }
   }
 }
 
@@ -272,6 +312,11 @@
     line-height: 4.6rem; /* 117.949% */
     margin-bottom: 1.6rem;
     text-align: center;
+    @include screenMax("mobile") {
+      font-size: 2.2rem;
+      line-height: 2.9rem;
+      margin-bottom: 0.6rem;
+    }
   }
   &__subtext {
     color: map-get($grey-map, 100);
@@ -281,6 +326,10 @@
     font-weight: 400;
     line-height: 3.5rem; /* 152.174% */
     text-align: center;
+    @include screenMax("mobile") {
+      font-size: 1.6rem;
+      line-height: 2.7rem;
+    }
   }
   &__one {
     max-width: 47.8rem;
@@ -293,6 +342,11 @@
       line-height: 2.4rem; /* 150% */
       margin-top: 7.7rem;
       margin-bottom: 3.3rem;
+      @include screenMax("mobile") {
+        font-size: 1.2rem;
+        line-height: 1.9rem;
+        margin-top: 5.7rem;
+      }
     }
     &-radio {
       display: flex;
@@ -335,6 +389,17 @@
           height: 8.4rem;
           margin: auto;
           margin-bottom: 0.8rem;
+        }
+        @include screenMax("mobile") {
+          padding: 1.6rem;
+          font-size: 1.2rem;
+          line-height: 1.9rem;
+          svg {
+            width: 5.4rem;
+            height: 5.4rem;
+            margin: auto;
+            margin-bottom: 0.8rem;
+          }
         }
       }
       input[type="radio"]:checked + label {
@@ -380,6 +445,23 @@
           transform: translateY(-0.3rem);
         }
       }
+      @include screenMax("mobile") {
+        width: 7.6rem;
+        height: 7.6rem;
+        padding: 1.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+          height: 4.4rem;
+          width: 4.4rem;
+        }
+        &-error {
+          svg {
+            transform: translateY(-0.15rem);
+          }
+        }
+      }
     }
     h6 {
       color: $black;
@@ -391,6 +473,11 @@
       line-height: 3.72rem; /* 155% */
       margin-bottom: 1.6rem;
       margin-top: 4.8rem;
+      @include screenMax("mobile") {
+        font-size: 1.8rem;
+        line-height: 3rem; /* 155% */
+        margin-bottom: 1.3rem;
+      }
     }
     p {
       color: $black;
@@ -403,6 +490,10 @@
       margin-bottom: 4rem;
       a {
         text-decoration: underline;
+      }
+      @include screenMax("mobile") {
+        font-size: 1.4rem;
+        line-height: 2.5rem; /* 155% */
       }
     }
     button {

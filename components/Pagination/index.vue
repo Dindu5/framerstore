@@ -9,6 +9,9 @@
     </button>
 
     <!-- Visible Buttons Start -->
+    <h6>
+      <span> {{ currentPage }}</span> of {{ pages.length }}
+    </h6>
     <button
       type="button"
       v-for="page in pages"

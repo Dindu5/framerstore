@@ -40,8 +40,16 @@
         width: 2.4rem;
       }
       button {
-        background: transparent;
+        background-color: transparent;
         padding: 0.8rem;
+        border-radius: 0.4rem;
+        img {
+          height: 2.4rem;
+          width: 2.4rem;
+        }
+        &:active {
+          background-color: map-get($grey-map, 400);
+        }
       }
     }
   }
@@ -179,6 +187,177 @@
       display: flex;
       align-items: center;
       gap: 0.8rem;
+    }
+  }
+  &-mobile,
+  &-mobile-search,
+  &-mobile-filters {
+    width: 100%;
+    position: absolute;
+    background-color: transparent;
+    transition: all 0.6s;
+    z-index: 0;
+    height: 0rem;
+    min-height: 0rem;
+    overflow: hidden;
+    padding: 0rem;
+    // opacity: 0;
+    > div {
+      border-radius: 0px 0px 1.6rem 1.6rem;
+      background: $white;
+      box-shadow: 0px 4.529px 3.623px 0px rgba(0, 0, 0, 0.02),
+        0px 12.522px 10.017px 0px rgba(0, 0, 0, 0.04),
+        0px 30.147px 24.118px 0px rgba(0, 0, 0, 0.05),
+        0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+      padding: 0 1.6rem;
+      padding: 1.6rem;
+    }
+
+    a {
+      padding: 1.6rem;
+      color: map-get($grey-map, 100);
+      font-family: $secondary-font;
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      border-radius: 0.4rem;
+      transition: all 0.6s;
+      background-color: $white;
+      bottom: 0;
+      display: block;
+      &:hover {
+        background-color: map-get($grey-map, 500);
+      }
+    }
+    &__input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.6rem;
+      input {
+        padding: 1.2rem 1.6rem;
+        min-width: 26rem;
+        padding-left: 4rem;
+        width: 100%;
+        border-radius: 80px;
+        background: map-get($grey-map, 500);
+        font-family: $secondary-font;
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 2.5rem;
+      }
+      img {
+        position: absolute;
+        left: 1.6rem;
+        height: 1.6rem;
+        width: 1.6rem;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      button {
+        background-color: transparent;
+        outline: none;
+        color: map-get($grey-map, 100);
+        font-family: $neue-bold;
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.8rem; /* 128.571% */
+        letter-spacing: 0.014rem;
+        padding: 1.6rem 1rem;
+        height: auto;
+      }
+    }
+    &__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.6rem;
+      h4 {
+        color: map-get($grey-map, 100);
+        font-family: $neue-bold;
+        font-size: 1.8rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 2.6rem; /* 144.444% */
+      }
+      button {
+        background: transparent;
+        img {
+          height: 2.4rem;
+          width: 2.4rem;
+        }
+      }
+    }
+    &__buttons {
+      display: flex;
+      gap: 1.6rem;
+      padding: 1.6rem;
+      border-top: 0.1rem solid map-get($grey-map, 400);
+    }
+    &__filter-items {
+      max-height: 70vh;
+      overflow: scroll;
+      > div {
+        margin-bottom: 0.1rem;
+      }
+      &-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.6rem;
+        background-color: map-get($grey-map, 500);
+        cursor: pointer;
+        h5 {
+          color: map-get($grey-map, 100);
+          font-family: $secondary-font;
+          font-size: 1.6rem;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+      }
+      &-options {
+        padding: 0rem 2.4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.6rem;
+        transition: all 0.6s;
+        height: 0rem;
+        overflow: hidden;
+        &-active {
+          padding: 1.6rem 2.4rem;
+          height: max-content;
+        }
+      }
+    }
+  }
+  &-mobile {
+    &-active {
+      height: 18.75rem;
+    }
+  }
+  &-mobile-search {
+    &-active {
+      height: 10rem;
+    }
+  }
+  &-mobile-filters {
+    box-shadow: none;
+    background-color: transparent;
+    transition: all 1s;
+    > div {
+      padding: 0rem;
+    }
+    &-active {
+      min-height: 40rem;
+      height: 90vh;
+      > div {
+        padding: 0rem;
+      }
     }
   }
 }

@@ -29,6 +29,9 @@
       left: 0;
       transition: all 0.6s;
       transform: translateY(50%);
+      @include screenMax("mobile") {
+        display: none;
+      }
     }
     > img {
       width: 100%;

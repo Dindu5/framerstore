@@ -3,6 +3,10 @@
   border-left: 0;
   padding: 2rem;
   border-radius: 0.8rem;
+  @include screenMax("mobile") {
+    padding: 1rem;
+    border-radius: 0rem;
+  }
 
   // style for title line
   .notification-title {
@@ -10,6 +14,9 @@
     font-size: 2rem;
     font-family: $secondary-font;
     font-weight: 600;
+    @include screenMax("mobile") {
+      font-size: 1.4rem;
+    }
     // margin-bottom: 1rem;
   }
 
@@ -20,6 +27,9 @@
     font-family: $secondary-font;
     font-weight: 400;
     //  margin-top: 1rem;
+    @include screenMax("mobile") {
+      font-size: 1.2rem;
+    }
   }
 
   // additional styling hook when using`type` parameter, i.e. this.$notify({ type: 'success', message: 'Yay!' })
@@ -32,11 +42,20 @@
     background: $accent !important;
     color: $white;
     font-size: 4rem;
+    @include screenMax("mobile") {
+      font-size: 2rem;
+    }
   }
 }
 .vue-notification-group {
   top: 2rem !important;
   right: 2rem !important;
+  width: 50rem !important;
+  @include screenMax("mobile") {
+    top: 0rem !important;
+    right: 0rem !important;
+    width: 37.5rem !important;
+  }
 }
 .vue-notification-wrapper {
 }

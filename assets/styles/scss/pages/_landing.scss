@@ -30,6 +30,10 @@
     line-height: 6.4rem; /* 106.667% */
     letter-spacing: -0.12rem;
     margin-bottom: 0.4rem;
+    @include screenMax("mobile") {
+      font-size: 2.9rem;
+      line-height: 3.2rem;
+    }
     span {
       color: $black;
       text-transform: capitalize;

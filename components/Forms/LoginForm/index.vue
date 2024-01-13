@@ -39,7 +39,7 @@
       color="primary"
       fullWidth
       :loading="apiLoadingStates.login === API_STATES.LOADING"
-      @click="login"
+      type="submit"
     >
       Log in
     </Button>

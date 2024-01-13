@@ -34,7 +34,7 @@ const props = defineProps({
 });
 const emit = defineEmits(["update:modelValue"]);
 
-const name = toRef(props, "formName");
+const formName = toRef(props, "formName");
 
 const {
   value: inputValue,
@@ -42,7 +42,7 @@ const {
   handleBlur,
   handleChange,
   meta,
-} = useField(name, undefined, {
+} = useField(formName, undefined, {
   initialValue: props.value,
 });
 </script>

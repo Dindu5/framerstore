@@ -11,3 +11,27 @@
   background-position: top;
   min-height: 100vh;
 }
+
+body {
+  &::before {
+    content: "";
+    width: 100vw;
+    height: 0vh;
+    background-color: none;
+    opacity: 0.8;
+  }
+  &.show-overlay {
+    position: relative;
+    &::before {
+      position: fixed;
+      content: "";
+      width: 100vw;
+      height: 100vh;
+      background-color: $black;
+      opacity: 0.8;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+  }
+}

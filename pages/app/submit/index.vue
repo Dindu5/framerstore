@@ -1,5 +1,5 @@
 <template>
-  <div class="submit-page container">
+  <div class="submit-page">
     <MvpTemplateSubmitForm />
   </div>
 </template>

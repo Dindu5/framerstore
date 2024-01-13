@@ -8,6 +8,20 @@
           can use Framer’s customizable and responsive website templates to get
           started.
         </h5>
+        <div class="hero-mobile-filter">
+          <button>
+            <img src="/images/icons/down.svg" alt="Down" /> Collection
+          </button>
+          <button @click="setMobileFilters(true)">
+            <img src="/images/icons/filters.svg" alt="Filters" /> Filters
+          </button>
+        </div>
+        <div class="hero-mobile__template-details">
+          <h6>Showing {{ allTemplatesMeta.total }} templates</h6>
+          <p v-if="noOfFiltersApplied">
+            {{ noOfFiltersApplied }} Filters applied
+          </p>
+        </div>
         <div class="hero-filters">
           <div>
             <p @click="router.push('/')">All templates</p>
@@ -40,8 +54,10 @@ import { storeToRefs } from "pinia";
 import { useTemplateStore } from "../../stores/useTemplate";
 const router = useRouter();
 
-const { searchFilters } = storeToRefs(useTemplateStore());
-const { getTemplates } = useTemplateStore();
+const { searchFilters, allTemplatesMeta, noOfFiltersApplied } = storeToRefs(
+  useTemplateStore()
+);
+const { getTemplates, setMobileFilters } = useTemplateStore();
 
 const triggerSearch = (search: string) => {
   getTemplates({ filters: searchFilters.value }, search);

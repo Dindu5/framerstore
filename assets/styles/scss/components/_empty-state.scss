@@ -9,6 +9,10 @@
     height: 9.6rem;
     border-radius: 50%;
     margin-bottom: 4.8rem;
+    @include screenMax("mobile") {
+      width: 4.6rem;
+      height: 4.6rem;
+    }
   }
   &--loading {
     margin-bottom: 4.8rem;
@@ -21,6 +25,10 @@
     font-style: normal;
     font-weight: 700;
     line-height: 3.72rem; /* 120% */
+    @include screenMax("mobile") {
+      font-size: 2.1rem;
+      line-height: 2.72rem; /* 120% */
+    }
   }
   p {
     color: $black;
@@ -32,5 +40,9 @@
     line-height: 3.5rem; /* 152.174% */
     margin-top: 1.6rem;
     margin-bottom: 4rem;
+    @include screenMax("mobile") {
+      font-size: 1.6rem;
+      line-height: 2.4rem; /* 120% */
+    }
   }
 }
