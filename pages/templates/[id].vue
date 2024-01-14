@@ -99,21 +99,26 @@
         </div>
       </div>
       <client-only>
-        <swiper
-          class="search-page-images"
-          :slides-per-view="2"
-          :space-between="50"
-          navigation
-          @swiper="onSwiper"
-          @slideChange="onSlideChange"
-        >
-          <swiper-slide
-            v-for="(screenshot, i) in singleTemplate.screenshots"
-            :key="i"
+        <div @mouseout="hoverElement = false" @mouseover="hoverElement = true">
+          <swiper
+            class="search-page-images"
+            :class="hoverElement ? 'search-page-images--active' : ''"
+            :space-between="50"
+            :modules="modules"
+            :keyboard="true"
+            slidesPerView="auto"
+            navigation
+            @swiper="onSwiper"
+            @slideChange="onSlideChange"
           >
-            <img :src="screenshot.image" alt="Search Image"
-          /></swiper-slide>
-        </swiper>
+            <swiper-slide
+              v-for="(screenshot, i) in singleTemplate.screenshots"
+              :key="i"
+            >
+              <img :src="screenshot.image" alt="Search Image"
+            /></swiper-slide>
+          </swiper>
+        </div>
         <!-- <div  style="width: 100%">
         <slider
           ref="slider"
@@ -266,10 +271,11 @@
 import { useTemplateStore } from "../../stores/useTemplate";
 import { storeToRefs } from "pinia";
 import "swiper/css";
-// import "swiper/css/navigation";
+import "swiper/css/navigation";
 import { API_STATES } from "../../services/constants";
 // import { slider, slideritem } from "vue-concise-slider";
 import { Swiper, SwiperSlide } from "swiper/vue";
+import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
 
 export default {
   components: {
@@ -278,7 +284,7 @@ export default {
   },
   async setup() {
     const onSwiper = (swiper: any) => {
-      console.log(swiper);
+      console.log(swiper, "heree");
     };
     const onSlideChange = () => {
       console.log("slide change");
@@ -287,6 +293,7 @@ export default {
     const { getSingleTemplate, setSelectedTemplate } = useTemplateStore();
     const { relatedTemplates, apiLoadingStates } = storeToRefs(templateStore);
     const route = useRoute();
+    const hoverElement = ref(false);
 
     const id = route.params.id as string;
 
@@ -315,6 +322,8 @@ export default {
       apiLoadingStates,
       API_STATES,
       previewTemplate,
+      modules: [Navigation, Pagination, Mousewheel, Keyboard],
+      hoverElement,
     };
   },
 };

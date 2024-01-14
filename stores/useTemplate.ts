@@ -135,6 +135,7 @@ export const useTemplateStore = defineStore("template", () => {
         tags: "*",
         typographies: "*",
       },
+      sort: ["createdAt:desc"],
     };
     if (searchTerm) {
       stateSearchTerm.value = searchTerm;
@@ -171,7 +172,7 @@ export const useTemplateStore = defineStore("template", () => {
     const query = qs.stringify(queryParams);
     try {
       const { data, error } = await $api.template.getTemplates(query, {
-        lazy: searchTerm ? true : false,
+        lazy: false,
       });
       if (!searchTerm) {
         allTemplates.value = data.value?.data?.map((template: any) =>
@@ -183,7 +184,6 @@ export const useTemplateStore = defineStore("template", () => {
         templatesSearchResult.value = data.value?.data?.map((template: any) =>
           transformTemplate(template)
         );
-
         templatesSearchResultMeta.value = data.value?.meta?.pagination;
         apiLoadingStates.value.templatesSearchResult = API_STATES.SUCCESS;
       }
@@ -295,6 +295,7 @@ export const useTemplateStore = defineStore("template", () => {
           tags: "*",
           typographies: "*",
         },
+        sort: ["createdAt:desc"],
       };
       apiLoadingStates.value.relatedTemplates = API_STATES.LOADING;
       const query = qs.stringify(queryParams);

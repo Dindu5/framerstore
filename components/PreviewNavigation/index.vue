@@ -39,6 +39,16 @@
               <img src="/images/icons/buy.svg" alt="Info" />
               Buy for ${{ selectedTemplate.price ? selectedTemplate.price : 0 }}
             </Button>
+            <Button
+              icon
+              @click="router.push(`/templates/${selectedTemplate.id}`)"
+            >
+              <img src="/images/icons/info.svg" alt="Info" />
+            </Button>
+
+            <Button color="accent" icon @click="router.push('/app/submit')">
+              <img src="/images/icons/buy.svg" alt="Info" />
+            </Button>
           </div>
         </div>
       </div>

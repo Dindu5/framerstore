@@ -1,10 +1,16 @@
 .search-page {
   background-color: $white;
   padding-top: 5.9rem;
+  @include screenMax("mobile") {
+    padding-top: 4rem;
+  }
   &-top {
     display: flex;
     justify-content: space-between;
     padding-bottom: 0;
+    @include screenMax("mobile") {
+      flex-direction: column;
+    }
     h1 {
       color: $black;
       font-family: $neue-bold;
@@ -14,11 +20,19 @@
       line-height: 6.4rem; /* 106.667% */
       letter-spacing: -0.12rem;
       margin-bottom: 2.4rem;
+      @include screenMax("mobile") {
+        font-size: 2.9rem;
+        line-height: 3.7rem;
+        margin-bottom: 1.6rem;
+      }
     }
     > div {
       &:first-child {
         max-width: 99.4rem;
         margin-bottom: 1.6rem;
+        @include screenMax("mobile") {
+          margin-bottom: 2.4rem;
+        }
         > div {
           display: flex;
           align-items: center;
@@ -27,6 +41,10 @@
             width: 4.8rem;
             height: 4.8rem;
             border-radius: 50%;
+            @include screenMax("mobile") {
+              width: 2.4rem;
+              height: 2.4rem;
+            }
           }
           p {
             color: map-get($grey-map, 100);
@@ -35,6 +53,10 @@
             font-style: normal;
             font-weight: 400;
             line-height: 3.5rem;
+            @include screenMax("mobile") {
+              font-size: 1.6rem;
+              line-height: 2.7rem;
+            }
           }
         }
       }
@@ -54,29 +76,87 @@
           > button:last-child {
             flex: 1;
           }
+          @include screenMax("mobile") {
+            margin-top: 0.8rem;
+          }
         }
       }
     }
   }
   &-images {
-    // display: flex;
-    // overflow: visible;
-    // gap: 6.4rem;
+    width: 100%;
     padding: 6.8rem 5rem !important;
     padding-top: 0rem;
-    // overflow: hidden;
+    @include screenMax("mobile") {
+      padding: 4.4rem 1.6rem !important;
+    }
+    .swiper-slide {
+      height: 74.2rem !important;
+      width: 110.3rem;
+      @include screenMax("mobile") {
+        width: 34rem;
+        height: 22.9rem !important;
+      }
+    }
     .swiper-wrapper {
       img {
         height: 74.2rem !important;
         width: 110.3rem;
         border-radius: 0rem;
         object-fit: cover;
+        @include screenMax("mobile") {
+          width: 34rem;
+          height: 22.9rem !important;
+        }
       }
       .swiper-slide:first-child {
         box-shadow: 0rem 0.4529rem 0.3623rem 0rem rgba(0, 0, 0, 0.01),
           0rem 1.2522rem 1.0017rem 0rem rgba(0, 0, 0, 0.014),
           0rem 3.0147rem 2.4118rem 0rem rgba(0, 0, 0, 0.015),
           0rem 10rem 8rem 0rem rgba(0, 0, 0, 0.017);
+      }
+    }
+    .swiper-button-next {
+      opacity: 0;
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 10rem solid transparent;
+      border-left: 10rem solid $black;
+      border-bottom: 10rem solid transparent;
+      transition: all 0.3s ease;
+      @include screenMax("mobile") {
+        border-top: 2rem solid transparent;
+        border-left: 2rem solid $black;
+        border-bottom: 2rem solid transparent;
+      }
+      &::after {
+        display: none;
+      }
+    }
+    .swiper-button-prev {
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 10rem solid transparent;
+      border-right: 10rem solid $black;
+      border-bottom: 10rem solid transparent;
+      transition: all 0.3s ease;
+
+      opacity: 0;
+      @include screenMax("mobile") {
+        border-top: 2rem solid transparent;
+        border-right: 2rem solid $black;
+        border-bottom: 2rem solid transparent;
+      }
+      &::after {
+        display: none;
+      }
+    }
+    &--active {
+      .swiper-button-next,
+      .swiper-button-prev {
+        opacity: 1;
       }
     }
   }
@@ -92,6 +172,9 @@
       font-weight: 400;
       line-height: 1.9rem; /* 158.333% */
       text-transform: uppercase;
+      @include screenMax("mobile") {
+        font-size: 1.2rem;
+      }
     }
     p {
       color: map-get($grey-map, 200);
@@ -101,9 +184,16 @@
       font-weight: 400;
       line-height: 3.6rem;
       margin-bottom: 0.8rem;
+      @include screenMax("mobile") {
+        font-size: 1.4rem;
+        line-height: 2.1rem;
+      }
     }
     > div {
       margin-bottom: 2.4rem;
+      @include screenMax("mobile") {
+        margin-bottom: 1.6rem;
+      }
       // gap: 8rem;
     }
   }
@@ -132,6 +222,12 @@
       &:nth-child(1),
       &:nth-child(2) {
         flex: 1;
+      }
+    }
+    @include screenMax("mobile") {
+      flex-direction: column;
+      > button {
+        width: 100%;
       }
     }
   }

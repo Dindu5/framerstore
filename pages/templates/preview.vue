@@ -26,11 +26,9 @@ definePageMeta({
 
 <style lang="scss" scoped>
 .preview-template {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
   background: #efefef;
   iframe {
     width: 100%;
@@ -38,18 +36,19 @@ definePageMeta({
     border-radius: 1.6rem;
   }
   &--desktop {
-    height: 100%;
+    height: calc(100vh - 10rem);
     width: 100%;
     iframe {
       border-radius: 0rem;
     }
   }
   &--tablet {
-    height: 1024px;
+    height: 1149px;
     width: 768px;
     margin: auto;
     border: 0.8rem solid #fcfbf9;
-
+    margin-top: 8rem;
+    margin-bottom: 8rem;
     border-radius: 2.4rem;
     box-shadow: 8px 11px 29px 0px rgba(0, 0, 0, 0.1),
       31px 42px 53px 0px rgba(0, 0, 0, 0.09),
@@ -58,9 +57,11 @@ definePageMeta({
       196px 265px 92px 0px rgba(0, 0, 0, 0);
   }
   &--mobile {
-    height: 932px;
-    width: 430px;
+    height: 884px;
+    width: 406px;
     margin: auto;
+    margin-top: 8rem;
+    margin-bottom: 8rem;
     border: 0.8rem solid #fcfbf9;
     border-bottom: 3.2rem solid #fcfbf9;
     border-radius: 2.4rem;

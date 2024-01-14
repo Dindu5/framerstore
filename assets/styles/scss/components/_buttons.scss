@@ -33,6 +33,10 @@
     img {
       height: 2.4rem;
       width: 2.4rem;
+      @include screenMax("mobile") {
+        height: 1.2rem !important;
+        width: 1.2rem !important;
+      }
     }
   }
 
@@ -74,12 +78,18 @@
     &.btn-loading::before {
       background-color: map-get($black-map, 100);
     }
+    &:hover {
+      background: map-get($grey-map, 100);
+    }
     &-outline {
       border: 0.1rem solid map-get($grey-map, 100);
       color: map-get($black-map, 100);
       background-color: transparent;
       &.btn-loading::before {
         background-color: map-get($white-map, 200);
+      }
+      &:hover {
+        background: map-get($grey-map, 500);
       }
     }
   }
@@ -130,6 +140,21 @@
     > img {
       height: 2.4rem;
       width: 2.4rem;
+    }
+    @include screenMax("mobile") {
+      height: 4rem;
+      width: 4rem;
+      padding: 0.5rem 0.5rem;
+
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: center !important;
+      }
+      > img {
+        height: 1.2rem !important;
+        width: 1.2rem !important;
+      }
     }
   }
   &-full {

@@ -188,16 +188,28 @@
       line-height: normal;
       letter-spacing: 0.018rem;
       margin-right: 10rem;
+      @include screenMax("mobile") {
+        margin-right: 1rem;
+        padding: 1.6rem 0;
+        font-size: 1.4rem;
+      }
     }
     &--screens {
       display: flex;
       align-items: center;
       gap: 2.4rem;
+      @include screenMax("mobile") {
+        gap: 1rem;
+      }
       img {
         height: 4rem;
         width: 4rem;
         opacity: 0.1;
         cursor: pointer;
+        @include screenMax("mobile") {
+          height: 2rem;
+          width: 2rem;
+        }
       }
       &-active {
         opacity: 1 !important;
@@ -207,6 +219,21 @@
       display: flex;
       align-items: center;
       gap: 0.8rem;
+      button {
+        &:first-child,
+        &:nth-child(2) {
+          @include screenMax("mobile") {
+            display: none;
+          }
+        }
+        &:last-child,
+        &:nth-child(3) {
+          display: none;
+          @include screenMax("mobile") {
+            display: block;
+          }
+        }
+      }
     }
   }
   &-mobile,

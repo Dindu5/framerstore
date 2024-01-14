@@ -46,7 +46,7 @@
           </Button> -->
         </div>
         <div class="nav-container--mobile">
-          <button @click="isMobileSearchVisible = !isMobileSearchVisible">
+          <button @click="searchTrigger()">
             <img src="/images/icons/search-mobile.svg" alt="Menu" />
           </button>
           <button @click="menuTrigger()">
@@ -240,7 +240,7 @@
             />
 
             <img src="/images/icons/seach-mobile.svg" alt="Search" />
-            <button>Cancel</button>
+            <button @click="searchTrigger()">Cancel</button>
           </form>
         </div>
       </div>
@@ -457,7 +457,18 @@ const menuTrigger = (): void => {
     isMobileNavVisible.value = false;
     return;
   }
+  setMobileFilters(false);
+  isMobileSearchVisible.value = false;
   isMobileNavVisible.value = true;
+};
+const searchTrigger = (): void => {
+  if (isMobileSearchVisible.value) {
+    isMobileSearchVisible.value = false;
+    return;
+  }
+  setMobileFilters(false);
+  isMobileNavVisible.value = false;
+  isMobileSearchVisible.value = true;
 };
 
 const { getFilters, getTemplates, setMobileFilters } = useTemplateStore();
