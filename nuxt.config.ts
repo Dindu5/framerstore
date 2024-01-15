@@ -6,7 +6,7 @@ export default defineNuxtConfig({
       baseURL: process.env.API_URL,
     },
   },
-  modules: ["@pinia/nuxt", "@nuxt/image", "@nuxtjs/cloudinary"],
+  modules: ["@pinia/nuxt", "@nuxt/image", "@nuxtjs/cloudinary", "nuxt-gtag"],
   cloudinary: {
     cloudName: "dindu",
   },
