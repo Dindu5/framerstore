@@ -53,17 +53,17 @@ import { API_STATES } from "../services/constants";
 useSeoMeta({
   title: "Framerstore - Home",
   ogTitle: "Framerstore - Home",
-  // applicationName: "FramerStore",
-  // description: "Discover the best suited Framer template for your website",
-  // ogDescription: "Discover the best suited Framer template for your website",
+  applicationName: "FramerStore",
+  description: "Discover the best suited Framer template for your website",
+  ogDescription: "Discover the best suited Framer template for your website",
   ogImage:
     "https://res.cloudinary.com/dindu/image/upload/v1705347384/framerstore-og_jdeqlq_ypj8ru.png",
   twitterCard: "summary_large_image",
-  // ogType: "website",
-  // ogLocale: "en_UK",
-  // twitterImage:
-  //   "https://res.cloudinary.com/dindu/image/upload/v1705347384/framerstore-og_jdeqlq_ypj8ru.png",
-  // themeColor: "#1d1c1c",
+  ogType: "website",
+  ogLocale: "en_UK",
+  twitterImage:
+    "https://res.cloudinary.com/dindu/image/upload/v1705347384/framerstore-og_jdeqlq_ypj8ru.png",
+  themeColor: "#1d1c1c",
 });
 
 const currentPage = ref(1);
