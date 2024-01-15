@@ -1,8 +1,11 @@
 <template>
   <div class="search-result-page">
     <div v-if="templatesSearchResult?.length > 0" class="container">
-      <h1 class="search-result-page__text">
-        Showing Result for: <span>{{ searchTerm }}</span>
+      <h1
+        v-if="apiLoadingStates.templatesSearchResult === API_STATES.SUCCESS"
+        class="search-result-page__text"
+      >
+        Showing Result for: <span>{{ stateSearchTerm }}</span>
       </h1>
     </div>
     <section
