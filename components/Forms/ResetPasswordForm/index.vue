@@ -45,10 +45,7 @@
       Reset Password
     </Button>
     <div class="auth-form__actions">
-      <nuxt-link
-        v-if="currentScreen !== 'success'"
-        to="/login"
-        class="auth-form__reset-password"
+      <nuxt-link to="/login" class="auth-form__reset-password"
         >Back to login</nuxt-link
       >
     </div>
