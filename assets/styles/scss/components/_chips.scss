@@ -19,6 +19,7 @@
     border-radius: 3.2rem;
     border: 0.1rem solid map-get($grey-map, 400);
     height: 3.6rem;
+    cursor: pointer;
     @include screenMax("mobile") {
       font-size: 1.2rem;
       height: auto;

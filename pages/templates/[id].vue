@@ -153,6 +153,7 @@
                 v-for="page in singleTemplate.pages"
                 :key="page"
                 class="chip"
+                @click="triggerSearch(page)"
               >
                 {{ page }}
               </div>
@@ -166,6 +167,7 @@
                 v-for="feature in singleTemplate.features"
                 :key="feature.name"
                 class="chip"
+                @click="triggerSearch(feature.name)"
               >
                 {{ feature.name }}
               </div>
@@ -178,6 +180,7 @@
                 v-for="tag in singleTemplate.tags"
                 :key="tag.id"
                 class="chip"
+                @click="triggerSearch(tag?.attributes?.name || '')"
               >
                 {{ tag?.attributes?.name || "" }}
               </div>
@@ -190,6 +193,7 @@
                 v-for="style in singleTemplate.design_styles"
                 :key="style.id"
                 class="chip"
+                @click="triggerSearch(style?.attributes?.name || '')"
               >
                 {{ style?.attributes?.name || "" }}
               </div>
@@ -202,6 +206,7 @@
                 v-for="typo in singleTemplate.typographies"
                 :key="typo.id"
                 class="chip"
+                @click="triggerSearch(typo?.attributes?.name || '')"
               >
                 {{ typo?.attributes?.name || "" }}
               </div>
@@ -214,6 +219,7 @@
                 v-for="color in singleTemplate.colors"
                 :key="color.id"
                 class="chip"
+                @click="triggerSearch(color)"
               >
                 <span
                   :class="
@@ -299,9 +305,12 @@ export default {
       console.log("slide change");
     };
     const templateStore = useTemplateStore();
-    const { getSingleTemplate, setSelectedTemplate } = useTemplateStore();
-    const { relatedTemplates, apiLoadingStates } = storeToRefs(templateStore);
+    const { getSingleTemplate, setSelectedTemplate, getTemplates } =
+      useTemplateStore();
+    const { relatedTemplates, apiLoadingStates, searchFilters } =
+      storeToRefs(templateStore);
     const route = useRoute();
+    const router = useRouter();
     const hoverElement = ref(false);
 
     const id = route.params.id as string;
@@ -329,6 +338,11 @@ export default {
         description: "",
         screenshots: [],
       } as any);
+
+    const triggerSearch = (search: string) => {
+      getTemplates({ filters: searchFilters.value }, search);
+      router.push(`/search?searchTerm=${search}`);
+    };
     return {
       onSwiper,
       onSlideChange,
@@ -341,6 +355,7 @@ export default {
       modules: [Navigation, Pagination, Mousewheel, Keyboard],
       hoverElement,
       visitExternalLink,
+      triggerSearch,
     };
   },
 };
