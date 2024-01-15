@@ -33,6 +33,7 @@
           v-for="(item, i) in templatesSearchResult"
           :key="i"
           :cardData="item"
+          @preview="previewTemplate"
         />
       </div>
     </section>
@@ -53,7 +54,7 @@ import { useTemplateStore } from "../stores/useTemplate";
 import { storeToRefs } from "pinia";
 import { API_STATES } from "../services/constants";
 
-const { getTemplates, setSearchTerm } = useTemplateStore();
+const { getTemplates, setSearchTerm, setSelectedTemplate } = useTemplateStore();
 const {
   templatesSearchResult,
   templatesSearchResultMeta,
@@ -83,5 +84,9 @@ const onPageChange = (page: number) => {
 const goBack = () => {
   setSearchTerm("");
   router.push("/");
+};
+
+const previewTemplate = (template: any) => {
+  setSelectedTemplate(template);
 };
 </script>
