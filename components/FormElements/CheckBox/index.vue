@@ -1,7 +1,7 @@
 <template>
   <label class="form-checkbox" :class="model ? 'active' : ''">
     <input type="checkbox" v-model="model" :value="value" />
-    <span v-if="useColor" :style="`background-color: ${label}`"></span>
+    <span v-if="useColor" :class="`form-checkbox-color-${label}`"></span>
     {{ label }}
   </label>
 </template>

@@ -250,10 +250,41 @@
   span {
     width: 1.6rem;
     height: 1.6rem;
+
     border-radius: 50%;
     @include screenMax("mobile") {
       width: 1.4rem;
       height: 1.4rem;
+    }
+  }
+  &-color {
+    &-Blue {
+      background-color: #54a2fe;
+    }
+    &-Red {
+      background-color: #fe5454;
+    }
+    &-Yellow {
+      background-color: #fed854;
+    }
+    &-Orange {
+      background-color: #fea554;
+    }
+    &-Purple {
+      background-color: #8a54fe;
+    }
+    &-Pink {
+      background-color: #fe54ba;
+    }
+    &-Green {
+      background-color: #5bcd74;
+    }
+    &-Black {
+      background-color: #424242;
+    }
+    &-White {
+      background-color: transparent;
+      border: 0.1rem solid;
     }
   }
   input[type="checkbox"] {

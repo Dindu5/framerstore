@@ -216,8 +216,11 @@
                 class="chip"
               >
                 <span
-                  :style="`background-color: ${color};`"
-                  :class="color.toLowerCase() === 'white' ? 'chip-white' : ''"
+                  :class="
+                    color.toLowerCase() === 'white'
+                      ? 'chip-white'
+                      : `chip-color-${color}`
+                  "
                 ></span>
                 {{ color }}
               </div>
