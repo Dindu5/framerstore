@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseURL: process.env.API_URL,
+      mailLiteKey: process.env.MAILLITE_API_KEY,
     },
   },
   modules: ["@pinia/nuxt", "@nuxt/image", "@nuxtjs/cloudinary", "nuxt-gtag"],

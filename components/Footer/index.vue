@@ -10,7 +10,9 @@
             placeholder="Enter email here"
             class="footer-subscription"
           />
-          <button class="btn">Subscribe</button>
+          <button class="btn" @click="subscribeToNewsletter('')">
+            Subscribe
+          </button>
         </div>
         <div>
           <a href="https://www.pinterest.com/framerstorehq" target="_blank">
@@ -60,11 +62,14 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
+import { API_STATES } from "~/services/constants";
+const authStore = useAuthStore();
 import { useTemplateStore } from "../../stores/useTemplate";
 const router = useRouter();
 
 const { searchFilters } = storeToRefs(useTemplateStore());
 const { getTemplates } = useTemplateStore();
+const { subscribeToNewsletter } = authStore;
 
 const topSearch = ref([
   "Portfolio",

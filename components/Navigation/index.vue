@@ -27,7 +27,7 @@
             outlined
             @click="visitExternalLink('http://framerstore.shop/blog/')"
           >
-            Our Blog
+            Blog
           </Button>
           <Button
             color="secondary"

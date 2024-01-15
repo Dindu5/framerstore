@@ -2,6 +2,7 @@ import AuthRepository from "./AuthRepository";
 import DesignStyleRepository from "./DesignStyleRepository";
 import DesignTypeRepository from "./DesignTypeRepository";
 import IndustryRepository from "./IndustryRepository";
+import MailLiteRepository from "./MailLiteRepository";
 import PendingTemplateRepository from "./PendingTemplateRepository";
 import TagRepository from "./TagRepository";
 import TemplateRepository from "./TemplateRepository";
@@ -18,4 +19,5 @@ export default {
   typography: TypographyRepository(),
   pendingTemplates: PendingTemplateRepository(),
   users: UserRepository(),
+  mailLite: MailLiteRepository(),
 };
