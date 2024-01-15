@@ -3,17 +3,30 @@
     <div class="container">
       <h2>Get the free weekly templates in your inbox</h2>
       <div class="footer-top">
-        <div>
-          <input
-            name="email subscription"
-            type="email"
-            placeholder="Enter email here"
-            class="footer-subscription"
-          />
-          <button class="btn" @click="subscribeToNewsletter('')">
+        <VForm :validation-schema="schema" @submit="initSubscription">
+          <VField name="email" v-slot="{ field, meta }">
+            <input
+              v-bind="field"
+              name="email subscription"
+              type="email"
+              placeholder="Enter email here"
+              class="footer-subscription"
+              v-model="email"
+              :class="{
+                'is-success': meta.valid && meta.touched,
+                'has-error': !meta.valid && meta.touched,
+              }"
+            />
+          </VField>
+          <Button
+            type="submit"
+            :loading="
+              apiLoadingStates.subscribeToNewsletter === API_STATES.LOADING
+            "
+          >
             Subscribe
-          </button>
-        </div>
+          </Button>
+        </VForm>
         <div>
           <a href="https://www.pinterest.com/framerstorehq" target="_blank">
             <img src="/images/icons/pintrest.svg" alt="Pinterest" />
@@ -62,14 +75,17 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
+import * as Yup from "yup";
 import { API_STATES } from "~/services/constants";
-const authStore = useAuthStore();
 import { useTemplateStore } from "../../stores/useTemplate";
+import { useSubscriptionStore } from "../../stores/useSubscription";
+const subStore = useSubscriptionStore();
 const router = useRouter();
 
 const { searchFilters } = storeToRefs(useTemplateStore());
 const { getTemplates } = useTemplateStore();
-const { subscribeToNewsletter } = authStore;
+const { subscribeToNewsletter } = subStore;
+const { apiLoadingStates } = storeToRefs(subStore);
 
 const topSearch = ref([
   "Portfolio",
@@ -87,9 +103,20 @@ const topSearch = ref([
   "Technology",
 ]);
 
+const email = ref<string>("");
+
+const schema = Yup.object().shape({
+  email: Yup.string().email().required("Email address is required"),
+});
+
 const triggerSearch = (search: string) => {
   getTemplates({ filters: searchFilters.value }, search);
   router.push(`/search?searchTerm=${search}`);
+};
+
+const initSubscription = async (values: any, { resetForm }: any) => {
+  await subscribeToNewsletter(email.value);
+  resetForm();
 };
 </script>
 

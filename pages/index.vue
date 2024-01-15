@@ -50,6 +50,14 @@ import { useTemplateStore } from "../stores/useTemplate";
 import { storeToRefs } from "pinia";
 import { API_STATES } from "../services/constants";
 
+useSeoMeta({
+  title: "Framerstore - Home",
+  ogTitle: "Framerstore - Home",
+  ogImage:
+    "https://res.cloudinary.com/dindu/image/upload/v1705347384/framerstore-og_jdeqlq_ypj8ru.png",
+  twitterCard: "summary_large_image",
+});
+
 const currentPage = ref(1);
 const { getTemplates, setSelectedTemplate } = useTemplateStore();
 const { allTemplates, allTemplatesMeta, searchFilters, apiLoadingStates } =

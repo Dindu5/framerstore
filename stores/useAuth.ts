@@ -6,6 +6,7 @@ import type {
   SignUpPayload,
 } from "~/types/modules/authModel";
 import { useNotification } from "@kyvg/vue3-notification";
+import MailerLite from "@mailerlite/mailerlite-nodejs";
 
 export const useAuthStore = defineStore("auth", () => {
   // state variables
@@ -18,7 +19,6 @@ export const useAuthStore = defineStore("auth", () => {
     providerAuth: API_STATES.IDLE,
     forgotPassword: API_STATES.IDLE,
     resetPassword: API_STATES.IDLE,
-    subscribeToNewsletter: API_STATES.IDLE,
   });
 
   // getter equivalent
@@ -150,31 +150,6 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
-  const subscribeToNewsletter = async (email: string) => {
-    const { $api } = useNuxtApp();
-    const { notify } = useNotification();
-
-    apiLoadingStates.value.subscribeToNewsletter = API_STATES.LOADING;
-
-    const { data, error } = await $api.mailLite.getDesignTypes(
-      "dindu696@gmail.com"
-    );
-    if (error.value) {
-      console.log(error?.value);
-      notify({
-        title: "Error",
-        type: "error",
-        text: error.value?.data?.error?.message || "",
-      });
-      apiLoadingStates.value.subscribeToNewsletter = API_STATES.ERROR;
-      return { error: error.value };
-    }
-    if (data.value) {
-      apiLoadingStates.value.subscribeToNewsletter = API_STATES.SUCCESS;
-      return { data: data.value };
-    }
-  };
-
   const triggerResetPassword = async (payload: any) => {
     const { $api } = useNuxtApp();
     const { notify } = useNotification();
@@ -216,6 +191,5 @@ export const useAuthStore = defineStore("auth", () => {
     loginProvider,
     triggerResetPassword,
     triggerForgotPassword,
-    subscribeToNewsletter,
   };
 });

@@ -109,7 +109,7 @@
           height: 22.9rem !important;
         }
       }
-      .swiper-slide:first-child {
+      .swiper-slide-active {
         box-shadow: 0rem 0.4529rem 0.3623rem 0rem rgba(0, 0, 0, 0.01),
           0rem 1.2522rem 1.0017rem 0rem rgba(0, 0, 0, 0.014),
           0rem 3.0147rem 2.4118rem 0rem rgba(0, 0, 0, 0.015),
@@ -117,13 +117,18 @@
       }
     }
     .swiper-button-next {
-      opacity: 0;
-      display: block;
-      width: 0;
-      height: 0;
-      border-top: 10rem solid transparent;
-      border-left: 10rem solid $black;
-      border-bottom: 10rem solid transparent;
+      background-image: url("/images/icons/forward-arr.svg");
+      background-position: center;
+      background-size: contain;
+      border-radius: 10rem;
+      opacity: 0.8;
+      box-shadow: 0px 4.529px 3.623px 0px rgba(0, 0, 0, 0.02),
+        0px 12.522px 10.017px 0px rgba(0, 0, 0, 0.04),
+        0px 30.147px 24.118px 0px rgba(0, 0, 0, 0.05),
+        0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+      width: 12.8rem;
+      height: 12.8rem;
+      right: 5rem;
       transition: all 0.3s ease;
       @include screenMax("mobile") {
         border-top: 2rem solid transparent;
@@ -135,15 +140,20 @@
       }
     }
     .swiper-button-prev {
-      display: block;
-      width: 0;
-      height: 0;
-      border-top: 10rem solid transparent;
-      border-right: 10rem solid $black;
-      border-bottom: 10rem solid transparent;
-      transition: all 0.3s ease;
+      background-image: url("/images/icons/back-arr.svg");
+      background-position: center;
+      background-size: contain;
+      border-radius: 10rem;
+      opacity: 0.8;
+      box-shadow: 0px 4.529px 3.623px 0px rgba(0, 0, 0, 0.02),
+        0px 12.522px 10.017px 0px rgba(0, 0, 0, 0.04),
+        0px 30.147px 24.118px 0px rgba(0, 0, 0, 0.05),
+        0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+      width: 12.8rem;
+      height: 12.8rem;
+      left: 5rem;
 
-      opacity: 0;
+      transition: all 0.3s ease;
       @include screenMax("mobile") {
         border-top: 2rem solid transparent;
         border-right: 2rem solid $black;
@@ -151,12 +161,6 @@
       }
       &::after {
         display: none;
-      }
-    }
-    &--active {
-      .swiper-button-next,
-      .swiper-button-prev {
-        opacity: 1;
       }
     }
   }
@@ -182,7 +186,7 @@
       font-size: 2.2rem;
       font-style: normal;
       font-weight: 400;
-      line-height: 3.6rem;
+      line-height: 3.2rem;
       margin-bottom: 0.8rem;
       @include screenMax("mobile") {
         font-size: 1.4rem;

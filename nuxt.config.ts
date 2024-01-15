@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     public: {
       baseURL: process.env.API_URL,
       mailLiteKey: process.env.MAILLITE_API_KEY,
+      mailLiteGroupId: process.env.MAILLITE_GROUP_ID,
     },
   },
   modules: ["@pinia/nuxt", "@nuxt/image", "@nuxtjs/cloudinary", "nuxt-gtag"],
