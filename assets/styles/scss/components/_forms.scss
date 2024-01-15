@@ -9,7 +9,7 @@
   width: 100%;
   margin: auto;
   padding: 8rem;
-  margin-top: 9rem;
+  // margin-top: 9rem;
   position: relative;
   @include screenMax("mobile") {
     box-shadow: none;
@@ -145,6 +145,12 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 4rem;
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+    }
   }
   &__login-link {
     color: $accent;
@@ -164,6 +170,22 @@
     font-style: normal;
     font-weight: 600;
     line-height: 2.4rem; /* 150% */
+    @include screenMax("mobile") {
+      font-size: 1.4rem;
+    }
+  }
+  &__reset-password {
+    text-align: center;
+    color: map-get($grey-map, 100);
+    font-family: $secondary-font;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2.8rem; /* 150% */
+    letter-spacing: -0.018rem;
+    display: block;
+    margin: auto;
+    cursor: pointer;
     @include screenMax("mobile") {
       font-size: 1.4rem;
     }

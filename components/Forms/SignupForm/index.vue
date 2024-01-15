@@ -1,8 +1,8 @@
 <template>
   <VForm class="auth-form" :validation-schema="schema" @submit="submitForm">
-    <button class="btn btn-icon auth-form__close">
+    <!-- <button class="btn btn-icon auth-form__close">
       <span class="material-symbols-rounded"> close </span>
-    </button>
+    </button> -->
     <h1>Create a free account</h1>
     <p>Already a member? <nuxt-link to="/login">Log in </nuxt-link></p>
     <SocialAuth />
@@ -76,9 +76,9 @@ const userDetails = ref({
 const schema = Yup.object().shape({
   fullName: Yup.string()
     .matches(NAME_REGEX, "Please enter first and last name")
-    .required(),
-  email: Yup.string().email().required(),
-  password: Yup.string().required(),
+    .required("Full name is required"),
+  email: Yup.string().email().required("Email address is required"),
+  password: Yup.string().required("Password is required"),
 });
 
 const submitForm = async (e: Event) => {

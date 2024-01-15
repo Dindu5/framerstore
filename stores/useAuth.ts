@@ -16,6 +16,8 @@ export const useAuthStore = defineStore("auth", () => {
     signup: API_STATES.IDLE,
     getUser: API_STATES.IDLE,
     providerAuth: API_STATES.IDLE,
+    forgotPassword: API_STATES.IDLE,
+    resetPassword: API_STATES.IDLE,
   });
 
   // getter equivalent
@@ -125,6 +127,57 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
+  const triggerForgotPassword = async (email: string) => {
+    const { $api } = useNuxtApp();
+    const { notify } = useNotification();
+
+    apiLoadingStates.value.forgotPassword = API_STATES.LOADING;
+
+    const { data, error } = await $api.auth.forgotPassword(email);
+    if (error.value) {
+      notify({
+        title: "Error",
+        type: "error",
+        text: error.value?.data?.error?.message || "",
+      });
+      apiLoadingStates.value.forgotPassword = API_STATES.ERROR;
+      return { error: error.value };
+    }
+    if (data.value) {
+      apiLoadingStates.value.forgotPassword = API_STATES.SUCCESS;
+      return { data: data.value };
+    }
+  };
+
+  const triggerResetPassword = async (payload: any) => {
+    const { $api } = useNuxtApp();
+    const { notify } = useNotification();
+
+    apiLoadingStates.value.resetPassword = API_STATES.LOADING;
+
+    const { data, error } = await $api.auth.resetPassword(payload);
+    if (error.value) {
+      notify({
+        title: "Error",
+        type: "error",
+        text: error.value?.data?.error?.message || "",
+      });
+      apiLoadingStates.value.resetPassword = API_STATES.ERROR;
+    }
+    if (data.value) {
+      notify({
+        title: "Password reset successfully",
+        text: `Welcome ${
+          data.value?.user?.firstName || data.value?.user?.username
+        }`,
+      });
+      apiLoadingStates.value.resetPassword = API_STATES.SUCCESS;
+      setTimeout(() => {
+        completeLogin(data);
+      }, 1000);
+    }
+  };
+
   return {
     user,
     getUserName,
@@ -135,5 +188,7 @@ export const useAuthStore = defineStore("auth", () => {
     getUser,
     apiLoadingStates,
     loginProvider,
+    triggerResetPassword,
+    triggerForgotPassword,
   };
 });

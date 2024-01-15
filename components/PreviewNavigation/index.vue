@@ -35,7 +35,10 @@
               Template details
             </Button>
 
-            <Button color="accent" @click="router.push('/app/submit')">
+            <Button
+              color="accent"
+              @click="visitExternalLink(selectedTemplate.purchase_link)"
+            >
               <img src="/images/icons/buy.svg" alt="Info" />
               Buy for ${{ selectedTemplate.price ? selectedTemplate.price : 0 }}
             </Button>
@@ -46,7 +49,11 @@
               <img src="/images/icons/info.svg" alt="Info" />
             </Button>
 
-            <Button color="accent" icon @click="router.push('/app/submit')">
+            <Button
+              color="accent"
+              icon
+              @click="visitExternalLink(selectedTemplate.purchase_link)"
+            >
               <img src="/images/icons/buy.svg" alt="Info" />
             </Button>
           </div>

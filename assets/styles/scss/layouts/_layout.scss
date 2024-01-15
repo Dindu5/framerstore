@@ -6,10 +6,21 @@
   }
 }
 .auth-layout {
-  background-image: url("/images/auth-bg.jpg");
+  // background-image: url("/images/auth-bg.jpg");
   background-size: cover;
   background-position: top;
+  background-color: map-get($grey-map, 500);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  &--container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  @include screenMax("mobile") {
+    background-color: $white;
+  }
 }
 
 body {

@@ -1,8 +1,8 @@
 <template>
   <VForm class="auth-form" :validation-schema="schema" @submit="login">
-    <button class="btn btn-icon auth-form__close">
+    <!-- <button class="btn btn-icon auth-form__close">
       <span class="material-symbols-rounded"> close </span>
-    </button>
+    </button> -->
     <h1>Log into FramerStore</h1>
     <SocialAuth />
     <h6>or</h6>
@@ -48,7 +48,9 @@
       <nuxt-link class="auth-form__login-link" to="/signup"
         >Don’t have an account?</nuxt-link
       >
-      <nuxt-link class="auth-form__forgot-password">Forgot Password?</nuxt-link>
+      <nuxt-link to="/forgot-password" class="auth-form__forgot-password"
+        >Forgot Password?</nuxt-link
+      >
     </div>
   </VForm>
 </template>
@@ -76,8 +78,8 @@ function login(e: any) {
 }
 
 const schema = Yup.object().shape({
-  email: Yup.string().email().required(),
-  password: Yup.string().required(),
+  email: Yup.string().email().required("Email address is required"),
+  password: Yup.string().required("Password is required"),
 });
 </script>
 

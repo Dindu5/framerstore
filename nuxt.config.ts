@@ -26,6 +26,8 @@ export default defineNuxtConfig({
     "/templates/**": { ssr: false },
     "/login": { ssr: false },
     "/signup": { ssr: false },
+    "/forgot-password": { ssr: false },
+    "/reset-password": { ssr: false },
     "/facebook/callback": { ssr: false },
     "/google/callback": { ssr: false },
   },

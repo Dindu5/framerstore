@@ -1,7 +1,7 @@
 <template>
   <main class="auth-layout">
     <Navigation />
-    <div class="container">
+    <div class="container auth-layout--container">
       <slot />
     </div>
     <Notifications classes="my-notification" />

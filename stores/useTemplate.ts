@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import qs from "qs";
 import type { TemplateSizes } from "~/types/modules/templateModel";
 import { API_STATES } from "../services/constants";
+import { useNotification } from "@kyvg/vue3-notification";
 
 export const useTemplateStore = defineStore("template", () => {
   // state variables
@@ -123,6 +124,7 @@ export const useTemplateStore = defineStore("template", () => {
     }
     noOfFiltersApplied.value = totalFilters;
     const router = useRouter();
+    const { notify } = useNotification();
     const queryParams = {
       ...payload,
       populate: {
@@ -175,17 +177,35 @@ export const useTemplateStore = defineStore("template", () => {
         lazy: false,
       });
       if (!searchTerm) {
-        allTemplates.value = data.value?.data?.map((template: any) =>
-          transformTemplate(template)
-        );
-        allTemplatesMeta.value = data.value?.meta?.pagination;
-        apiLoadingStates.value.allTemplates = API_STATES.SUCCESS;
+        if (error.value) {
+          notify({
+            type: "error",
+            title: "Something went wrong",
+            text: error.value?.data?.error?.message || "",
+          });
+          apiLoadingStates.value.allTemplates = API_STATES.ERROR;
+        } else if (data.value) {
+          allTemplates.value = data.value?.data?.map((template: any) =>
+            transformTemplate(template)
+          );
+          allTemplatesMeta.value = data.value?.meta?.pagination;
+          apiLoadingStates.value.allTemplates = API_STATES.SUCCESS;
+        }
       } else {
-        templatesSearchResult.value = data.value?.data?.map((template: any) =>
-          transformTemplate(template)
-        );
-        templatesSearchResultMeta.value = data.value?.meta?.pagination;
-        apiLoadingStates.value.templatesSearchResult = API_STATES.SUCCESS;
+        if (error.value) {
+          notify({
+            type: "error",
+            title: "Something went wrong",
+            text: error.value?.data?.error?.message || "",
+          });
+          apiLoadingStates.value.templatesSearchResult = API_STATES.ERROR;
+        } else if (data.value) {
+          templatesSearchResult.value = data.value?.data?.map((template: any) =>
+            transformTemplate(template)
+          );
+          templatesSearchResultMeta.value = data.value?.meta?.pagination;
+          apiLoadingStates.value.templatesSearchResult = API_STATES.SUCCESS;
+        }
       }
     } catch (error) {
       console.error(error);

@@ -1,4 +1,4 @@
-import { LoginPayload, SignUpPayload } from "~/types/modules/authModel";
+import type { LoginPayload, SignUpPayload } from "~/types/modules/authModel";
 
 const resource = "/auth";
 
@@ -22,6 +22,18 @@ export default () => {
     providerAuth(provider: string, payload: any) {
       return useCustomFetch(`${resource}/${provider}/callback`, {
         query: payload,
+      });
+    },
+    forgotPassword(email: string) {
+      return useCustomFetch(`${resource}/forgot-password`, {
+        body: { email },
+        method: "POST",
+      });
+    },
+    resetPassword(payload: any) {
+      return useCustomFetch(`${resource}/reset-password`, {
+        body: payload,
+        method: "POST",
       });
     },
   };

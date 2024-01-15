@@ -90,7 +90,7 @@ import { API_STATES } from '~/services/constants';
           <div class="mvp-template-submit__two-form">
             <TextField
               label="Template name"
-              placeholder="Polymer"
+              placeholder="Name of template"
               v-model="templateDetails.name"
               formName="name"
             />
@@ -98,7 +98,7 @@ import { API_STATES } from '~/services/constants';
               formName="url"
               label="Template URL"
               hint="https://www.framer.com/templates/..."
-              placeholder="Polymer"
+              placeholder="Link to the template"
               v-model="templateDetails.url"
             />
           </div>

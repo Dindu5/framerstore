@@ -75,7 +75,10 @@
             </div>
           </div>
           <div>
-            <Button color="accent">
+            <Button
+              color="accent"
+              @click="visitExternalLink(singleTemplate.purchase_link)"
+            >
               <img src="/images/icons/buy.svg" alt="Upload" /> Buy Template -
               ${{ singleTemplate.price }}
             </Button>
@@ -221,7 +224,10 @@
             </div>
           </div>
           <div class="search-page--cta">
-            <Button color="accent">
+            <Button
+              color="accent"
+              @click="visitExternalLink(singleTemplate.purchase_link)"
+            >
               <img src="/images/icons/buy.svg" alt="Buy" /> Buy Template - ${{
                 singleTemplate.price
               }}
@@ -300,6 +306,13 @@ export default {
     const options = {
       currentPage: 0,
     };
+    const visitExternalLink = (url: string) => {
+      navigateTo(url, {
+        open: {
+          target: "_blank",
+        },
+      });
+    };
 
     const previewTemplate = (template: any) => {
       setSelectedTemplate(template);
@@ -324,6 +337,7 @@ export default {
       previewTemplate,
       modules: [Navigation, Pagination, Mousewheel, Keyboard],
       hoverElement,
+      visitExternalLink,
     };
   },
 };
