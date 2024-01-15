@@ -6,6 +6,7 @@
       <Meta name="description" :content="singleTemplate.description" />
       <Meta name="author" :content="singleTemplate.author.username" />
     </Head>
+
     <div
       v-if="apiLoadingStates.singleTemplate === API_STATES.LOADING"
       class="search-page-loading"
