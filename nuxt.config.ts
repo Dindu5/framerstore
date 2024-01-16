@@ -8,6 +8,7 @@ export default defineNuxtConfig({
       mailLiteGroupId: process.env.MAILLITE_GROUP_ID,
     },
   },
+  pages: true,
   modules: ["@pinia/nuxt", "@nuxt/image", "@nuxtjs/cloudinary", "nuxt-gtag"],
   cloudinary: {
     cloudName: "dindu",
