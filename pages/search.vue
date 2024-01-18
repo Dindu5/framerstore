@@ -65,6 +65,7 @@ useSeoMeta({
     "https://res.cloudinary.com/dindu/image/upload/v1705347384/framerstore-og_jdeqlq_ypj8ru.png",
   themeColor: "#1d1c1c",
 });
+
 import { useTemplateStore } from "../stores/useTemplate";
 import { storeToRefs } from "pinia";
 import { API_STATES } from "../services/constants";
