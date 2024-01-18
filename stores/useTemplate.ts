@@ -20,10 +20,11 @@ export const useTemplateStore = defineStore("template", () => {
     total: 1,
     pageCount: 1,
   }) as any;
-  const allTags = ref([]) as any;
-  const allIndustries = ref([]) as any;
-  const allDesignStyles = ref([]) as any;
-  const allDesignTypes = ref([]) as any;
+  const allTypographies = ref<Array<any>>([]);
+  const allColors = ref<Array<any>>([]);
+  const allIndustries = ref<Array<any>>([]);
+  const allDesignStyles = ref<Array<any>>([]);
+  const allDesignTypes = ref<Array<any>>([]);
   const apiLoadingStates = ref({
     allTemplates: API_STATES.IDLE,
     templatesSearchResult: API_STATES.IDLE,
@@ -83,7 +84,7 @@ export const useTemplateStore = defineStore("template", () => {
       pages,
       features,
       title,
-      colors,
+      colors: colors?.data || [],
       thumbnail: {
         image: thumbnail?.data?.attributes?.url,
         placeholder: thumbnail?.data?.attributes?.formats?.thumbnail?.url,
@@ -219,24 +220,28 @@ export const useTemplateStore = defineStore("template", () => {
 
   const getFilters = async () => {
     const { $api } = useNuxtApp();
-    // const tagUrl = $api.tags.getTags();
+    const typographyUrl = $api.typography.getTypographies();
+    const colorUrl = $api.colors.getColors();
     const industryUrl = $api.industry.getIndustries();
     const designStyleUrl = $api.designStyle.getDesignStyles();
     const designTypeUrl = $api.designType.getDesignTypes();
 
     try {
-      const [industries, designTypes, designStyles] = await Promise.all([
-        industryUrl,
-        // tagUrl,
-        designTypeUrl,
-        designStyleUrl,
-      ]);
-      //  allTags.value = tags?.data?.value?.data;
+      const [industries, typographies, colors, designTypes, designStyles] =
+        await Promise.all([
+          industryUrl,
+          typographyUrl,
+          colorUrl,
+          designTypeUrl,
+          designStyleUrl,
+        ]);
+      allTypographies.value = typographies?.data?.value?.data;
       allIndustries.value = industries?.data?.value?.data;
       allDesignStyles.value = designStyles?.data?.value?.data;
       allDesignTypes.value = designTypes?.data?.value?.data;
+      allColors.value = colors?.data?.value?.data;
     } catch (error) {
-      console.log(error, "error na so");
+      console.log(error);
     }
   };
 
@@ -251,6 +256,7 @@ export const useTemplateStore = defineStore("template", () => {
         design_types: "*",
         industries: "*",
         tags: "*",
+        colors: "*",
         typographies: "*",
       },
     };
@@ -298,7 +304,12 @@ export const useTemplateStore = defineStore("template", () => {
           },
           typographies: {
             id: {
-              $in: template?.design_types?.map((ind: any) => ind.id) || [],
+              $in: template?.typographies?.map((ind: any) => ind.id) || [],
+            },
+          },
+          colors: {
+            id: {
+              $in: template?.colors?.map((ind: any) => ind.id) || [],
             },
           },
           id: {
@@ -313,6 +324,7 @@ export const useTemplateStore = defineStore("template", () => {
           design_types: "*",
           industries: "*",
           tags: "*",
+          colors: "*",
           typographies: "*",
         },
         sort: ["createdAt:desc"],
@@ -385,7 +397,8 @@ export const useTemplateStore = defineStore("template", () => {
     templatesSearchResultMeta,
     getTemplates,
     getFilters,
-    allTags,
+    allTypographies,
+    allColors,
     allIndustries,
     allDesignStyles,
     allDesignTypes,

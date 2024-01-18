@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="preview--layout">
     <PreviewNavigation />
     <div>
       <slot />
@@ -8,3 +8,9 @@
 </template>
 
 <script setup lang="ts"></script>
+
+<style lang="scss" scoped>
+.preview--layout {
+  background: #efefef;
+}
+</style>

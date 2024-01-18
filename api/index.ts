@@ -1,4 +1,5 @@
 import AuthRepository from "./AuthRepository";
+import ColorRepository from "./ColorRepository";
 import DesignStyleRepository from "./DesignStyleRepository";
 import DesignTypeRepository from "./DesignTypeRepository";
 import IndustryRepository from "./IndustryRepository";
@@ -18,4 +19,5 @@ export default {
   typography: TypographyRepository(),
   pendingTemplates: PendingTemplateRepository(),
   users: UserRepository(),
+  colors: ColorRepository(),
 };

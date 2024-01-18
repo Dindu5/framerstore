@@ -50,6 +50,21 @@
 </template>
 
 <script lang="ts" setup>
+useSeoMeta({
+  title: "Framerstore - Search",
+  ogTitle: "Framerstore - Search",
+  applicationName: "FramerStore",
+  description: "Discover the best suited Framer template for your website",
+  ogDescription: "Discover the best suited Framer template for your website",
+  ogImage:
+    "https://res.cloudinary.com/dindu/image/upload/v1705347384/framerstore-og_jdeqlq_ypj8ru.png",
+  twitterCard: "summary_large_image",
+  ogType: "website",
+  ogLocale: "en_UK",
+  twitterImage:
+    "https://res.cloudinary.com/dindu/image/upload/v1705347384/framerstore-og_jdeqlq_ypj8ru.png",
+  themeColor: "#1d1c1c",
+});
 import { useTemplateStore } from "../stores/useTemplate";
 import { storeToRefs } from "pinia";
 import { API_STATES } from "../services/constants";

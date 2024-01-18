@@ -161,15 +161,17 @@
             />
           </DropdownContent>
         </Dropdown>
-        <!-- <Dropdown>
+        <Dropdown>
           <template v-slot:toggler>
             <div
               class="nav-filter-options__toggle"
-              :class="hasTagActive ? 'nav-filter-options__toggle-active' : ''"
+              :class="
+                hasTypographyActive ? 'nav-filter-options__toggle-active' : ''
+              "
             >
-              Tags
+              Typography
               <img
-                v-if="!hasTagActive"
+                v-if="!hasTypographyActive"
                 src="/images/icons/down.svg"
                 alt="expand"
               />
@@ -178,20 +180,21 @@
           </template>
           <DropdownContent>
             <CheckBox
-              v-for="industry in tagFilterItems"
+              v-for="industry in typographyFilterItems"
               :key="industry.name"
               :label="industry.name"
               v-model="industry.value"
               @change="applyFilters"
             />
           </DropdownContent>
-        </Dropdown> -->
+        </Dropdown>
         <button
           v-if="
             hasStyleActive ||
             hasIndustryActive ||
             hasTypeActive ||
-            hasColorActive
+            hasColorActive ||
+            hasTypographyActive
           "
           class="nav-filter-options__reset"
           @click="
@@ -388,12 +391,12 @@
             </div>
           </div>
 
-          <!-- <div>
+          <div>
             <div
               class="nav-mobile-filters__filter-items-title"
               @click="
-                mobileFilterOptionHeadings.tags =
-                  !mobileFilterOptionHeadings.tags
+                mobileFilterOptionHeadings.typography =
+                  !mobileFilterOptionHeadings.typography
               "
             >
               <h5>Tags</h5>
@@ -402,24 +405,24 @@
             <div
               class="nav-mobile-filters__filter-items-options"
               :class="
-                mobileFilterOptionHeadings.tags
+                mobileFilterOptionHeadings.typography
                   ? ' nav-mobile-filters__filter-items-options-active'
                   : ''
               "
               :style="`height: ${
-                mobileFilterOptionHeadings.tags
-                  ? getFilterHeight(tagFilterItems.length || 1)
+                mobileFilterOptionHeadings.typography
+                  ? getFilterHeight(typographyFilterItems.length || 1)
                   : '0rem'
               };`"
             >
               <CheckBox
-                v-for="industry in tagFilterItems"
-                :key="industry.name"
-                :label="industry.name"
-                v-model="industry.value"
+                v-for="typo in typographyFilterItems"
+                :key="typo.name"
+                :label="typo.name"
+                v-model="typo.value"
               />
             </div>
-          </div> -->
+          </div>
         </div>
         <div class="nav-mobile-filters__buttons">
           <Button
@@ -474,7 +477,8 @@ const searchTrigger = (): void => {
 const { getFilters, getTemplates, setMobileFilters } = useTemplateStore();
 const templateStore = useTemplateStore();
 const {
-  // allTags,
+  allTypographies,
+  allColors,
   allIndustries,
   allDesignStyles,
   allDesignTypes,
@@ -509,7 +513,7 @@ const mobileFilterOptionHeadings = ref<Record<string, boolean>>({
   color: false,
   type: false,
   style: false,
-  tags: false,
+  typography: false,
 });
 const industryFilterItems = ref([]) as Ref<
   Array<{ name: string; value: boolean }>
@@ -518,7 +522,9 @@ const styleFilterItems = ref([]) as Ref<
   Array<{ name: string; value: boolean }>
 >;
 const typeFilterItems = ref([]) as Ref<Array<{ name: string; value: boolean }>>;
-// const tagFilterItems = ref([]) as Ref<Array<{ name: string; value: boolean }>>;
+const typographyFilterItems = ref([]) as Ref<
+  Array<{ name: string; value: boolean }>
+>;
 const colorFilterValues = ref([]) as Ref<
   Array<{ name: string; value: boolean }>
 >;
@@ -531,14 +537,15 @@ const setFilters = () => {
   styleFilterItems.value = allDesignStyles.value?.map((tag: any) => {
     return { name: tag?.attributes?.name, id: tag.id, value: false };
   });
-  // tagFilterItems.value = allTags.value?.map((tag: any) => {
-  //   return { name: tag?.attributes?.name, id: tag.id, value: false };
-  // });
+  typographyFilterItems.value = allTypographies.value?.map((tag: any) => {
+    return { name: tag?.attributes?.name, id: tag.id, value: false };
+  });
   typeFilterItems.value = allDesignTypes.value?.map((tag: any) => {
     return { name: tag?.attributes?.name, id: tag.id, value: false };
   });
-  colorFilterValues.value = Object.values(Colors).map((color: any) => {
-    return { name: color, id: color, value: false };
+  // Object.values(Colors)
+  colorFilterValues.value = allColors.value?.map((color: any) => {
+    return { name: color?.attributes?.name, id: color.id, value: false };
   });
 };
 
@@ -556,9 +563,9 @@ const hasIndustryActive = computed(() => {
 const hasStyleActive = computed(() => {
   return styleFilterItems.value?.some((item: any) => item.value);
 });
-// const hasTagActive = computed(() => {
-//   return tagFilterItems.value?.some((item: any) => item.value);
-// });
+const hasTypographyActive = computed(() => {
+  return typographyFilterItems.value?.some((item: any) => item.value);
+});
 const hasTypeActive = computed(() => {
   return typeFilterItems.value?.some((item: any) => item.value);
 });
@@ -585,7 +592,9 @@ const applyFilters = () => {
       (industry: any) => industry.value
     ),
     style: styleFilterItems.value?.filter((industry: any) => industry.value),
-    // tag: tagFilterItems.value?.filter((industry: any) => industry.value),
+    typography: typographyFilterItems.value?.filter(
+      (industry: any) => industry.value
+    ),
     type: typeFilterItems.value?.filter((industry: any) => industry.value),
     color: colorFilterValues.value?.filter((color: any) => color.value),
   };
@@ -603,13 +612,13 @@ const applyFilters = () => {
       },
     };
   }
-  // if (hasTagActive) {
-  //   filters["tags"] = {
-  //     id: {
-  //       $in: selectedFilters.tag?.map((ind: any) => ind.id),
-  //     },
-  //   };
-  // }
+  if (hasTypographyActive) {
+    filters["typographies"] = {
+      id: {
+        $in: selectedFilters.typography?.map((ind: any) => ind.id),
+      },
+    };
+  }
   if (hasTypeActive) {
     filters["design_types"] = {
       id: {

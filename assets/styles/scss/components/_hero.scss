@@ -9,8 +9,10 @@
     max-width: 96rem;
     width: 100%;
   }
-  @include screenMax("mobile") {
+  @include screenMax("tablet") {
     background-image: none;
+  }
+  @include screenMax("mobile") {
     padding-bottom: 2.4rem;
     padding-top: 4rem;
   }

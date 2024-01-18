@@ -46,10 +46,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useTemplateStore } from "../stores/useTemplate";
-import { storeToRefs } from "pinia";
-import { API_STATES } from "../services/constants";
-
 useSeoMeta({
   title: "Framerstore - Home",
   ogTitle: "Framerstore - Home",
@@ -65,6 +61,9 @@ useSeoMeta({
     "https://res.cloudinary.com/dindu/image/upload/v1705347384/framerstore-og_jdeqlq_ypj8ru.png",
   themeColor: "#1d1c1c",
 });
+import { useTemplateStore } from "../stores/useTemplate";
+import { storeToRefs } from "pinia";
+import { API_STATES } from "../services/constants";
 
 const currentPage = ref(1);
 const { getTemplates, setSelectedTemplate } = useTemplateStore();

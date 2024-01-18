@@ -28,7 +28,6 @@ definePageMeta({
 .preview-template {
   min-height: 100vh;
   width: 100vw;
-
   background: #efefef;
   iframe {
     width: 100%;
@@ -63,7 +62,7 @@ definePageMeta({
     margin-top: 8rem;
     margin-bottom: 8rem;
     border: 0.8rem solid #fcfbf9;
-    border-bottom: 3.2rem solid #fcfbf9;
+    border-top: 3.2rem solid #fcfbf9;
     border-radius: 2.4rem;
     box-shadow: 8px 11px 29px 0px rgba(0, 0, 0, 0.1),
       31px 42px 53px 0px rgba(0, 0, 0, 0.09),
