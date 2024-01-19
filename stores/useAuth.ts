@@ -6,7 +6,6 @@ import type {
   SignUpPayload,
 } from "~/types/modules/authModel";
 import { useNotification } from "@kyvg/vue3-notification";
-import MailerLite from "@mailerlite/mailerlite-nodejs";
 
 export const useAuthStore = defineStore("auth", () => {
   // state variables

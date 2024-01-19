@@ -8,6 +8,15 @@
           can use Framer’s customizable and responsive website templates to get
           started.
         </h5>
+        <div class="hero-main-bg">
+          <NuxtImg
+            preload
+            src="https://res.cloudinary.com/dvyovkyma/image/upload/v1705601446/static/hero-bg-3x_qefm5l.png"
+            alt="Template Image"
+            densities="x1 x2"
+            placeholder="https://res.cloudinary.com/dvyovkyma/image/upload/e_pixelate:60/e_blur:1000/c_fill,h_34,w_66/v1705601446/static/hero-bg-3x_qefm5l.png"
+          />
+        </div>
         <div class="hero-mobile-filter">
           <button>
             <img src="/images/icons/down.svg" alt="Down" /> Collection

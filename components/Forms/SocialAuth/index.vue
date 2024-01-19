@@ -7,13 +7,13 @@
       <img src="/images/icons/google-icon.svg" alt="Google Icon" />
       Login with Google
     </button>
-    <button
+    <!-- <button
       class="btn btn-full btn-auth auth-form--facebook"
       @click.prevent="socialLogin('facebook')"
     >
       <img src="/images/icons/facebook.svg" alt="Google Icon" />
       Login with Facebook
-    </button>
+    </button> -->
   </div>
 </template>
 

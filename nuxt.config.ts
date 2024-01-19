@@ -33,6 +33,7 @@ export default defineNuxtConfig({
     "/reset-password": { ssr: false },
     "/facebook/callback": { ssr: false },
     "/google/callback": { ssr: false },
+    "/app/submit": { ssr: false },
   },
 
   // components: {

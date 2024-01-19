@@ -86,20 +86,41 @@ import { API_STATES } from '~/services/constants';
         <p class="mvp-template-submit__subtext">
           What template will you like to submit
         </p>
-        <form @submit="moveSwitch">
+        <form :validation-schema="schema" @submit.prevent="moveSwitch">
           <div class="mvp-template-submit__two-form">
             <TextField
+              formName="name"
               label="Template name"
               placeholder="Name of template"
               v-model="templateDetails.name"
-              formName="name"
+              :errorMessage="errorObj.name"
+              @blur="validateForm('name')"
             />
+
             <TextField
               formName="url"
               label="Template URL"
-              hint="https://www.framer.com/templates/..."
-              placeholder="Link to the template"
+              placeholder="www.polymer.com/framer"
               v-model="templateDetails.url"
+              :errorMessage="errorObj.url"
+              @blur="validateForm('url')"
+            />
+            <MultiSelect
+              label="Your affiliate program*"
+              :options="designStyleOptions"
+              placeholder="Choose which affiliate program you use"
+              v-model="templateDetails.affiliate_program"
+              :isSingleSelect="true"
+              :errorMessage="errorObj.affiliate_program"
+              @blur="validateForm('affiliate_program')"
+            />
+            <TextField
+              label="Your affiliate link"
+              placeholder="https://gumroad.com/a/12345"
+              v-model="templateDetails.affiliate_link"
+              formName="affiliate_link"
+              :errorMessage="errorObj.affiliate_link"
+              @blur="validateForm('affiliate_program')"
             />
           </div>
           <div class="mvp-template-submit__one-buttons">
@@ -110,7 +131,6 @@ import { API_STATES } from '~/services/constants';
               color="primary"
               type="submit"
               :loading="apiLoadingStates.mvpSubmit === API_STATES.LOADING"
-              @click="moveSwitch"
             >
               Submit
             </Button>
@@ -197,6 +217,7 @@ import { API_STATES } from '~/services/constants';
 </template>
 
 <script lang="ts" setup>
+import * as Yup from "yup";
 import { storeToRefs } from "pinia";
 import { API_STATES } from "~/services/constants";
 const authStore = useAuthStore();
@@ -211,7 +232,50 @@ const currentStep = ref("one") as Ref<"one" | "two" | "success" | "error">;
 const templateDetails = ref({
   name: "",
   url: "",
+  affiliate_program: "",
+  affiliate_link: "",
+}) as any;
+
+const errorObj = ref({
+  name: "",
+  url: "",
+  affiliate_program: "",
+  affiliate_link: "",
+}) as any;
+const designStyleOptions = [
+  "LemonSqueezy",
+  "Gumroad",
+  "I do not have an affiliate program",
+];
+
+const schema = Yup.object().shape({
+  email: Yup.string().email().required("Email address is required"),
+  password: Yup.string().required("Password is required"),
 });
+
+const validateForm = (formName?: string) => {
+  if (formName) {
+    if (!templateDetails.value[formName]) {
+      errorObj.value[formName] = "This field is required";
+    } else {
+      errorObj.value[formName] = "";
+    }
+    return;
+  }
+  let error = {};
+  let isValid = false;
+  for (const keyObj in templateDetails.value) {
+    if (!templateDetails.value[keyObj]) {
+      error = {
+        ...error,
+        [`${keyObj}`]: "This field is required",
+      };
+      isValid = true;
+    }
+  }
+  errorObj.value = error;
+  return isValid;
+};
 
 const moveSwitch = async (e?: Event) => {
   e?.preventDefault();
@@ -224,18 +288,20 @@ const moveSwitch = async (e?: Event) => {
       }
       break;
     case "two":
-      const { name, url } = templateDetails.value;
-      if (url && name) {
-        console.log({ templateDetails }, { user });
+      if (!validateForm()) {
         const res = (await mvpTemplateSubmit({
           ...templateDetails.value,
+          affiliate_program:
+            templateDetails.value.affiliate_program ===
+            "I do not have an affiliate program"
+              ? "None"
+              : templateDetails.value.affiliate_program,
           user: user?.value?.id,
         })) as any;
-        console.log({ res });
-
         if (res?.data) {
           currentStep.value = "success";
         } else if (res?.error) {
+          // console.log(res.error);
         }
       }
 

@@ -1,13 +1,33 @@
 .hero {
   background-color: map-get($grey-map, 500);
   padding: 8rem 0;
-  background-image: url("/images/hero-bg-3x.png");
-  background-size: contain;
-  background-position: right;
-  background-repeat: no-repeat;
+  // background-image: url("https://res.cloudinary.com/dvyovkyma/image/upload/e_pixelate:60/e_blur:1000/c_fill,h_34,w_66/v1705601446/static/hero-bg-3x_qefm5l.png");
+  // background-size: contain;
+  // background-position: right;
+  // background-repeat: no-repeat;
+  position: relative;
   &-main_content {
     max-width: 96rem;
     width: 100%;
+  }
+  &-main-bg {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 111rem;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+    @include screenMax("tablet") {
+      height: 100%;
+      width: 60rem;
+      img {
+        object-fit: cover;
+      }
+    }
   }
   @include screenMax("tablet") {
     background-image: none;

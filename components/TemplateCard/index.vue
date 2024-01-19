@@ -10,6 +10,7 @@
         :src="cardData.thumbnail.image"
         alt="Template Image"
         :placeholder="cardData.thumbnail.placeholder"
+        loading="lazy"
       />
       <!-- <CldImage
         :src="cardData.thumbnail.publicId"

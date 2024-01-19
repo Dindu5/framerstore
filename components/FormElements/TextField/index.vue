@@ -3,7 +3,6 @@
     class="text-field--wrapper"
     :class="{
       'text-field--wrapper-error': !!errorMessage,
-      success: meta.valid,
     }"
   >
     <h4 v-if="name">{{ name }}</h4>
@@ -14,6 +13,7 @@
       :value="modelValue"
       v-bind="$attrs"
       autocomplete="off"
+      @blur="$emit('blur', $event)"
       @input="$emit('update:modelValue', $event.target.value)"
     />
     <small v-if="hint || errorMessage">{{ errorMessage || hint }}</small>
@@ -31,20 +31,21 @@ const props = defineProps({
   name: { type: String },
   hint: { type: String },
   formName: { type: String },
+  errorMessage: { type: String },
 });
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "blur"]);
 
-const formName = toRef(props, "formName");
+// const elementName = toRef(props, "formName");
 
-const {
-  value: inputValue,
-  errorMessage,
-  handleBlur,
-  handleChange,
-  meta,
-} = useField(formName, undefined, {
-  initialValue: props.value,
-});
+// const {
+//   value: inputValue,
+//   errorMessage,
+//   handleBlur,
+//   handleChange,
+//   meta,
+// } = useField(elementName, undefined, {
+//   initialValue: props.value,
+// });
 </script>
 
 <style></style>

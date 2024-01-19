@@ -1,6 +1,8 @@
 <template>
   <main class="preview-template">
-    <div :class="`preview-template--${selectedTemplateSize}`">
+    <div
+      :class="`preview-template-card preview-template--${selectedTemplateSize}`"
+    >
       <iframe :src="selectedTemplate.preview_link" frameborder="0"></iframe>
     </div>
   </main>
@@ -29,6 +31,10 @@ definePageMeta({
   min-height: 100vh;
   width: 100vw;
   background: #efefef;
+  &-card {
+    transition: all 0.6s;
+    transform-origin: center;
+  }
   iframe {
     width: 100%;
     height: 100%;
@@ -49,6 +55,7 @@ definePageMeta({
     margin-top: 8rem;
     margin-bottom: 8rem;
     border-radius: 2.4rem;
+    // transition: all 0.6s;
     box-shadow: 8px 11px 29px 0px rgba(0, 0, 0, 0.1),
       31px 42px 53px 0px rgba(0, 0, 0, 0.09),
       71px 95px 71px 0px rgba(0, 0, 0, 0.05),
@@ -61,6 +68,7 @@ definePageMeta({
     margin: auto;
     margin-top: 8rem;
     margin-bottom: 8rem;
+    transition: all 0.6s;
     border: 0.8rem solid #fcfbf9;
     border-top: 3.2rem solid #fcfbf9;
     border-radius: 2.4rem;

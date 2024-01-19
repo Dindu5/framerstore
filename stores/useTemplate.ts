@@ -354,25 +354,28 @@ export const useTemplateStore = defineStore("template", () => {
   const mvpTemplateSubmit = async (
     payload: any
   ): Promise<{ error?: any; data?: any }> => {
-    try {
-      const { $api } = useNuxtApp();
-      apiLoadingStates.value.mvpSubmit = API_STATES.LOADING;
+    const { notify } = useNotification();
+    const { $api } = useNuxtApp();
+    apiLoadingStates.value.mvpSubmit = API_STATES.LOADING;
 
-      const { data, error } = await $api.pendingTemplates.createTemplate({
-        data: payload,
+    const { data, error } = await $api.pendingTemplates.createTemplate({
+      data: payload,
+    });
+    if (error.value) {
+      apiLoadingStates.value.mvpSubmit = API_STATES.ERROR;
+      console.log(error.value, "skdnsu");
+
+      notify({
+        title: "Error",
+        type: "error",
+        text: error.value?.data?.error?.message || "Something went wrong",
       });
-      if (error.value) {
-        apiLoadingStates.value.mvpSubmit = API_STATES.ERROR;
-        return { error: error.value };
-      } else if (data.value) {
-        apiLoadingStates.value.mvpSubmit = API_STATES.SUCCESS;
-        return { data: data.value };
-      } else {
-        return { error: null };
-      }
-    } catch (error) {
-      console.log(error);
-      return {};
+      return { error: error.value };
+    } else if (data.value) {
+      apiLoadingStates.value.mvpSubmit = API_STATES.SUCCESS;
+      return { data: data.value };
+    } else {
+      return { error: null };
     }
   };
 

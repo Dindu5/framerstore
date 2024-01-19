@@ -25,7 +25,7 @@ export const useSubscriptionStore = defineStore("subscription", () => {
 
     await mailerlite.subscribers
       .createOrUpdate(params)
-      .then((response) => {
+      .then((response: any) => {
         notify({
           title: "Subscription successful",
           type: "success",
@@ -34,7 +34,7 @@ export const useSubscriptionStore = defineStore("subscription", () => {
         apiLoadingStates.value.subscribeToNewsletter = API_STATES.SUCCESS;
         //  console.log(response.data);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         if (error.response) {
           notify({
             title: "Error",
